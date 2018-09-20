@@ -8,12 +8,13 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 
 abstract class BaseAppCompatActivity(
-        @LayoutRes layout: Int
+        @LayoutRes private val layout: Int
 ) : AppCompatActivity() {
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(layout)
     }
 
     protected fun <T> LiveData<T>.observe(observer: (T?) -> Unit) {

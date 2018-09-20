@@ -10,7 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core-android-utils" />
-            <option value="$PROJECT_DIR$/feature-logination" />
+            <option value="$PROJECT_DIR$/feature-account" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
