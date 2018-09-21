@@ -1,8 +1,8 @@
-package ru.iandreyshev.featureAccount.repository
+package ru.iandreyshev.featureAccount.model.repository
 
 import android.content.Context
-import ru.iandreyshev.featureAccount.account.IAuthProperties
-import ru.iandreyshev.featureAccount.account.IUserAccount
+import ru.iandreyshev.featureAccount.model.account.IAuthProperties
+import ru.iandreyshev.featureAccount.model.account.IUserAccount
 
 interface IAccountRepository {
 

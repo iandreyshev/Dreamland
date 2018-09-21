@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.activity.LoginActivity" />
-        <activity android:name=".presentation.activity.NavigationActivity" />
+        <activity android:name="ru.iandreyshev.featureAccount.presentation.activity.LoginActivity" />
+        <activity android:name=".presentation.activity.MenuActivity" />
         <!--ACTIVITY-->
     </application>
 

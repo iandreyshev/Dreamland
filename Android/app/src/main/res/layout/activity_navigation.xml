@@ -16,24 +16,30 @@
 
         <fragment
             android:id="@+id/fragment.feed"
-            android:name="ru.iandreyshev.dreamland.presentation.fragment.FeedFragment"
+            android:tag="fragment.feed"
+            android:name="ru.iandreyshev.dreams.presentation.fragment.DreamsFeedFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.activity.NavigationActivity" />
+            tools:context=".presentation.activity.MenuActivity"
+            tools:layout="@layout/fragment_dreams_feed" />
 
         <fragment
             android:id="@+id/fragment.dreams"
-            android:name="ru.iandreyshev.dreamland.presentation.fragment.DreamsFragment"
+            android:tag="fragment.dreams"
+            android:name="ru.iandreyshev.dreams.presentation.fragment.DreamsDiaryFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.activity.NavigationActivity" />
+            tools:context=".presentation.activity.MenuActivity"
+            tools:layout="@layout/fragment_dreams_diary" />
 
         <fragment
             android:id="@+id/fragment.profile"
+            android:tag="fragment.profile"
             android:name="ru.iandreyshev.dreamland.presentation.fragment.ProfileFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.activity.NavigationActivity" />
+            tools:context=".presentation.activity.MenuActivity"
+            tools:layout="@layout/fragment_profile" />
 
     </FrameLayout>
 

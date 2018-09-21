@@ -1,9 +1,9 @@
-package ru.iandreyshev.featureAccount.repository
+package ru.iandreyshev.featureAccount.model.repository
 
 import android.content.Context
-import ru.iandreyshev.featureAccount.account.IAuthProperties
-import ru.iandreyshev.featureAccount.account.IUserAccount
-import ru.iandreyshev.featureAccount.storage.MyObjectBox
+import ru.iandreyshev.featureAccount.model.account.IAuthProperties
+import ru.iandreyshev.featureAccount.model.account.IUserAccount
+import ru.iandreyshev.featureAccount.model.storage.MyObjectBox
 
 internal class AccountRepository(
         private val context: Context

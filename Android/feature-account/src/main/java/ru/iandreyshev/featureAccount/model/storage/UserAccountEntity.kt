@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccount.storage
+package ru.iandreyshev.featureAccount.model.storage
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id

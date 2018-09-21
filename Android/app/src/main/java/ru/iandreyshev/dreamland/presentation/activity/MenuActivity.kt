@@ -6,7 +6,7 @@ import ru.iandreyshev.coreAndroidUtils.activity.BaseAppCompatActivity
 import ru.iandreyshev.dreamland.R
 import ru.iandreyshev.dreamland.presentation.tools.NavigationActivityPageController
 
-class NavigationActivity : BaseAppCompatActivity(R.layout.activity_navigation) {
+class MenuActivity : BaseAppCompatActivity(R.layout.activity_navigation) {
 
     private lateinit var mPagesController: NavigationActivityPageController
 

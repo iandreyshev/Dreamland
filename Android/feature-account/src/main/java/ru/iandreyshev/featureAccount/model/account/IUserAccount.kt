@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccount.account
+package ru.iandreyshev.featureAccount.model.account
 
 interface IUserAccount {
     val login: String

@@ -1,8 +1,9 @@
 package ru.iandreyshev.dreamland.application
 
 import android.app.Application
+import android.content.Context
 import io.objectbox.BoxStore
-import ru.iandreyshev.featureAccount.storage.MyObjectBox
+import ru.iandreyshev.featureAccount.model.storage.MyObjectBox
 
 class DreamlandApp : Application() {
 

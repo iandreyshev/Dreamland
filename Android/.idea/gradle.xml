@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core-android-utils" />
             <option value="$PROJECT_DIR$/feature-account" />
+            <option value="$PROJECT_DIR$/feature-dreams" />
+            <option value="$PROJECT_DIR$/feature-statistic" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
