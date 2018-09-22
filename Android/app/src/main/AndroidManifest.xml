@@ -3,7 +3,7 @@
     package="ru.iandreyshev.dreamland">
 
     <application
-        android:name=".application.DreamlandApp"
+        android:name=".application.DreamlandApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,14 +12,18 @@
         android:theme="@style/AppTheme">
 
         <!--ACTIVITY-->
-        <activity android:name=".presentation.activity.MainActivity">
+        <activity
+            android:name=".presentation.activity.MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.iandreyshev.featureAccount.presentation.activity.LoginActivity" />
+        <activity
+            android:name="ru.iandreyshev.featureAccount.presentation.activity.LoginActivity"
+            android:noHistory="true" />
         <activity android:name=".presentation.activity.MenuActivity" />
         <!--ACTIVITY-->
     </application>

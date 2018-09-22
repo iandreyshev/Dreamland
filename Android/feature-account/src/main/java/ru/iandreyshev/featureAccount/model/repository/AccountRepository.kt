@@ -1,22 +1,23 @@
 package ru.iandreyshev.featureAccount.model.repository
 
 import android.content.Context
-import ru.iandreyshev.featureAccount.model.account.IAuthProperties
-import ru.iandreyshev.featureAccount.model.account.IUserAccount
+import ru.iandreyshev.featureAccount.model.storage.AccountEntity
 import ru.iandreyshev.featureAccount.model.storage.MyObjectBox
 
-internal class AccountRepository(
-        private val context: Context
-) : IAccountRepository {
+internal class AccountRepository(context: Context) : IAccountRepository {
 
-    private val mBoxStore = MyObjectBox.builder()
-            .androidContext(context)
-            .build()
+    private val mBoxStore by lazy {
+        MyObjectBox.builder().androidContext(context).build()
+    }
 
-    override val account: IUserAccount?
+    private val mAccountBox by lazy {
+        mBoxStore.boxFor(AccountEntity::class.java)
+    }
+
+    override val account: IAccount?
         get() = null
 
-    override fun signIn(loginData: IAuthProperties): IUserAccount {
+    override fun signIn(loginData: IAuthProperties): IAccount {
         TODO("signIn not implemented")
     }
 

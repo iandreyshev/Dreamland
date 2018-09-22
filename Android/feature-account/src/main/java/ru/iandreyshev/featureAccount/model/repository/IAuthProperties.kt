@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccount.model.account
+package ru.iandreyshev.featureAccount.model.repository
 
 interface IAuthProperties {
     val login: String
