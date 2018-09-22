@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/core-android-utils" />
+            <option value="$PROJECT_DIR$/core-android" />
             <option value="$PROJECT_DIR$/feature-account" />
             <option value="$PROJECT_DIR$/feature-dreams" />
             <option value="$PROJECT_DIR$/feature-statistic" />

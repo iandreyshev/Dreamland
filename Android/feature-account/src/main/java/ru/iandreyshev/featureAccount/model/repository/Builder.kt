@@ -1,16 +1,16 @@
 package ru.iandreyshev.featureAccount.model.repository
 
-import android.content.Context
+import io.objectbox.BoxStore
 
 class Builder {
 
-    private lateinit var mContext: Context
+    private lateinit var mBoxStore: BoxStore
 
-    fun withContext(context: Context) = apply {
-        mContext = context
+    fun withStore(boxStore: BoxStore) = apply {
+        mBoxStore = boxStore
     }
 
-    fun build(): IAccountRepository =
-            AccountRepository(mContext)
+    fun build(): IUserRepository =
+            UserRepository(mBoxStore)
 
 }

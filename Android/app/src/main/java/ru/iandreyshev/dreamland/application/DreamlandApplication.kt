@@ -4,7 +4,7 @@ import android.app.Application
 import io.objectbox.BoxStore
 import ru.iandreyshev.dreamland.di.MainViewModelFactory
 import ru.iandreyshev.dreamland.di.MenuViewModelFactory
-import ru.iandreyshev.featureAccount.model.repository.IAccountRepository
+import ru.iandreyshev.featureAccount.model.repository.IUserRepository
 import ru.iandreyshev.featureAccount.model.storage.MyObjectBox
 
 class DreamlandApplication : Application() {
@@ -26,13 +26,13 @@ class DreamlandApplication : Application() {
     }
 
     private fun initAccountRepository() {
-        accountRepository = IAccountRepository.builder()
-                .withContext(this)
+        accountRepository = IUserRepository.builder()
+                .withStore(mBoxStore)
                 .build()
     }
 
     private fun initMainVMFactory() {
-        mainViewModelFactory = MainViewModelFactory()
+        mainViewModelFactory = MainViewModelFactory(accountRepository)
     }
 
     private fun initMenuVMFactory() {
@@ -40,7 +40,7 @@ class DreamlandApplication : Application() {
     }
 
     companion object {
-        lateinit var accountRepository: IAccountRepository
+        lateinit var accountRepository: IUserRepository
         lateinit var mainViewModelFactory: MainViewModelFactory
         lateinit var menuViewModelFactory: MenuViewModelFactory
     }

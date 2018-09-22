@@ -1,17 +1,15 @@
 package ru.iandreyshev.featureAccount.model.repository
 
-internal class Account : IAccount {
+import ru.iandreyshev.featureAccount.model.storage.AccountEntity
 
-    override val login: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+internal data class Account(
+        override val login: String,
+        override val password: String,
+        override val fullName: String,
+        override val avatarUrl: String
+) : IAccount {
 
-    override val password: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-
-    override val fullName: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-
-    override val avatarUrl: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    constructor(entity: AccountEntity)
+            : this(entity.login, entity.password, entity.fullName, entity.avatarUrl)
 
 }
