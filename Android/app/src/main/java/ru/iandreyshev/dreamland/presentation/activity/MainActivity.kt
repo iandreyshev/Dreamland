@@ -1,20 +1,22 @@
 package ru.iandreyshev.dreamland.presentation.activity
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.intentFor
-import ru.iandreyshev.coreAndroidUtils.activity.BaseAppCompatActivity
 import ru.iandreyshev.dreamland.R
 import ru.iandreyshev.dreamland.application.DreamlandApplication
 import ru.iandreyshev.dreamland.viewModel.main.MainViewModel
 import ru.iandreyshev.dreamland.viewModel.main.MainViewModelState
 import ru.iandreyshev.featureAccount.presentation.activity.LoginActivity
 
-class MainActivity : BaseAppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
         mViewModel = DreamlandApplication.mainViewModelFactory.getFor(this)
         mViewModel.observeState(this@MainActivity) { newState ->
             when (newState) {

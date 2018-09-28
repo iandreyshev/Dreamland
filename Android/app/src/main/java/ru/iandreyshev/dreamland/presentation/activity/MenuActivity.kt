@@ -1,17 +1,19 @@
 package ru.iandreyshev.dreamland.presentation.activity
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_navigation.*
-import ru.iandreyshev.coreAndroidUtils.activity.BaseAppCompatActivity
 import ru.iandreyshev.dreamland.R
 import ru.iandreyshev.dreamland.presentation.tools.NavigationActivityPageController
 
-class MenuActivity : BaseAppCompatActivity(R.layout.activity_navigation) {
+class MenuActivity : AppCompatActivity() {
 
     private lateinit var mPagesController: NavigationActivityPageController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_navigation)
+
         initPagesController(savedInstanceState)
     }
 

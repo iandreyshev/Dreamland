@@ -12,3 +12,5 @@ inline fun <reified T : ViewModel> viewModelFor(activity: FragmentActivity, cros
 
     return ViewModelProviders.of(activity, vmFactory)[T::class.java]
 }
+
+

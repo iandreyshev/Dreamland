@@ -1,7 +1,10 @@
 package ru.iandreyshev.dreamland.application
 
 import android.app.Application
+import android.content.Context
+import dagger.android.DaggerApplication
 import io.objectbox.BoxStore
+import ru.iandreyshev.dreamland.di.AppComponent
 import ru.iandreyshev.dreamland.di.MainViewModelFactory
 import ru.iandreyshev.dreamland.di.MenuViewModelFactory
 import ru.iandreyshev.featureAccount.model.repository.IUserRepository
@@ -13,6 +16,10 @@ class DreamlandApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        appContext = applicationContext
+        AppComponent.init(
+        )
+
         initBoxStore()
         initAccountRepository()
         initMainVMFactory()
@@ -40,6 +47,7 @@ class DreamlandApplication : Application() {
     }
 
     companion object {
+        lateinit var appContext: Context
         lateinit var accountRepository: IUserRepository
         lateinit var mainViewModelFactory: MainViewModelFactory
         lateinit var menuViewModelFactory: MenuViewModelFactory

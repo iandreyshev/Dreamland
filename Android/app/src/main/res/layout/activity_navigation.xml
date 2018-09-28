@@ -35,7 +35,7 @@
         <fragment
             android:id="@+id/fragment.profile"
             android:tag="fragment.profile"
-            android:name="ru.iandreyshev.dreamland.presentation.fragment.ProfileFragment"
+            android:name="ru.iandreyshev.featureAccount.presentation.fragment.ProfileFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".presentation.activity.MenuActivity"
