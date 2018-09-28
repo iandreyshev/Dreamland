@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion target_sdk
@@ -28,6 +29,9 @@ dependencies {
     implementation project(':feature-account')
     implementation project(':feature-dreams')
     implementation project(':feature-statistic')
+
+    kapt 'com.google.dagger:dagger-compiler:2.16'
+    kapt 'com.google.dagger:dagger-android-processor:2.16'
 
     testImplementation 'junit:junit:4.12'
 

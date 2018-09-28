@@ -2,9 +2,9 @@ package ru.iandreyshev.dreamland.application
 
 import android.app.Application
 import android.content.Context
-import dagger.android.DaggerApplication
 import io.objectbox.BoxStore
 import ru.iandreyshev.dreamland.di.AppComponent
+import ru.iandreyshev.dreamland.di.DaggerAppComponent
 import ru.iandreyshev.dreamland.di.MainViewModelFactory
 import ru.iandreyshev.dreamland.di.MenuViewModelFactory
 import ru.iandreyshev.featureAccount.model.repository.IUserRepository
@@ -17,8 +17,9 @@ class DreamlandApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        AppComponent.init(
-        )
+
+        AppComponent.init(DaggerAppComponent.create())
+        AppComponent.get().inject(this)
 
         initBoxStore()
         initAccountRepository()
