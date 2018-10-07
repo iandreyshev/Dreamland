@@ -8,9 +8,9 @@ import javax.inject.Singleton
         modules = [AppModule::class]
 )
 @Singleton
-interface AppComponent {
+abstract class AppComponent {
 
-    fun inject(application: DreamlandApplication)
+    abstract fun inject(application: DreamlandApplication)
 
     companion object {
         fun init(component: AppComponent) {

@@ -10,8 +10,4 @@ interface IUserRepository {
     fun signIn(loginData: IAuthProperties, observer: SingleObserver<IAccount>)
     fun signOut(): Completable
 
-    companion object {
-        fun builder() = Builder()
-    }
-
 }

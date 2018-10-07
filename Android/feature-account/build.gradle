@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 
@@ -27,7 +28,10 @@ android {
 
 dependencies {
     implementation project(':core-android')
-    implementation "io.objectbox:objectbox-rxjava:$objectbox_version"
+
+    // Dagger 2
+    kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
     testImplementation 'junit:junit:4.12'
 

@@ -30,8 +30,8 @@ dependencies {
     implementation project(':feature-dreams')
     implementation project(':feature-statistic')
 
-    kapt 'com.google.dagger:dagger-compiler:2.16'
-    kapt 'com.google.dagger:dagger-android-processor:2.16'
+    kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
     testImplementation 'junit:junit:4.12'
 

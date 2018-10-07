@@ -17,13 +17,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mViewModel = DreamlandApplication.mainViewModelFactory.getFor(this)
-        mViewModel.observeState(this@MainActivity) { newState ->
-            when (newState) {
-                is MainViewModelState.WaitState -> onWaitState(newState)
-                is MainViewModelState.CompleteState -> onCompleteState(newState)
-            }
-        }
+//        mViewModel.observeState(this@MainActivity) { newState ->
+//            when (newState) {
+//                is MainViewModelState.WaitState -> onWaitState(newState)
+//                is MainViewModelState.CompleteState -> onCompleteState(newState)
+//            }
+//        }
     }
 
     private fun onWaitState(state: MainViewModelState.WaitState) {}

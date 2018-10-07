@@ -1,22 +1,20 @@
 package ru.iandreyshev.featureAccount.model.repository
 
-import io.objectbox.BoxStore
+import io.objectbox.Box
 import io.objectbox.rx.RxQuery
 import io.reactivex.Completable
 import io.reactivex.SingleObserver
 import ru.iandreyshev.featureAccount.model.storage.AccountEntity
+import javax.inject.Inject
 
-internal class UserRepository(boxStore: BoxStore) : IUserRepository {
+internal class UserRepository : IUserRepository {
 
-    private val mAccountBox by lazy {
-        boxStore.boxFor(AccountEntity::class.java)
-    }
-    private val mAllAccountsQuery by lazy {
-        mAccountBox.query().build()
-    }
+    @Inject
+    lateinit var userBox: Box<AccountEntity>
 
     override fun getUser(observer: SingleObserver<IUser>) {
-        RxQuery.single(mAllAccountsQuery)
+        val query = userBox.query().build()
+        RxQuery.single(query)
                 .map {
                     val account = it.firstOrNull()?.toAccount()
                     return@map User(account)
