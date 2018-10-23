@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion target_sdk
     defaultConfig {
         applicationId "ru.iandreyshev.dreamland"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion min_sdk
+        targetSdkVersion target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -23,15 +23,14 @@ android {
 }
 
 dependencies {
-    implementation project(':core-android-utils')
-    implementation project(':feature-logination')
+    implementation project(':core-android')
+    implementation project(':feature-account')
+    implementation project(':feature-dreams')
+    implementation project(':feature-statistic')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation "org.jetbrains.anko:anko-commons:$anko_version"
-    implementation 'com.android.support:design:28.0.0-rc02'
+    // Dagger 2
+    kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
     testImplementation 'junit:junit:4.12'
 

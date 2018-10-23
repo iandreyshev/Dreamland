@@ -1,1 +1,1 @@
-include ':app', ':feature-logination', ':core-android-utils'
+include ':app', ':core-android', ':feature-account', ':feature-dreams', ':feature-statistic'

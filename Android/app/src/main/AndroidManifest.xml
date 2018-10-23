@@ -2,19 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.iandreyshev.dreamland">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <application
+        android:name=".application.DreamlandApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.activity.MainActivity">
+
+        <!--ACTIVITY-->
+        <activity
+            android:name=".presentation.activity.MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:name="ru.iandreyshev.featureAccount.presentation.activity.AuthActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".presentation.activity.MenuActivity" />
+        <!--ACTIVITY-->
     </application>
 
 </manifest>
