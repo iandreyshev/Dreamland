@@ -3,9 +3,9 @@ package ru.iandreyshev.dreamland.presentation.tools
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
 import android.view.View
-import ru.iandreyshev.coreAndroidUtils.goneAll
-import ru.iandreyshev.coreAndroidUtils.visible
 import ru.iandreyshev.dreamland.R
+import ru.iandreyshev.vext.view.goneAll
+import ru.iandreyshev.vext.view.visible
 
 class NavigationActivityPageController(
         private val feedPage: View,
@@ -39,7 +39,7 @@ class NavigationActivityPageController(
     }
 
     private fun onPageClick(pageId: Int) {
-        goneAll(mPages)
+        mPages.goneAll()
         when (pageId) {
             R.id.menu_application_feed -> feedPage.visible()
             R.id.menu_application_dreams -> dreamsPage.visible()

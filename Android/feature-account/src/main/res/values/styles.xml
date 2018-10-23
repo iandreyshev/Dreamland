@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
+    </style>
+
+</resources>

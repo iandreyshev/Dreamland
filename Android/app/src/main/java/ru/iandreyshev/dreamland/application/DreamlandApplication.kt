@@ -1,27 +1,25 @@
 package ru.iandreyshev.dreamland.application
 
 import android.app.Application
-import android.content.Context
-import io.objectbox.BoxStore
 import ru.iandreyshev.dreamland.di.DaggerAppComponent
 import ru.iandreyshev.dreamland.di.AppComponent
-import javax.inject.Inject
+import ru.iandreyshev.dreamland.di.FeatureProxyInjector
+import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 
 class DreamlandApplication : Application() {
 
-    @Inject
-    lateinit var mBoxStore: BoxStore
+    companion object {
+        lateinit var instance: Application
+    }
 
     override fun onCreate() {
         super.onCreate()
-        appContext = applicationContext
+        instance = this
 
         AppComponent.init(DaggerAppComponent.create())
-        AppComponent.get().inject(this)
-    }
+        FeatureAccountComponent.init(FeatureProxyInjector.featureAccountComponent())
 
-    companion object {
-        lateinit var appContext: Context
+        AppComponent.get().inject(this)
     }
 
 }

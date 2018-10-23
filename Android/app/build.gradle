@@ -20,8 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dexOptions {
-    }
 }
 
 dependencies {
@@ -30,6 +28,7 @@ dependencies {
     implementation project(':feature-dreams')
     implementation project(':feature-statistic')
 
+    // Dagger 2
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 

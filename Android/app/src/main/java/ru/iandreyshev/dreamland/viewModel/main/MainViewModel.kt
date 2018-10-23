@@ -1,31 +1,40 @@
 package ru.iandreyshev.dreamland.viewModel.main
 
-import android.arch.lifecycle.LifecycleOwner
+import android.app.Application
 import android.arch.lifecycle.ViewModel
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
-import ru.iandreyshev.coreAndroidUtils.mutableLiveDataOf
-import ru.iandreyshev.coreAndroidUtils.observeNotNull
-import ru.iandreyshev.featureAccount.model.repository.IUser
-import ru.iandreyshev.featureAccount.model.repository.IUserRepository
+import org.jetbrains.anko.startActivity
+import ru.iandreyshev.dreamland.presentation.activity.MenuActivity
+import ru.iandreyshev.featureAccount.presentation.activity.AuthActivity
+import ru.iandreyshev.featureAccount.repository.IUserRepository
+import ru.iandreyshev.featureAccount.repository.impl.AuthState
+import ru.iandreyshev.viewModel.WaitViewModel
+import javax.inject.Inject
 
-class MainViewModel(mUserRepository: IUserRepository) : ViewModel() {
+class MainViewModel
+@Inject constructor(
+        userRepository: IUserRepository,
+        private val application: Application
+) : ViewModel() {
 
-    private val mState = mutableLiveDataOf<MainViewModelState>(MainViewModelState.WaitState)
+    val waitViewModel: WaitViewModel = WaitViewModel(true)
 
     init {
-        mUserRepository.getUser(object : SingleObserver<IUser> {
-            override fun onSuccess(user: IUser) {
-                val completeState = MainViewModelState.CompleteState(user.isSignIn)
-                mState.postValue(completeState)
-            }
-
-            override fun onSubscribe(d: Disposable) = Unit
-            override fun onError(e: Throwable) = Unit
-        })
+        userRepository.getUserAuthState()
+                .singleOrError()
+                .subscribe(::handleAuthState, ::handleError)
     }
 
-    fun observeState(lifecycleOwner: LifecycleOwner, observer: (MainViewModelState) -> Unit) =
-            mState.observeNotNull(lifecycleOwner, observer)
+    private fun handleAuthState(state: AuthState) {
+        waitViewModel.stop()
+        when (state) {
+            AuthState.SIGNED_IN -> application.startActivity<MenuActivity>()
+            AuthState.NOT_EXISTS -> application.startActivity<AuthActivity>()
+        }
+    }
+
+    private fun handleError(error: Throwable) {
+        waitViewModel.stop()
+        error.printStackTrace()
+    }
 
 }

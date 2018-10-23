@@ -1,15 +1,16 @@
 package ru.iandreyshev.dreamland.presentation.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import org.jetbrains.anko.intentFor
+import kotlinx.android.synthetic.main.activity_main.*
+import ru.iandreyshev.activity.BaseAppCompatActivity
+import ru.iandreyshev.coreAndroidUtils.observeNotNull
+import ru.iandreyshev.coreAndroidUtils.viewModel
 import ru.iandreyshev.dreamland.R
-import ru.iandreyshev.dreamland.application.DreamlandApplication
+import ru.iandreyshev.dreamland.di.AppComponent
 import ru.iandreyshev.dreamland.viewModel.main.MainViewModel
-import ru.iandreyshev.dreamland.viewModel.main.MainViewModelState
-import ru.iandreyshev.featureAccount.presentation.activity.LoginActivity
+import ru.iandreyshev.vext.view.visibleIfOrGone
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseAppCompatActivity() {
 
     private lateinit var mViewModel: MainViewModel
 
@@ -17,21 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        mViewModel.observeState(this@MainActivity) { newState ->
-//            when (newState) {
-//                is MainViewModelState.WaitState -> onWaitState(newState)
-//                is MainViewModelState.CompleteState -> onCompleteState(newState)
-//            }
-//        }
-    }
+        AppComponent.get().inject(this)
 
-    private fun onWaitState(state: MainViewModelState.WaitState) {}
-
-    private fun onCompleteState(state: MainViewModelState.CompleteState) {
-        if (state.isSignIn) {
-            startActivity(intentFor<MenuActivity>())
-        } else {
-            startActivity(intentFor<LoginActivity>())
+        mViewModel = viewModel(viewModelFactory) {
+            observeNotNull(waitViewModel.observable, progressBar::visibleIfOrGone)
         }
     }
 
