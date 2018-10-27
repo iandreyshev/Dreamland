@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import ru.iandreyshev.coreAndroidUtils.observeNotNull
 import ru.iandreyshev.featureAccount.R
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.repository.ISignUpProperties
+import ru.iandreyshev.featureAccount.repository.SignUpResult
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
 import ru.iandreyshev.fragment.BaseFragment
@@ -39,6 +42,7 @@ class SignUpFragment : BaseFragment() {
                 startSignUp(getProperties())
             }
             observeNotNull(waitingObservable, ::handleWaiting)
+            observeNotNull(errorObservable, ::handleError)
         }
     }
 
@@ -66,6 +70,19 @@ class SignUpFragment : BaseFragment() {
         signUpFields_password_field.clearFocus()
 
         signUpFields_progressBar.visibleIfOrGone(isWait)
+    }
+
+    private fun handleError(error: SignUpResult) {
+        activity?.alert {
+            titleResource = R.string.sign_up_error_title
+            messageResource = when(error) {
+                SignUpResult.SUCCESS -> return@alert
+                SignUpResult.USER_ALREADY_EXISTS -> R.string.sign_up_error_user_already_exists
+                SignUpResult.NO_CONNECTION -> R.string.sign_up_error_no_connection
+                SignUpResult.UNKNOWN -> R.string.sign_up_error_unknown
+            }
+            okButton { }
+        }?.show()
     }
 
 }

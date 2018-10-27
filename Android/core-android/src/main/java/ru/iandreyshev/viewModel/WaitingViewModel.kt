@@ -3,7 +3,7 @@ package ru.iandreyshev.viewModel
 import android.arch.lifecycle.LiveData
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 
-class WaitViewModel(default: Boolean = false) {
+class WaitingViewModel(default: Boolean = false) {
 
     val observable: LiveData<Boolean>
         get() = mWaitState

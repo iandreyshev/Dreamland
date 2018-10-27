@@ -1,9 +1,6 @@
-package ru.iandreyshev.featureAccount.repository.impl
+package ru.iandreyshev.featureAccount.repository
 
 import io.reactivex.Single
-import ru.iandreyshev.featureAccount.repository.IAuthRepository
-import ru.iandreyshev.featureAccount.repository.ISignInProperties
-import ru.iandreyshev.featureAccount.repository.ISignUpProperties
 import ru.iandreyshev.rx.ioToMain
 
 class AuthRepository : IAuthRepository {
@@ -11,14 +8,14 @@ class AuthRepository : IAuthRepository {
     override fun signIn(signInProperties: ISignInProperties): Single<SignInResult> {
         return Single.fromCallable {
             Thread.sleep(3000)
-            SignInResult.ERROR
+            SignInResult.UNKNOWN
         }.ioToMain()
     }
 
     override fun signUp(signUpProperties: ISignUpProperties): Single<SignUpResult> {
         return Single.fromCallable {
             Thread.sleep(3000)
-            SignUpResult.ERROR
+            SignUpResult.NO_CONNECTION
         }.ioToMain()
     }
 

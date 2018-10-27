@@ -1,10 +1,8 @@
-package ru.iandreyshev.featureAccount.repository.impl
+package ru.iandreyshev.featureAccount.repository
 
 import io.objectbox.Box
 import io.objectbox.rx.RxQuery
 import io.reactivex.*
-import ru.iandreyshev.featureAccount.repository.IUser
-import ru.iandreyshev.featureAccount.repository.IUserRepository
 import ru.iandreyshev.featureAccount.repository.storage.AccountEntity
 import javax.inject.Inject
 
@@ -13,8 +11,8 @@ internal class UserRepository : IUserRepository {
     @Inject
     lateinit var userBox: Box<AccountEntity>
 
-    private val mAuthStateObservable = Observable.create<AuthState> {
-        it.onNext(AuthState.NOT_EXISTS)
+    private val mAuthStateObservable = Observable.create<Boolean> {
+        it.onNext(false)
         it.onComplete()
     }
 
@@ -27,8 +25,12 @@ internal class UserRepository : IUserRepository {
                 }
     }
 
-    override fun getUserAuthState(): Observable<AuthState> {
+    override fun getUserAuthState(): Observable<Boolean> {
         return mAuthStateObservable
+    }
+
+    override fun refresh() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

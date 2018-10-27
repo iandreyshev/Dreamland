@@ -4,53 +4,56 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroidUtils.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.presentation.data.AuthError
+import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
 import ru.iandreyshev.featureAccount.repository.IAuthRepository
 import ru.iandreyshev.featureAccount.repository.ISignInProperties
-import ru.iandreyshev.featureAccount.repository.impl.SignInResult
-import ru.iandreyshev.rx.ioToMain
-import ru.iandreyshev.viewModel.WaitViewModel
+import ru.iandreyshev.featureAccount.repository.SignInResult
+import ru.iandreyshev.viewModel.WaitingViewModel
 import javax.inject.Inject
 
 class SignInViewModel
 @Inject constructor(
-        private val authRepository: IAuthRepository
+        private val authRepository: IAuthRepository,
+        private val navigator: IAuthNavigator
 ) : ViewModel() {
 
     val waitingObservable: LiveData<Boolean>
-        get() = mWaitingViewModel.observable
+        get() = mWaitingObservable.observable
 
-    val errorObservable: LiveData<AuthError>
-        get() = mErrorViewModel
+    val errorObservable: LiveData<SignInResult>
+        get() = mErrorObservable
 
-    private val mWaitingViewModel = WaitViewModel()
-    private val mErrorViewModel = SingleLiveEvent<AuthError>()
+    private val mWaitingObservable = WaitingViewModel()
+    private val mErrorObservable = SingleLiveEvent<SignInResult>()
 
     init {
         FeatureAccountComponent.get().inject(this)
     }
 
     fun startSignIn(properties: ISignInProperties) {
-        mWaitingViewModel.start()
+        mWaitingObservable.start()
         authRepository.signIn(properties)
                 .doOnSuccess(::handleSignInResult)
                 .doOnError(::handleSignInError)
                 .subscribe { _ ->
-                    mWaitingViewModel.stop()
+                    mWaitingObservable.stop()
                 }
     }
 
     private fun handleSignInResult(result: SignInResult) {
         when (result) {
-            SignInResult.SUCCESS -> {}
-            SignInResult.ERROR -> {
-                mErrorViewModel.postValue(AuthError("Title", "Message"))
-            }
+            SignInResult.SUCCESS ->
+                navigator.onSignInSuccess()
+            SignInResult.USER_NOT_EXISTS,
+            SignInResult.NO_CONNECTION,
+            SignInResult.UNKNOWN ->
+                mErrorObservable.setValue(result)
         }
     }
 
     private fun handleSignInError(error: Throwable) {
         error.printStackTrace()
+        mErrorObservable.value = SignInResult.UNKNOWN
     }
 
 }

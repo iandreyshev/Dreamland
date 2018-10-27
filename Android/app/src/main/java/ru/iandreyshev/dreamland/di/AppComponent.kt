@@ -7,7 +7,11 @@ import ru.iandreyshev.featureAccount.di.FeatureAccountModule
 import javax.inject.Singleton
 
 @Component(
-        modules = [AppModule::class, AppViewModelModule::class, FeatureAccountModule::class]
+        modules = [
+            AppModule::class,
+            AppViewModelModule::class,
+            AppNavigationModule::class,
+            FeatureAccountModule::class]
 )
 @Singleton
 abstract class AppComponent {

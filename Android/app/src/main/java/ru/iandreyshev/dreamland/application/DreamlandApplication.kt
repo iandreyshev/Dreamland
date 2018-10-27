@@ -17,7 +17,10 @@ class DreamlandApplication : Application() {
         instance = this
 
         AppComponent.init(DaggerAppComponent.create())
-        FeatureAccountComponent.init(FeatureProxyInjector.featureAccountComponent())
+
+        val featureAccountComponent = FeatureProxyInjector
+                .featureAccountComponent(applicationContext)
+        FeatureAccountComponent.init(featureAccountComponent)
 
         AppComponent.get().inject(this)
     }

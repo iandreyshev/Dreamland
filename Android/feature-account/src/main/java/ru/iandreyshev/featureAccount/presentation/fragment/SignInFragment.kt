@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import ru.iandreyshev.coreAndroidUtils.observeNotNull
 import ru.iandreyshev.featureAccount.R
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.repository.ISignInProperties
+import ru.iandreyshev.featureAccount.repository.SignInResult
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.fragment.BaseFragment
@@ -39,6 +42,7 @@ class SignInFragment : BaseFragment() {
                 startSignIn(getProperties())
             }
             observeNotNull(waitingObservable, ::handleWaiting)
+            observeNotNull(errorObservable, ::handleError)
         }
     }
 
@@ -62,6 +66,20 @@ class SignInFragment : BaseFragment() {
         signInFields_password_field.clearFocus()
 
         signInFields_progressBar.visibleIfOrGone(isWait)
+    }
+
+    private fun handleError(error: SignInResult) {
+        activity?.alert {
+            titleResource = R.string.sign_in_error_title
+            messageResource = when (error) {
+                SignInResult.SUCCESS -> return@alert
+                SignInResult.USER_NOT_EXISTS -> R.string.sign_in_error_user_not_exists
+                SignInResult.INCORRECT_DATA -> R.string.sign_in_error_incorrect_data
+                SignInResult.NO_CONNECTION -> R.string.sign_in_error_no_connection
+                SignInResult.UNKNOWN -> R.string.sign_in_error_unknown
+            }
+            okButton { }
+        }?.show()
     }
 
 }

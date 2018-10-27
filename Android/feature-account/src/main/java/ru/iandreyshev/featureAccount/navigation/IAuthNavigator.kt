@@ -1,5 +1,6 @@
 package ru.iandreyshev.featureAccount.navigation
 
-interface INavigationCallback {
+interface IAuthNavigator {
     fun onSignInSuccess()
+    fun onSignUpSuccess()
 }

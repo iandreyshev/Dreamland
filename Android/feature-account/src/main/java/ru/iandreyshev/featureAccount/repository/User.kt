@@ -1,6 +1,5 @@
-package ru.iandreyshev.featureAccount.repository.impl
+package ru.iandreyshev.featureAccount.repository
 
-import ru.iandreyshev.featureAccount.repository.IUser
 import ru.iandreyshev.featureAccount.repository.storage.AccountEntity
 
 internal data class User(

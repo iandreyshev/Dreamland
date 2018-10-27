@@ -1,8 +1,6 @@
 package ru.iandreyshev.featureAccount.repository
 
 import io.reactivex.Single
-import ru.iandreyshev.featureAccount.repository.impl.SignInResult
-import ru.iandreyshev.featureAccount.repository.impl.SignUpResult
 
 interface IAuthRepository {
 

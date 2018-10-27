@@ -1,6 +1,5 @@
 package ru.iandreyshev.dreamland.di
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -23,9 +22,5 @@ class AppModule {
             MyObjectBox.builder()
                     .androidContext(DreamlandApplication.instance.applicationContext)
                     .build()
-
-    @Provides
-    internal fun provideApplication(): Application =
-            DreamlandApplication.instance
 
 }

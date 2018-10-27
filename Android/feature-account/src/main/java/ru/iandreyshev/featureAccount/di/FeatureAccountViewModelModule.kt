@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.iandreyshev.di.viewModel.ViewModelFactory
 import ru.iandreyshev.di.viewModel.ViewModelKey
+import ru.iandreyshev.featureAccount.viewModel.AccountViewModel
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
@@ -31,5 +32,10 @@ abstract class FeatureAccountViewModelModule {
     @IntoMap
     @ViewModelKey(SignUpViewModel::class)
     internal abstract fun bindSignUpViewModel(viewModel: SignUpViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountViewModel::class)
+    internal abstract fun bindAccountViewModel(viewModel: AccountViewModel): ViewModel
 
 }

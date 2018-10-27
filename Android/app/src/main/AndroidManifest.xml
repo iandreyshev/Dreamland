@@ -13,7 +13,7 @@
 
         <!--ACTIVITY-->
         <activity
-            android:name=".presentation.activity.MainActivity"
+            android:name=".presentation.activity.SplashActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

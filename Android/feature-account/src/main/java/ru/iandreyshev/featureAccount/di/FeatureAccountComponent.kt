@@ -1,7 +1,9 @@
 package ru.iandreyshev.featureAccount.di
 
-import android.app.Application
+import android.content.Context
 import dagger.Component
+import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
+import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
 import ru.iandreyshev.featureAccount.presentation.activity.AuthActivity
 import ru.iandreyshev.featureAccount.presentation.fragment.SignInFragment
 import ru.iandreyshev.featureAccount.presentation.fragment.SignUpFragment
@@ -11,8 +13,16 @@ import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
 import javax.inject.Singleton
 
 @Component(
-        modules = [FeatureAccountModule::class, FeatureAccountViewModelModule::class],
-        dependencies = [Application::class]
+        modules = [
+            FeatureAccountModule::class,
+            FeatureAccountViewModelModule::class,
+            FeatureAccountUseCaseModule::class
+        ],
+        dependencies = [
+            IAuthNavigator::class,
+            IAccountNavigator::class,
+            Context::class
+        ]
 )
 @Singleton
 abstract class FeatureAccountComponent {

@@ -1,14 +1,19 @@
 package ru.iandreyshev.dreamland.di
 
-import ru.iandreyshev.dreamland.application.DreamlandApplication
+import android.content.Context
+import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
 import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 
 object FeatureProxyInjector {
 
-    fun featureAccountComponent(): FeatureAccountComponent =
+    private val mFeatureAccountNavigator = FeatureAccountNavigator()
+
+    fun featureAccountComponent(context: Context): FeatureAccountComponent =
             DaggerFeatureAccountComponent.builder()
-                    .application(DreamlandApplication.instance)
+                    .iAuthNavigator(mFeatureAccountNavigator)
+                    .iAccountNavigator(mFeatureAccountNavigator)
+                    .context(context)
                     .build()
 
 }

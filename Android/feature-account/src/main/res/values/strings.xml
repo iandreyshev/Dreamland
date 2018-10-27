@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Account</string>
+    <string name="app_name">Dreamland</string>
+
+    <string name="sign_in_error_title">Ошибка авторизации</string>
+    <string name="sign_in_error_user_not_exists">Пользователь с такими данными не существует. Пожалуйста, зарегестрируйтесь</string>
+    <string name="sign_in_error_incorrect_data">Введены некорректные данные</string>
+    <string name="sign_in_error_no_connection">Отсутствует соединение с сервером</string>
+    <string name="sign_in_error_unknown">Неизвестная ошибка, попробуйте снова…</string>
+
+    <string name="sign_up_error_title">Ошибка регистрации</string>
+    <string name="sign_up_error_user_already_exists">Пользователь с такими данными уже существует</string>
+    <string name="sign_up_error_no_connection">Отсутствует соединение с сервером</string>
+    <string name="sign_up_error_unknown">Неизвестная ошибка, попробуйте снова…</string>
 </resources>
