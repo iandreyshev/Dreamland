@@ -1,20 +1,20 @@
 package ru.iandreyshev.dreamland.navigation
 
+import android.content.Context
+import org.jetbrains.anko.startActivity
 import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
-import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
+import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
 
-class FeatureAccountNavigator : IAuthNavigator, IAccountNavigator {
+class FeatureAccountNavigator(
+        private val context: Context
+) : IAccountNavigator {
 
     override fun onSignInSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        context.startActivity<MenuActivity>()
     }
 
     override fun onSignUpSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onBackFromAccount() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        context.startActivity<MenuActivity>()
     }
 
 }

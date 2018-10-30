@@ -24,9 +24,12 @@ android {
 
 dependencies {
     implementation project(':core-android')
+    implementation project(':core-database')
+    implementation project(':core-network')
     implementation project(':feature-account')
     implementation project(':feature-dreams')
     implementation project(':feature-statistic')
+    implementation project(':feature-menu')
 
     // Dagger 2
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"

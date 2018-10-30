@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion target_sdk
@@ -30,9 +29,12 @@ repositories {
 }
 
 dependencies {
-    implementation project(':core-android')
+    api project(':core-android')
+    api project(':core-database')
+    api project(':core-network')
 
     // Dagger 2
+    api 'com.google.dagger:dagger-android:2.16'
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 

@@ -4,8 +4,8 @@ import io.reactivex.Observable
 
 interface IUserRepository {
 
-    fun getUser(): Observable<IUser>
-    fun getUserAuthState(): Observable<Boolean>
-    fun refresh()
+    fun getUserObservable(): Observable<IUser>
+    fun getUserAuthStateObservable(): Observable<Boolean>
+    fun refreshUserData()
 
 }

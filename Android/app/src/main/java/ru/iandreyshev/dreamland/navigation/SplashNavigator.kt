@@ -2,7 +2,7 @@ package ru.iandreyshev.dreamland.navigation
 
 import android.content.Context
 import org.jetbrains.anko.startActivity
-import ru.iandreyshev.dreamland.presentation.activity.MenuActivity
+import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
 import ru.iandreyshev.featureAccount.presentation.activity.AuthActivity
 import javax.inject.Inject
 

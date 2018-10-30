@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroidUtils.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
+import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
 import ru.iandreyshev.featureAccount.repository.IAuthRepository
 import ru.iandreyshev.featureAccount.repository.ISignInProperties
 import ru.iandreyshev.featureAccount.repository.SignInResult
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class SignInViewModel
 @Inject constructor(
         private val authRepository: IAuthRepository,
-        private val navigator: IAuthNavigator
+        private val navigator: IAccountNavigator
 ) : ViewModel() {
 
     val waitingObservable: LiveData<Boolean>
@@ -40,15 +40,14 @@ class SignInViewModel
                 }
     }
 
-    private fun handleSignInResult(result: SignInResult) {
-        when (result) {
-            SignInResult.SUCCESS ->
-                navigator.onSignInSuccess()
-            SignInResult.USER_NOT_EXISTS,
-            SignInResult.NO_CONNECTION,
-            SignInResult.UNKNOWN ->
-                mErrorObservable.setValue(result)
-        }
+    private fun handleSignInResult(result: SignInResult) = when (result) {
+        SignInResult.SUCCESS ->
+            navigator.onSignInSuccess()
+        SignInResult.USER_NOT_EXISTS,
+        SignInResult.NO_CONNECTION,
+        SignInResult.INCORRECT_DATA,
+        SignInResult.UNKNOWN ->
+            mErrorObservable.setValue(result)
     }
 
     private fun handleSignInError(error: Throwable) {

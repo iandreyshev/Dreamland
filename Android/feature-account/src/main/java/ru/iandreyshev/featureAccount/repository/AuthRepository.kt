@@ -8,7 +8,7 @@ class AuthRepository : IAuthRepository {
     override fun signIn(signInProperties: ISignInProperties): Single<SignInResult> {
         return Single.fromCallable {
             Thread.sleep(3000)
-            SignInResult.UNKNOWN
+            SignInResult.SUCCESS
         }.ioToMain()
     }
 

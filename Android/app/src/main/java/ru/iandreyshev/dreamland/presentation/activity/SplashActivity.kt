@@ -7,7 +7,7 @@ import ru.iandreyshev.coreAndroidUtils.observeNotNull
 import ru.iandreyshev.coreAndroidUtils.viewModel
 import ru.iandreyshev.dreamland.R
 import ru.iandreyshev.dreamland.di.AppComponent
-import ru.iandreyshev.dreamland.viewModel.main.SplashViewModel
+import ru.iandreyshev.dreamland.viewModel.SplashViewModel
 import ru.iandreyshev.vext.view.visibleIfOrGone
 
 class SplashActivity : BaseAppCompatActivity() {

@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "2:4907306163344455828",
-      "lastPropertyId": "5:972193856084436659",
+      "lastPropertyId": "6:5272092349602165828",
       "name": "AccountEntity",
       "properties": [
         {
@@ -28,6 +28,10 @@
         {
           "id": "5:972193856084436659",
           "name": "avatarUrl"
+        },
+        {
+          "id": "6:5272092349602165828",
+          "name": "fullName"
         }
       ],
       "relations": []

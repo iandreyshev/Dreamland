@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroidUtils.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
+import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
 import ru.iandreyshev.featureAccount.repository.IAuthRepository
 import ru.iandreyshev.featureAccount.repository.ISignUpProperties
 import ru.iandreyshev.featureAccount.repository.SignUpResult
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class SignUpViewModel
 @Inject constructor(
         private val authRepository: IAuthRepository,
-        private val navigator: IAuthNavigator
+        private val navigator: IAccountNavigator
 ) : ViewModel() {
 
     val waitingObservable: LiveData<Boolean>

@@ -1,28 +1,18 @@
 package ru.iandreyshev.featureAccount.di
 
-import android.content.Context
+import android.arch.lifecycle.ViewModel
 import dagger.Component
+import ru.iandreyshev.activity.BaseAppCompatActivity
 import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
-import ru.iandreyshev.featureAccount.navigation.IAuthNavigator
-import ru.iandreyshev.featureAccount.presentation.activity.AuthActivity
-import ru.iandreyshev.featureAccount.presentation.fragment.SignInFragment
-import ru.iandreyshev.featureAccount.presentation.fragment.SignUpFragment
-import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
-import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
-import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
+import ru.iandreyshev.fragment.BaseFragment
 import javax.inject.Singleton
 
 @Component(
         modules = [
             FeatureAccountModule::class,
             FeatureAccountViewModelModule::class,
-            FeatureAccountUseCaseModule::class
-        ],
-        dependencies = [
-            IAuthNavigator::class,
-            IAccountNavigator::class,
-            Context::class
-        ]
+            FeatureAccountUseCaseModule::class],
+        dependencies = [IFeatureAccountDependencies::class]
 )
 @Singleton
 abstract class FeatureAccountComponent {
@@ -38,11 +28,13 @@ abstract class FeatureAccountComponent {
         private lateinit var sInstance: FeatureAccountComponent
     }
 
-    abstract fun inject(activity: AuthActivity)
-    abstract fun inject(fragment: SignInFragment)
-    abstract fun inject(fragment: SignUpFragment)
-    abstract fun inject(viewModel: AuthViewModel)
-    abstract fun inject(viewModel: SignInViewModel)
-    abstract fun inject(viewModel: SignUpViewModel)
+    abstract fun inject(activity: BaseAppCompatActivity)
+    abstract fun inject(fragment: BaseFragment)
+    abstract fun inject(viewModel: ViewModel)
+
+    @Component(
+            dependencies = [IAccountNavigator::class]
+    )
+    abstract class DependenciesComponent : IFeatureAccountDependencies
 
 }

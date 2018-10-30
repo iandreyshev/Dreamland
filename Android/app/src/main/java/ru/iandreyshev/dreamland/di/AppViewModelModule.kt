@@ -7,8 +7,8 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.iandreyshev.di.viewModel.ViewModelFactory
 import ru.iandreyshev.di.viewModel.ViewModelKey
-import ru.iandreyshev.dreamland.viewModel.main.SplashViewModel
-import ru.iandreyshev.dreamland.viewModel.menu.MenuViewModel
+import ru.iandreyshev.dreamland.viewModel.SplashViewModel
+import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 
 @Module
 internal abstract class AppViewModelModule {
@@ -19,7 +19,7 @@ internal abstract class AppViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
-    abstract fun bindMainViewModel(viewModel: SplashViewModel): ViewModel
+    abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
     @Binds
     @IntoMap

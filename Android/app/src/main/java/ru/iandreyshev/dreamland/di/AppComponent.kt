@@ -16,9 +16,6 @@ import javax.inject.Singleton
 @Singleton
 abstract class AppComponent {
 
-    abstract fun inject(application: DreamlandApplication)
-    abstract fun inject(activity: BaseAppCompatActivity)
-
     companion object {
         fun init(component: AppComponent) {
             sInstance = component
@@ -29,5 +26,8 @@ abstract class AppComponent {
         @Volatile
         private lateinit var sInstance: AppComponent
     }
+
+    abstract fun inject(application: DreamlandApplication)
+    abstract fun inject(activity: BaseAppCompatActivity)
 
 }

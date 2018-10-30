@@ -3,17 +3,27 @@ package ru.iandreyshev.dreamland.di
 import android.content.Context
 import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
 import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent
+import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent_FeatureAccountDependenciesComponent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
+import ru.iandreyshev.featureMenu.di.DaggerFeatureMenuComponent
+import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 
-object FeatureProxyInjector {
+class FeatureProxyInjector(
+        private val context: Context
+) {
 
-    private val mFeatureAccountNavigator = FeatureAccountNavigator()
-
-    fun featureAccountComponent(context: Context): FeatureAccountComponent =
+    fun featureAccountComponent(): FeatureAccountComponent =
             DaggerFeatureAccountComponent.builder()
-                    .iAuthNavigator(mFeatureAccountNavigator)
-                    .iAccountNavigator(mFeatureAccountNavigator)
-                    .context(context)
+                    .iFeatureAccountDependencies(DaggerFeatureAccountComponent_FeatureAccountDependenciesComponent
+                            .builder()
+                            .iAccountNavigator(FeatureAccountNavigator(context))
+                            .build())
                     .build()
+
+    fun featureMenuComponent(context: Context): FeatureMenuComponent {
+        return DaggerFeatureMenuComponent.builder()
+                .dependenciesComponent(FeatureMenuDependences(context))
+                .build()
+    }
 
 }

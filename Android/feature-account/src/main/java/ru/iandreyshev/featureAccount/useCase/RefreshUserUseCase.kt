@@ -10,7 +10,7 @@ class RefreshUserUseCase @Inject constructor(
 ) : IRefreshUserUseCase {
 
     override fun refresh() = Completable.create {
-        repository.refresh()
+        repository.refreshUserData()
         it.onComplete()
     }.ioToMain()
 

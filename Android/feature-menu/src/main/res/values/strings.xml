@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">feature-menu</string>
+
+    <string name="drawer_menu_item_dreams">Dreams</string>
+    <string name="drawer_menu_item_statistic">Statistic</string>
+
+</resources>

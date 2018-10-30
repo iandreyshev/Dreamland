@@ -2,16 +2,15 @@ package ru.iandreyshev.featureAccount.viewModel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import io.reactivex.Observable
 import ru.iandreyshev.featureAccount.repository.IUser
-import ru.iandreyshev.featureAccount.useCase.IBackFromAccountUseCase
 import ru.iandreyshev.featureAccount.useCase.IRefreshUserUseCase
 import ru.iandreyshev.viewModel.WaitingViewModel
 import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(
         private val refreshUserUseCase: IRefreshUserUseCase,
-        private val backUseCase: IBackFromAccountUseCase,
-        val accountObservable: LiveData<IUser>
+        accountObservable: Observable<IUser>
 ) : ViewModel() {
 
     val refreshWaitingObservable: LiveData<Boolean>
@@ -25,7 +24,5 @@ class AccountViewModel @Inject constructor(
                 .doFinally(mRefreshWaitingViewModel::stop)
                 .subscribe()
     }
-
-    fun back() = backUseCase.back()
 
 }
