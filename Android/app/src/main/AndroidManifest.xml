@@ -23,9 +23,9 @@
         </activity>
         <activity
             android:name="ru.iandreyshev.featureAccount.presentation.activity.AuthActivity"
-            android:noHistory="true"
-            android:theme="@style/AppTheme" />
+            android:noHistory="true" />
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
+        <activity android:name="ru.iandreyshev.featureAccount.presentation.activity.AccountActivity" />
         <!--ACTIVITY-->
     </application>
 

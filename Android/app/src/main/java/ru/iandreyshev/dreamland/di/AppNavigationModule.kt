@@ -7,7 +7,7 @@ import ru.iandreyshev.dreamland.navigation.ISplashNavigator
 import ru.iandreyshev.dreamland.navigation.FeatureMenuNavigator
 import ru.iandreyshev.dreamland.navigation.SplashNavigator
 import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
-import ru.iandreyshev.featureMenu.navigation.IMenuNavigator
+import ru.iandreyshev.featureMenuApi.navigation.IMenuNavigator
 
 @Module
 abstract class AppNavigationModule {

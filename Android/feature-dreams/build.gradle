@@ -22,8 +22,6 @@ android {
 
 dependencies {
     api project(':core-android')
-    api project(':core-database')
-    api project(':core-network')
 
     testImplementation 'junit:junit:4.12'
 

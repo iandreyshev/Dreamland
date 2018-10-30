@@ -3,7 +3,7 @@ package ru.iandreyshev.dreamland.navigation
 import android.content.Context
 import org.jetbrains.anko.startActivity
 import ru.iandreyshev.featureAccount.presentation.activity.AccountActivity
-import ru.iandreyshev.featureMenu.navigation.IMenuNavigator
+import ru.iandreyshev.featureMenuApi.navigation.IMenuNavigator
 import javax.inject.Inject
 
 class FeatureMenuNavigator

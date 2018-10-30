@@ -7,9 +7,10 @@ import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent
 import ru.iandreyshev.dreamland.di.DaggerAppComponent
 import ru.iandreyshev.dreamland.di.AppComponent
-import ru.iandreyshev.dreamland.di.FeatureProxyInjector
+import ru.iandreyshev.dreamland.di.ProxyInjector
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
+import javax.inject.Inject
 
 class DreamlandApplication : Application() {
 
@@ -17,19 +18,20 @@ class DreamlandApplication : Application() {
         lateinit var instance: Application
     }
 
+    @Inject
+    internal lateinit var proxyInjector: ProxyInjector
+
     override fun onCreate() {
         super.onCreate()
         instance = this
 
-        val proxyInjector = FeatureProxyInjector(applicationContext)
-
         AppComponent.init(DaggerAppComponent.create())
-        CoreNetworkComponent.init(DaggerCoreNetworkComponent.create())
-        CoreDatabaseComponent.init(DaggerCoreDatabaseComponent.create())
-        FeatureAccountComponent.init(proxyInjector.featureAccountComponent())
-        FeatureMenuComponent.init(proxyInjector.featureMenuComponent(applicationContext))
-
         AppComponent.get().inject(this)
+
+        CoreNetworkComponent.init(DaggerCoreNetworkComponent.create())
+        CoreDatabaseComponent.init(proxyInjector.coreDatabaseComponent())
+        FeatureAccountComponent.init(proxyInjector.featureAccountComponent())
+        FeatureMenuComponent.init(proxyInjector.featureMenuComponent())
     }
 
 }

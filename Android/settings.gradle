@@ -1,1 +1,1 @@
-include ':app', ':core-android', ':feature-account', ':feature-dreams', ':feature-statistic', ':feature-menu', ':core-database', ':core-network'
+include ':app', ':core-android', ':feature-account-impl', ':feature-dreams', ':feature-statistic', ':feature-menu-impl', ':core-database-impl', ':core-network-impl', ':core-database-api', ':core-network-api', ':feature-account-api', ':feature-menu-api'

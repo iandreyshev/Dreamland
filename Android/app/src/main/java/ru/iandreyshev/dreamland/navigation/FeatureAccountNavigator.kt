@@ -4,8 +4,10 @@ import android.content.Context
 import org.jetbrains.anko.startActivity
 import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
 import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
+import javax.inject.Inject
 
-class FeatureAccountNavigator(
+class FeatureAccountNavigator
+@Inject constructor(
         private val context: Context
 ) : IAccountNavigator {
 
