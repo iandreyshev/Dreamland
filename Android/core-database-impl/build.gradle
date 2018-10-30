@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 
@@ -8,8 +7,8 @@ android {
     compileSdkVersion target_sdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion min_sdk
+        targetSdkVersion target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -26,13 +25,12 @@ android {
 }
 
 dependencies {
-    implementation project(':core-database-api')
+    api project(':core-database-api')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "org.jetbrains.anko:anko-commons:$anko_version"
 
     // RxJava
     api 'io.reactivex.rxjava2:rxjava:2.2.2'
@@ -46,8 +44,4 @@ dependencies {
 
     // ObjectBox
     api "io.objectbox:objectbox-rxjava:$objectbox_version"
-
-    testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 }

@@ -31,6 +31,7 @@ repositories {
 dependencies {
     api project(':core-android')
     api project(':core-database-api')
+    api project(':core-network-api')
     api project(':feature-account-api')
 
     // Dagger 2

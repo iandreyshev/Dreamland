@@ -6,7 +6,7 @@ import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
 import ru.iandreyshev.dreamland.navigation.ISplashNavigator
 import ru.iandreyshev.dreamland.navigation.FeatureMenuNavigator
 import ru.iandreyshev.dreamland.navigation.SplashNavigator
-import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
+import ru.iandreyshev.featureAccountApi.IAccountNavigator
 import ru.iandreyshev.featureMenuApi.navigation.IMenuNavigator
 
 @Module

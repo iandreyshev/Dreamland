@@ -2,7 +2,7 @@ package ru.iandreyshev.coreDatabase.di
 
 import android.content.Context
 import dagger.Component
-import ru.iandreyshev.coreDatabaseApi.api.ICoreDatabaseApi
+import ru.iandreyshev.coreDatabaseApi.ICoreDatabaseApi
 import javax.inject.Singleton
 
 @Component(

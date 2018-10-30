@@ -1,11 +1,14 @@
 package ru.iandreyshev.coreNetwork.di
 
 import dagger.Component
+import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
 import javax.inject.Singleton
 
-@Component
+@Component(
+        modules = [CoreNetworkApiModule::class]
+)
 @Singleton
-abstract class CoreNetworkComponent {
+abstract class CoreNetworkComponent : ICoreNetworkApi {
 
     companion object {
         fun init(component: CoreNetworkComponent) {

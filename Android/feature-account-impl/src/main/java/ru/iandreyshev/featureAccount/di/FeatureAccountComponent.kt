@@ -3,7 +3,9 @@ package ru.iandreyshev.featureAccount.di
 import android.arch.lifecycle.ViewModel
 import dagger.Component
 import ru.iandreyshev.activity.BaseAppCompatActivity
-import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
+import ru.iandreyshev.coreDatabaseApi.ICoreDatabaseApi
+import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
+import ru.iandreyshev.featureAccountApi.IAccountNavigator
 import ru.iandreyshev.fragment.BaseFragment
 import javax.inject.Singleton
 
@@ -33,7 +35,10 @@ abstract class FeatureAccountComponent {
     abstract fun inject(viewModel: ViewModel)
 
     @Component(
-            dependencies = [IAccountNavigator::class]
+            dependencies = [
+                IAccountNavigator::class,
+                ICoreNetworkApi::class,
+                ICoreDatabaseApi::class]
     )
     abstract class DependenciesComponent : IFeatureAccountDependencies
 

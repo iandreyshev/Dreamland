@@ -2,7 +2,6 @@ package ru.iandreyshev.dreamland.application
 
 import android.app.Application
 import ru.iandreyshev.coreDatabase.di.CoreDatabaseComponent
-import ru.iandreyshev.coreDatabase.di.DaggerCoreDatabaseComponent
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent
 import ru.iandreyshev.dreamland.di.DaggerAppComponent

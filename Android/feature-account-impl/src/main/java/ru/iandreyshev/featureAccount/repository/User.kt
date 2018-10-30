@@ -1,6 +1,6 @@
 package ru.iandreyshev.featureAccount.repository
 
-import ru.iandreyshev.coreDatabaseApi.entity.AccountEntity
+import ru.iandreyshev.coreDatabaseApi.account.AccountEntity
 
 internal data class User(
         override val login: String,

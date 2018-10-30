@@ -1,4 +1,4 @@
-package ru.iandreyshev.coreDatabaseApi.entity
+package ru.iandreyshev.coreDatabaseApi.account
 
 class AccountEntity(
         val accountId: Long = 0,
