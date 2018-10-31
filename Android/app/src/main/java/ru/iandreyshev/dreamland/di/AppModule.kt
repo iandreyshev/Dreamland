@@ -9,8 +9,8 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    @Singleton
     @Provides
+    @Singleton
     internal fun provideContext(): Context =
             DreamlandApplication.instance.applicationContext
 

@@ -1,5 +1,6 @@
 package ru.iandreyshev.coreDatabaseApi.account
 
+
 class AccountEntity(
         val accountId: Long = 0,
         val login: String = "",

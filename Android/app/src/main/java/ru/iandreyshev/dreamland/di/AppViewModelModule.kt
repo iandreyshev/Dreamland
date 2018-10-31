@@ -19,11 +19,11 @@ internal abstract class AppViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
-    abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
+    internal abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(MenuViewModel::class)
-    abstract fun bindMenuViewModel(viewModel: MenuViewModel): ViewModel
+    internal abstract fun bindMenuViewModel(viewModel: MenuViewModel): ViewModel
 
 }
