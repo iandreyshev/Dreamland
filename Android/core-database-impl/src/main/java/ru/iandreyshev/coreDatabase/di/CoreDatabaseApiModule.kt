@@ -7,7 +7,7 @@ import ru.iandreyshev.coreDatabase.impl.AccountDatabaseApiImpl
 import javax.inject.Singleton
 
 @Module
-internal abstract class CoreDatabaseApiModule {
+abstract class CoreDatabaseApiModule {
 
     @Binds
     @Singleton

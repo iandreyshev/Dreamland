@@ -13,7 +13,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -39,8 +38,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
-    testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // Circle image view
+    api 'de.hdodenhof:circleimageview:2.2.0'
 }

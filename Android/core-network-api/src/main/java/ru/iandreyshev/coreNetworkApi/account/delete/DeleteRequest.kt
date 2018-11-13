@@ -1,3 +1,7 @@
 package ru.iandreyshev.coreNetworkApi.account.delete
 
-class DeleteRequest
+import ru.iandreyshev.coreNetworkApi.account.AccountIdentifier
+
+class DeleteRequest(
+        account: AccountIdentifier
+)

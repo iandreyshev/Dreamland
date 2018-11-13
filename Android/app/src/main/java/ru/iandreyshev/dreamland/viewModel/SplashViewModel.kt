@@ -2,7 +2,7 @@ package ru.iandreyshev.dreamland.viewModel
 
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.dreamland.navigation.ISplashNavigator
-import ru.iandreyshev.featureAccount.repository.IUserRepository
+import ru.iandreyshev.featureAccountApi.repository.IUserRepository
 import ru.iandreyshev.viewModel.WaitingViewModel
 import javax.inject.Inject
 

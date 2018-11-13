@@ -5,8 +5,8 @@ import dagger.Component
 import ru.iandreyshev.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreDatabaseApi.ICoreDatabaseApi
 import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
-import ru.iandreyshev.featureAccountApi.IAccountNavigator
-import ru.iandreyshev.fragment.BaseFragment
+import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
+import ru.iandreyshev.dreams.presentation.BaseFragment
 import javax.inject.Singleton
 
 @Component(

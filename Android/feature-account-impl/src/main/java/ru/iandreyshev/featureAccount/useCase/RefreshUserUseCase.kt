@@ -1,7 +1,7 @@
 package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Completable
-import ru.iandreyshev.featureAccount.repository.IUserRepository
+import ru.iandreyshev.featureAccountApi.repository.IUserRepository
 import ru.iandreyshev.rx.ioToMain
 import javax.inject.Inject
 

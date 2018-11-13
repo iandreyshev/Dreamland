@@ -12,8 +12,17 @@ import ru.iandreyshev.featureMenu.R
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
+import ru.iandreyshev.featureMenuApi.navigation.IMainPageFragmentProvider
+import javax.inject.Inject
 
 class MenuActivity : BaseAppCompatActivity() {
+
+    companion object {
+        private const val MAIN_FRAGMENT_TAG = "fragment.main"
+    }
+
+    @Inject
+    lateinit var mMainPageFragmentProvider: IMainPageFragmentProvider
 
     private lateinit var mViewModel: MenuViewModel
 
@@ -26,6 +35,7 @@ class MenuActivity : BaseAppCompatActivity() {
         initViewModel()
         initActionBar()
         initDrawer()
+        initMainPageList()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
@@ -49,13 +59,19 @@ class MenuActivity : BaseAppCompatActivity() {
     }
 
     private fun initDrawer() {
-        nav_view.getHeaderView(0).setOnClickListener {
-            drawer.closeDrawers()
-            mViewModel.openAccount()
-        }
         nav_view.setNavigationItemSelectedListener { menuItem ->
             drawer.closeDrawers()
             true
+        }
+    }
+
+    private fun initMainPageList() {
+        val mainFragment = supportFragmentManager.findFragmentByTag(MAIN_FRAGMENT_TAG)
+
+        if (mainFragment == null) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fragment_placeholder, mMainPageFragmentProvider.getFragment(), MAIN_FRAGMENT_TAG)
+                    .commit()
         }
     }
 

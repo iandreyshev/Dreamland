@@ -19,8 +19,8 @@ internal class AccountNetworkApiImpl
 @Inject constructor() : IAccountNetworkApi {
 
     companion object {
-        private const val PATH_SIGN_IN = "account/signIn"
-        private const val PATH_SIGN_UP = "account/signUp"
+        private const val PATH_SIGN_IN = "account/sign_in"
+        private const val PATH_SIGN_UP = "account/sign_up"
         private const val PATH_DELETE = "account/delete"
     }
 
@@ -31,11 +31,11 @@ internal class AccountNetworkApiImpl
      **/
     override fun signIn(properties: SignInRequest): SignInResponse {
         val request = getRequestTo(PATH_SIGN_IN)
-        val connError = SignInResponse(null, null)
-        val serverError = SignInResponse(null, null)
+        val connError = SignInResponse(null, SignInResponse.Error.NO_CONNECTION)
+        val serverError = SignInResponse(null, SignInResponse.Error.SERVER_ERROR)
 
         return apiCall(request, connError, serverError) { body ->
-            mGson.fromJson(body, SignInResponseGson::class.java).transform()
+            mGson.fromJson(body, SignInResponseGson::class.java).toApiModel()
         }
     }
 
@@ -44,11 +44,11 @@ internal class AccountNetworkApiImpl
      **/
     override fun signUp(properties: SignUpRequest): SignUpResponse {
         val request = getRequestTo(PATH_SIGN_UP)
-        val connError = TODO()
-        val serverError  = TODO()
+        val connError = SignUpResponse(null, SignUpResponse.Error.NO_CONNECTION)
+        val serverError = SignUpResponse(null, SignUpResponse.Error.SERVER_ERROR)
 
         return apiCall(request, connError, serverError) { body ->
-            mGson.fromJson(body, SignUpResponseGson::class.java).transform()
+            mGson.fromJson(body, SignUpResponseGson::class.java).toApiModel()
         }
     }
 
@@ -57,11 +57,11 @@ internal class AccountNetworkApiImpl
      **/
     override fun delete(properties: DeleteRequest): DeleteResponse {
         val request = getRequestTo(PATH_DELETE)
-        val connError = TODO()
-        val serverError  = TODO()
+        val connError = DeleteResponse(DeleteResponse.Result.NO_CONNECTION)
+        val serverError = DeleteResponse(DeleteResponse.Result.SERVER_ERROR)
 
         return apiCall(request, connError, serverError) { body ->
-            mGson.fromJson(body, DeleteResponseGson::class.java).transform()
+            mGson.fromJson(body, DeleteResponseGson::class.java).toApiModel()
         }
     }
 

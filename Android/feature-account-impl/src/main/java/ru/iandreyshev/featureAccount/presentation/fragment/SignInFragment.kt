@@ -10,11 +10,11 @@ import org.jetbrains.anko.okButton
 import ru.iandreyshev.coreAndroidUtils.observeNotNull
 import ru.iandreyshev.featureAccount.R
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.repository.ISignInProperties
-import ru.iandreyshev.featureAccount.repository.SignInResult
+import ru.iandreyshev.featureAccountApi.repository.ISignInProperties
+import ru.iandreyshev.featureAccountApi.repository.SignInResult
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
-import ru.iandreyshev.fragment.BaseFragment
+import ru.iandreyshev.dreams.presentation.BaseFragment
 import ru.iandreyshev.vext.view.invisibleIf
 import ru.iandreyshev.vext.view.visibleIf
 import ru.iandreyshev.vext.view.visibleIfOrGone

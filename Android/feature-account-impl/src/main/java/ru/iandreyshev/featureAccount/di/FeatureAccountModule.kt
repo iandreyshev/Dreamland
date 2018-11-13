@@ -4,6 +4,9 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
 import ru.iandreyshev.featureAccount.repository.*
+import ru.iandreyshev.featureAccountApi.repository.IAuthRepository
+import ru.iandreyshev.featureAccountApi.repository.IUser
+import ru.iandreyshev.featureAccountApi.repository.IUserRepository
 import ru.iandreyshev.rx.ioToMain
 import javax.inject.Singleton
 

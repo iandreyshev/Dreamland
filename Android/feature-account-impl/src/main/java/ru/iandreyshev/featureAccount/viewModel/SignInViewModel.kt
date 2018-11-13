@@ -4,10 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroidUtils.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccountApi.IAccountNavigator
-import ru.iandreyshev.featureAccount.repository.IAuthRepository
-import ru.iandreyshev.featureAccount.repository.ISignInProperties
-import ru.iandreyshev.featureAccount.repository.SignInResult
+import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
+import ru.iandreyshev.featureAccountApi.repository.IAuthRepository
+import ru.iandreyshev.featureAccountApi.repository.ISignInProperties
+import ru.iandreyshev.featureAccountApi.repository.SignInResult
 import ru.iandreyshev.viewModel.WaitingViewModel
 import javax.inject.Inject
 

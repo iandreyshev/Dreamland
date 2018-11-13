@@ -11,4 +11,6 @@
     <string name="sign_up_error_user_already_exists">Пользователь с такими данными уже существует</string>
     <string name="sign_up_error_no_connection">Отсутствует соединение с сервером</string>
     <string name="sign_up_error_unknown">Неизвестная ошибка, попробуйте снова…</string>
+
+    <string name="log_out_btn_text">Log out</string>
 </resources>

@@ -11,7 +11,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideContext(): Context =
+    fun provideContext(): Context =
             DreamlandApplication.instance.applicationContext
 
 }
