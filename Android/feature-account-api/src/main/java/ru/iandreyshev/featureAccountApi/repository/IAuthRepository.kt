@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccount.repository
+package ru.iandreyshev.featureAccountApi.repository
 
 import io.reactivex.Single
 

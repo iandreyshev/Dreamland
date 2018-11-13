@@ -3,16 +3,14 @@ package ru.iandreyshev.coreDatabase.impl
 import io.objectbox.BoxStore
 import io.objectbox.rx.RxQuery
 import io.reactivex.Observable
-import ru.iandreyshev.coreDatabase.di.BOX_STORE
-import ru.iandreyshev.coreDatabase.entityImpl.AccountDatabaseEntity
-import ru.iandreyshev.coreDatabase.entityImpl.toApiEntity
-import ru.iandreyshev.coreDatabase.entityImpl.toDatabaseEntity
+import ru.iandreyshev.coreDatabase.entity.AccountDatabaseEntity
+import ru.iandreyshev.coreDatabase.entity.toApiEntity
+import ru.iandreyshev.coreDatabase.entity.toDatabaseEntity
 import ru.iandreyshev.coreDatabaseApi.account.IAccountDatabaseApi
 import ru.iandreyshev.coreDatabaseApi.account.AccountEntity
 import javax.inject.Inject
-import javax.inject.Named
 
-internal class AccountDatabaseApiImpl
+class AccountDatabaseApiImpl
 @Inject constructor(
         boxStore: BoxStore
 ) : IAccountDatabaseApi {

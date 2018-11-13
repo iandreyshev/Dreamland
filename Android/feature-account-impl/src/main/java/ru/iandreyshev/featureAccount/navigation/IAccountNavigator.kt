@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccountApi
+package ru.iandreyshev.featureAccount.navigation
 
 interface IAccountNavigator {
     fun onSignInSuccess()

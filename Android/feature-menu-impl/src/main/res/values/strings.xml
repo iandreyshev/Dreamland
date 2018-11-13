@@ -3,5 +3,6 @@
 
     <string name="drawer_menu_item_dreams">Dreams</string>
     <string name="drawer_menu_item_statistic">Statistic</string>
+    <string name="drawer_menu_item_log_out">Log out</string>
 
 </resources>

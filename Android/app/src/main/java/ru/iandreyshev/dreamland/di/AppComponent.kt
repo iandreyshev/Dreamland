@@ -1,6 +1,9 @@
 package ru.iandreyshev.dreamland.di
 
+import android.content.Context
 import dagger.Component
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
 import ru.iandreyshev.activity.BaseAppCompatActivity
 import ru.iandreyshev.dreamland.application.DreamlandApplication
 import ru.iandreyshev.featureAccount.di.FeatureAccountModule

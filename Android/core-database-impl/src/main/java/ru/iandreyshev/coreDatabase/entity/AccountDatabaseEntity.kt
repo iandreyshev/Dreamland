@@ -1,4 +1,4 @@
-package ru.iandreyshev.coreDatabase.entityImpl
+package ru.iandreyshev.coreDatabase.entity
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
@@ -6,7 +6,7 @@ import io.objectbox.annotation.Unique
 import ru.iandreyshev.coreDatabaseApi.account.AccountEntity
 
 @Entity
-internal data class AccountDatabaseEntity(
+data class AccountDatabaseEntity(
         @Id var id: Long = 0,
         @Unique var accountId: Long = 0,
         var login: String = "",
@@ -15,7 +15,7 @@ internal data class AccountDatabaseEntity(
         var avatarUrl: String = ""
 )
 
-internal fun AccountDatabaseEntity.toApiEntity() =
+fun AccountDatabaseEntity.toApiEntity() =
         AccountEntity(
                 accountId = accountId,
                 login = login,
@@ -24,7 +24,7 @@ internal fun AccountDatabaseEntity.toApiEntity() =
                 avatarUrl = avatarUrl
         )
 
-internal fun AccountEntity.toDatabaseEntity() =
+fun AccountEntity.toDatabaseEntity() =
         AccountDatabaseEntity(
                 accountId = accountId,
                 login = login,

@@ -3,7 +3,7 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.repository.IAuthRepository
+import ru.iandreyshev.featureAccountApi.repository.IAuthRepository
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 import javax.inject.Inject
 

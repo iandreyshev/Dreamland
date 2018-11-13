@@ -1,7 +1,7 @@
 package ru.iandreyshev.coreNetwork.httpClient
 
 import okhttp3.*
-import ru.iandreyshev.coreNetwork.account.AccountIdentifier
+import ru.iandreyshev.coreNetworkApi.account.AccountIdentifier
 import java.io.IOException
 import java.lang.Exception
 import java.lang.IllegalStateException
@@ -19,7 +19,7 @@ private const val RESPONSE_CODE_ERROR = 500
 
 internal val AccountIdentifier.headers: Headers
     get() = Headers.of(mapOf(
-            HEADER_ACCOUNT_ID to id,
+            HEADER_ACCOUNT_ID to id.toString(),
             HEADER_PASSWORD to password
     ))
 

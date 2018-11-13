@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureAccount.repository
+package ru.iandreyshev.featureAccountApi.repository
 
 enum class SignUpResult {
     SUCCESS,

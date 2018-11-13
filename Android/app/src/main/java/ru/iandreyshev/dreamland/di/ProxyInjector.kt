@@ -3,6 +3,9 @@ package ru.iandreyshev.dreamland.di
 import android.content.Context
 import ru.iandreyshev.coreDatabase.di.CoreDatabaseComponent
 import ru.iandreyshev.coreDatabase.di.DaggerCoreDatabaseComponent
+import ru.iandreyshev.coreDatabase.di.DaggerCoreDatabaseComponent_DependenciesComponent
+import ru.iandreyshev.coreDatabase.di.dependencies.IContextProvider
+import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
 import ru.iandreyshev.dreamland.navigation.FeatureMenuNavigator
 import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent
@@ -24,6 +27,8 @@ class ProxyInjector
             DaggerFeatureAccountComponent.builder()
                     .iFeatureAccountDependencies(DaggerFeatureAccountComponent_DependenciesComponent.builder()
                             .iAccountNavigator(accountNavigator)
+                            .iCoreDatabaseApi(CoreDatabaseComponent.get())
+                            .iCoreNetworkApi(CoreNetworkComponent.get())
                             .build())
                     .build()
 
@@ -37,7 +42,11 @@ class ProxyInjector
 
     fun coreDatabaseComponent(): CoreDatabaseComponent {
         return DaggerCoreDatabaseComponent.builder()
-                .context(context)
+                .iCoreDatabaseDependencies(DaggerCoreDatabaseComponent_DependenciesComponent.builder()
+                        .iContextProvider(object : IContextProvider {
+                            override val context: Context = this@ProxyInjector.context
+                        })
+                        .build())
                 .build()
     }
 

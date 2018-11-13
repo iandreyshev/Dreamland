@@ -1,10 +1,11 @@
 package ru.iandreyshev.featureAccount.repository
 
 import io.reactivex.*
+import ru.iandreyshev.featureAccountApi.repository.IUser
+import ru.iandreyshev.featureAccountApi.repository.IUserRepository
 //import ru.iandreyshev.featureAccount.repository.storage.AccountEntity
-import javax.inject.Inject
 
-internal class UserRepository : IUserRepository {
+class UserRepository : IUserRepository {
 
 //    @Inject
 //    lateinit var userBox: Box<AccountEntity>

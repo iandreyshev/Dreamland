@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureAccount.repository
 
 import io.reactivex.Single
+import ru.iandreyshev.featureAccountApi.repository.*
 import ru.iandreyshev.rx.ioToMain
 
 class AuthRepository : IAuthRepository {
