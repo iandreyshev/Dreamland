@@ -14,6 +14,4 @@ class MenuViewModel
 
     val userObservable: LiveData<User> = liveDataOf()
 
-    fun openAccount() = menuNavigator.openAccount()
-
 }

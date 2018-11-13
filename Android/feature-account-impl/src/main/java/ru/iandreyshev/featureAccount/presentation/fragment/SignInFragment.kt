@@ -14,7 +14,7 @@ import ru.iandreyshev.featureAccountApi.repository.ISignInProperties
 import ru.iandreyshev.featureAccountApi.repository.SignInResult
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
-import ru.iandreyshev.fragment.BaseFragment
+import ru.iandreyshev.dreams.presentation.BaseFragment
 import ru.iandreyshev.vext.view.invisibleIf
 import ru.iandreyshev.vext.view.visibleIf
 import ru.iandreyshev.vext.view.visibleIfOrGone

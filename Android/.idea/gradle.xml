@@ -16,7 +16,8 @@
             <option value="$PROJECT_DIR$/core-network-impl" />
             <option value="$PROJECT_DIR$/feature-account-api" />
             <option value="$PROJECT_DIR$/feature-account-impl" />
-            <option value="$PROJECT_DIR$/feature-dreams" />
+            <option value="$PROJECT_DIR$/feature-dreams-api" />
+            <option value="$PROJECT_DIR$/feature-dreams-impl" />
             <option value="$PROJECT_DIR$/feature-menu-api" />
             <option value="$PROJECT_DIR$/feature-menu-impl" />
             <option value="$PROJECT_DIR$/feature-statistic" />

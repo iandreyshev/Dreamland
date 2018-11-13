@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">feature-menu</string>
+    <string name="app_name">Dreamland</string>
 
-    <string name="drawer_menu_item_dreams">Dreams</string>
-    <string name="drawer_menu_item_statistic">Statistic</string>
+    <string name="drawer_menu_item_dreams">My dreams diary</string>
+    <string name="drawer_menu_item_statistic">My statistic</string>
+    <string name="drawer_menu_item_about">About Dreamland</string>
     <string name="drawer_menu_item_log_out">Log out</string>
 
 </resources>

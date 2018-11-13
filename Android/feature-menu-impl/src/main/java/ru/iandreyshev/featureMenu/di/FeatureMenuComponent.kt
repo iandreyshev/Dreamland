@@ -1,7 +1,8 @@
 package ru.iandreyshev.featureMenu.di
 
 import dagger.Component
-import ru.iandreyshev.activity.BaseAppCompatActivity
+import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
+import ru.iandreyshev.featureMenuApi.navigation.IMainPageFragmentProvider
 import ru.iandreyshev.featureMenuApi.navigation.IMenuNavigator
 import javax.inject.Singleton
 
@@ -25,11 +26,12 @@ abstract class FeatureMenuComponent {
         private lateinit var sInstance: FeatureMenuComponent
     }
 
-    abstract fun inject(activity: BaseAppCompatActivity)
+    abstract fun inject(activity: MenuActivity)
 
     @Component(
             dependencies = [
-                IMenuNavigator::class]
+                IMenuNavigator::class,
+                IMainPageFragmentProvider::class]
     )
     interface DependenciesComponent : IFeatureMenuDependencies
 

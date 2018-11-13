@@ -25,4 +25,7 @@ dependencies {
 
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android
+    api "com.android.support:appcompat-v7:$support_version"
 }

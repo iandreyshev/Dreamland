@@ -5,8 +5,8 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.iandreyshev.di.viewModel.ViewModelFactory
-import ru.iandreyshev.di.viewModel.ViewModelKey
+import ru.iandreyshev.dreams.di.viewModel.ViewModelFactory
+import ru.iandreyshev.dreams.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureAccount.viewModel.AccountViewModel
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
