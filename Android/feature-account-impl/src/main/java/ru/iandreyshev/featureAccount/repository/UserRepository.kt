@@ -1,36 +1,18 @@
 package ru.iandreyshev.featureAccount.repository
 
 import io.reactivex.*
-import ru.iandreyshev.featureAccountApi.repository.IUser
-import ru.iandreyshev.featureAccountApi.repository.IUserRepository
-//import ru.iandreyshev.featureAccount.repository.storage.AccountEntity
+import ru.iandreyshev.coreAndroid.rx.ioToMain
+import ru.iandreyshev.featureAccountApi.data.User
 
 class UserRepository : IUserRepository {
 
-//    @Inject
-//    lateinit var userBox: Box<AccountEntity>
+    override val userObservable: Observable<User>
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
 
-    private val mAuthStateObservable = Observable.create<Boolean> {
-        it.onNext(false)
-        it.onComplete()
-    }
-
-    override fun getUserObservable(): Observable<IUser> {
-        return TODO()
-//        return RxQuery.observable(userBox.query().build())
-//                .map { entity ->
-//                    entity.firstOrNull()?.let {
-//                        User(it)
-//                    }
-//                }
-    }
-
-    override fun getUserAuthStateObservable(): Observable<Boolean> {
-        return mAuthStateObservable
-    }
-
-    override fun refreshUserData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun logout(): Completable {
+        return Completable.fromCallable {
+            Thread.sleep(500)
+        }.ioToMain()
     }
 
 }

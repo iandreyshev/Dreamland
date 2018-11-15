@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion target_sdk
@@ -24,9 +25,7 @@ android {
 
 dependencies {
     implementation project(':core-android')
-
-    implementation project(':core-database-api')
-    implementation project(':core-database-impl')
+    implementation project(':core-database')
 
     implementation project(':core-network-api')
     implementation project(':core-network-impl')

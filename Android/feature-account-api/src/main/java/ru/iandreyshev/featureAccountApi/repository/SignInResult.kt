@@ -1,9 +1,0 @@
-package ru.iandreyshev.featureAccountApi.repository
-
-enum class SignInResult {
-    SUCCESS,
-    USER_NOT_EXISTS,
-    INCORRECT_DATA,
-    NO_CONNECTION,
-    UNKNOWN
-}

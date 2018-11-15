@@ -1,41 +1,30 @@
 package ru.iandreyshev.featureAccount.di
 
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.multibindings.IntoMap
-import ru.iandreyshev.dreams.di.viewModel.ViewModelFactory
-import ru.iandreyshev.dreams.di.viewModel.ViewModelKey
-import ru.iandreyshev.featureAccount.viewModel.AccountViewModel
+import ru.iandreyshev.featureDreams.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
 
 @Module
-abstract class FeatureAccountViewModelModule {
+class FeatureAccountViewModelModule {
 
-    @Binds
-    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @Binds
+    @Provides
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
-    internal abstract fun bindAuthViewModel(viewModel: AuthViewModel): ViewModel
+    fun provideAuthViewModel(): ViewModel = AuthViewModel()
 
-    @Binds
+    @Provides
     @IntoMap
     @ViewModelKey(SignInViewModel::class)
-    internal abstract fun bindSignInViewModel(viewModel: SignInViewModel): ViewModel
+    fun provideSignInViewModel(): ViewModel = SignInViewModel()
 
-    @Binds
+    @Provides
     @IntoMap
     @ViewModelKey(SignUpViewModel::class)
-    internal abstract fun bindSignUpViewModel(viewModel: SignUpViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(AccountViewModel::class)
-    internal abstract fun bindAccountViewModel(viewModel: AccountViewModel): ViewModel
+    fun provideSignUpViewModel(): ViewModel = SignUpViewModel()
 
 }

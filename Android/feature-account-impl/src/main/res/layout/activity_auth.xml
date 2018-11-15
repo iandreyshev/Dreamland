@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="ru.iandreyshev.featureAccount.presentation.activity.AuthActivity">
+    tools:context="ru.iandreyshev.featureAccount.ui.activity.AuthActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
 
         <fragment
             android:id="@+id/fragment_sign_in"
-            android:name="ru.iandreyshev.featureAccount.presentation.fragment.SignInFragment"
+            android:name="ru.iandreyshev.featureAccount.ui.fragment.SignInFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:tag="fragment_sign_in"
@@ -50,7 +50,7 @@
 
         <fragment
             android:id="@+id/fragment_sign_up"
-            android:name="ru.iandreyshev.featureAccount.presentation.fragment.SignUpFragment"
+            android:name="ru.iandreyshev.featureAccount.ui.fragment.SignUpFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:tag="fragment_sign_up"

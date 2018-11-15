@@ -10,12 +10,6 @@
             android:title="@string/drawer_menu_item_statistic" />
     </group>
 
-    <group android:id="@+id/group.fast_action">
-        <item
-            android:id="@+id/drawer_item_new_dream"
-            android:title="@string/drawer_menu_item_new_dream" />
-    </group>
-
     <group android:id="@+id/group.logout">
         <item
             android:id="@+id/drawer_item_about"

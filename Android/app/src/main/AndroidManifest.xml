@@ -13,7 +13,7 @@
 
         <!--ACTIVITY-->
         <activity
-            android:name=".presentation.activity.SplashActivity"
+            android:name="ru.iandreyshev.featureMenu.presentation.activity.SplashActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ru.iandreyshev.featureAccount.presentation.activity.AuthActivity"
+            android:name="ru.iandreyshev.featureAccount.ui.activity.AuthActivity"
             android:noHistory="true" />
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
         <activity
-            android:name="ru.iandreyshev.dreams.presentation.fragment.CreateDreamActivity"
+            android:name="ru.iandreyshev.featureDreams.fragment.CreateDreamActivity"
             android:windowSoftInputMode="adjustResize" />
         <!--ACTIVITY-->
     </application>

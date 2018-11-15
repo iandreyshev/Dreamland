@@ -23,6 +23,7 @@ android {
 
 dependencies {
     api project(':core-android')
+    api project(':core-network-api')
     api project(':feature-dreams-api')
 
     // Dagger 2

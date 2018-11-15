@@ -6,15 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.view_drawer_header.*
-import ru.iandreyshev.activity.BaseAppCompatActivity
-import ru.iandreyshev.coreAndroidUtils.observeNotNull
-import ru.iandreyshev.coreAndroidUtils.viewModel
+import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
+import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
+import ru.iandreyshev.coreAndroid.viewModel.viewModel
 import ru.iandreyshev.featureMenu.R
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
-import ru.iandreyshev.featureMenuApi.navigation.IMainPageFragmentProvider
-import ru.iandreyshev.view.setOnClickListener
+import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
+import ru.iandreyshev.featureDreamsApi.data.IDreamsDiaryFragmentFactory
 import javax.inject.Inject
 
 class MenuActivity : BaseAppCompatActivity() {
@@ -24,7 +24,7 @@ class MenuActivity : BaseAppCompatActivity() {
     }
 
     @Inject
-    lateinit var mMainPageFragmentProvider: IMainPageFragmentProvider
+    lateinit var mMainFragmentFactory: IDreamsDiaryFragmentFactory
 
     private lateinit var mViewModel: MenuViewModel
 
@@ -68,6 +68,9 @@ class MenuActivity : BaseAppCompatActivity() {
 
     private fun initDrawer() {
         nav_view.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.drawer_item_log_out -> mViewModel.onLogoutClick()
+            }
             drawer.closeDrawers()
             true
         }
@@ -78,7 +81,7 @@ class MenuActivity : BaseAppCompatActivity() {
 
         if (mainFragment == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_placeholder, mMainPageFragmentProvider.getFragment(), MAIN_FRAGMENT_TAG)
+                    .add(R.id.fragment_placeholder, mMainFragmentFactory.create(), MAIN_FRAGMENT_TAG)
                     .commit()
         }
     }

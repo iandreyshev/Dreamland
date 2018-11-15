@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion target_sdk
@@ -29,7 +30,6 @@ repositories {
 
 dependencies {
     api project(':core-android')
-    api project(':core-database-api')
     api project(':core-network-api')
     api project(':feature-account-api')
 
@@ -40,4 +40,7 @@ dependencies {
 
     // Circle image view
     api 'de.hdodenhof:circleimageview:2.2.0'
+
+    // Gson
+    api 'com.google.code.gson:gson:2.8.5'
 }

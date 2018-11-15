@@ -38,8 +38,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
     // OkHttp
-    api 'com.squareup.okhttp3:okhttp:3.11.0'
-
-    // Gson
-    api 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }

@@ -1,12 +1,11 @@
 package ru.iandreyshev.dreamland.di
 
-import android.content.Context
 import dagger.Component
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import ru.iandreyshev.activity.BaseAppCompatActivity
+import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.dreamland.application.DreamlandApplication
-import ru.iandreyshev.featureAccount.di.FeatureAccountModule
+import ru.iandreyshev.featureAccount.di.FeatureAccountViewModelModule
+import ru.iandreyshev.featureDreams.di.FeatureDreamsViewModelModule
+import ru.iandreyshev.featureMenu.di.FeatureMenuViewModelModule
 import javax.inject.Singleton
 
 @Component(
@@ -14,7 +13,9 @@ import javax.inject.Singleton
             AppModule::class,
             AppViewModelModule::class,
             AppNavigationModule::class,
-            FeatureAccountModule::class]
+            FeatureMenuViewModelModule::class,
+            FeatureDreamsViewModelModule::class,
+            FeatureAccountViewModelModule::class]
 )
 @Singleton
 abstract class AppComponent {

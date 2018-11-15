@@ -1,7 +1,7 @@
 package ru.iandreyshev.coreNetwork.httpClient
 
 import okhttp3.*
-import ru.iandreyshev.coreNetworkApi.account.AccountIdentifier
+import ru.iandreyshev.coreNetworkApi.UserIdentifier
 import java.io.IOException
 import java.lang.Exception
 import java.lang.IllegalStateException
@@ -17,7 +17,7 @@ private const val HEADER_PASSWORD = ""
 private const val RESPONSE_CODE_SUCCESS = 200
 private const val RESPONSE_CODE_ERROR = 500
 
-internal val AccountIdentifier.headers: Headers
+internal val UserIdentifier.headers: Headers
     get() = Headers.of(mapOf(
             HEADER_ACCOUNT_ID to id.toString(),
             HEADER_PASSWORD to password
@@ -29,14 +29,14 @@ internal fun getRequestTo(path: String): Request =
                 .url(MOBILE_API_URL + path)
                 .build()
 
-internal fun getRequestTo(path: String, account: AccountIdentifier): Request =
+internal fun getRequestTo(path: String, account: UserIdentifier): Request =
         Request.Builder()
                 .get()
                 .url(MOBILE_API_URL + path)
                 .headers(account.headers)
                 .build()
 
-internal fun <T> apiCall(request: Request, connError: T, serverError: T, onSuccess: (String) -> T): T {
+fun <T> apiCall(request: Request, connError: T, serverError: T, onSuccess: (String) -> T): T {
     return try {
 
         val response = HTTP_CLIENT.newCall(request).execute()

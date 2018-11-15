@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
 import ru.iandreyshev.featureAccount.repository.*
-import ru.iandreyshev.featureAccountApi.repository.IAuthRepository
-import ru.iandreyshev.featureAccountApi.repository.IUser
-import ru.iandreyshev.featureAccountApi.repository.IUserRepository
-import ru.iandreyshev.rx.ioToMain
+import ru.iandreyshev.featureAccount.repository.IAuthRepository
+import ru.iandreyshev.featureAccountApi.data.User
+import ru.iandreyshev.featureAccount.repository.IUserRepository
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import javax.inject.Singleton
 
 @Module
@@ -15,17 +15,17 @@ class FeatureAccountModule {
 
     @Provides
     @Singleton
-    internal fun provideUserRepository(): IUserRepository =
+    fun provideUserRepository(): IUserRepository =
             UserRepository()
 
     @Provides
     @Singleton
-    internal fun provideAuthRepository(): IAuthRepository =
+    fun provideAuthRepository(): IAuthRepository =
             AuthRepository()
 
     @Provides
     @Singleton
-    internal fun provideAccountObservable(repository: IUserRepository): Observable<IUser> =
-            repository.getUserObservable().ioToMain()
+    fun provideAccountObservable(repository: IUserRepository): Observable<User> =
+            repository.userObservable.ioToMain()
 
 }

@@ -1,16 +1,13 @@
 package ru.iandreyshev.dreamland.proxy
 
-import android.content.Context
-import ru.iandreyshev.coreDatabase.di.CoreDatabaseComponent
-import ru.iandreyshev.coreDatabase.di.DaggerCoreDatabaseComponent
-import ru.iandreyshev.coreDatabase.di.DaggerCoreDatabaseComponent_DependenciesComponent
-import ru.iandreyshev.coreDatabase.di.dependencies.IContextProvider
+import android.arch.lifecycle.ViewModelProvider
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
-import ru.iandreyshev.dreamland.navigation.FeatureMenuNavigator
-import ru.iandreyshev.dreams.di.DaggerFeatureDreamsComponent
-import ru.iandreyshev.dreams.di.DaggerFeatureDreamsComponent_DependenciesComponent
-import ru.iandreyshev.dreams.di.FeatureDreamsComponent
+import ru.iandreyshev.dreamland.navigation.FeatureMenuMenuNavigator
+import ru.iandreyshev.dreamland.navigation.FeatureMenuSplashNavigator
+import ru.iandreyshev.featureDreams.di.DaggerFeatureDreamsComponent
+import ru.iandreyshev.featureDreams.di.DaggerFeatureDreamsComponent_DependenciesComponent
+import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent
 import ru.iandreyshev.featureAccount.di.DaggerFeatureAccountComponent_DependenciesComponent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
@@ -21,44 +18,37 @@ import javax.inject.Inject
 
 class ProxyInjector
 @Inject constructor(
-        private val context: Context,
-        private val menuNavigator: FeatureMenuNavigator,
-        private val accountNavigator: FeatureAccountNavigator
+        private val menuNavigator: FeatureMenuMenuNavigator,
+        private val splashNavigator: FeatureMenuSplashNavigator,
+        private val accountNavigator: FeatureAccountNavigator,
+        private val viewModelFactory: ViewModelProvider.Factory
 ) {
 
     fun featureAccountComponent(): FeatureAccountComponent =
             DaggerFeatureAccountComponent.builder()
                     .iFeatureAccountDependencies(DaggerFeatureAccountComponent_DependenciesComponent.builder()
                             .iAccountNavigator(accountNavigator)
-                            .iCoreDatabaseApi(CoreDatabaseComponent.get())
                             .iCoreNetworkApi(CoreNetworkComponent.get())
+                            .factory(viewModelFactory)
                             .build())
                     .build()
 
-    fun featureMenuComponent(): FeatureMenuComponent {
-        return DaggerFeatureMenuComponent.builder()
-                .iFeatureMenuDependencies(DaggerFeatureMenuComponent_DependenciesComponent.builder()
-                        .iMenuNavigator(menuNavigator)
-                        .iMainPageFragmentProvider(MenuFragmentProvider())
-                        .build())
-                .build()
-    }
+    fun featureMenuComponent(): FeatureMenuComponent =
+            DaggerFeatureMenuComponent.builder()
+                    .iFeatureMenuDependencies(DaggerFeatureMenuComponent_DependenciesComponent.builder()
+                            .iFeatureAccountApi(FeatureAccountComponent.get())
+                            .iFeatureDreamsApi(FeatureDreamsComponent.get())
+                            .iSplashNavigator(splashNavigator)
+                            .iMenuNavigator(menuNavigator)
+                            .factory(viewModelFactory)
+                            .build())
+                    .build()
 
-    fun featureDreamsComponent(): FeatureDreamsComponent {
-        return DaggerFeatureDreamsComponent.builder()
-                .iFeatureDreamsDependencies(DaggerFeatureDreamsComponent_DependenciesComponent.builder()
-                        .build())
-                .build()
-    }
-
-    fun coreDatabaseComponent(): CoreDatabaseComponent {
-        return DaggerCoreDatabaseComponent.builder()
-                .iCoreDatabaseDependencies(DaggerCoreDatabaseComponent_DependenciesComponent.builder()
-                        .iContextProvider(object : IContextProvider {
-                            override val context: Context = this@ProxyInjector.context
-                        })
-                        .build())
-                .build()
-    }
+    fun featureDreamsComponent(): FeatureDreamsComponent =
+            DaggerFeatureDreamsComponent.builder()
+                    .iFeatureDreamsDependencies(DaggerFeatureDreamsComponent_DependenciesComponent.builder()
+                            .factory(viewModelFactory)
+                            .build())
+                    .build()
 
 }

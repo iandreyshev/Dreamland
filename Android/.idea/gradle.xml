@@ -11,8 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core-android" />
-            <option value="$PROJECT_DIR$/core-database-api" />
-            <option value="$PROJECT_DIR$/core-database-impl" />
+            <option value="$PROJECT_DIR$/core-database" />
             <option value="$PROJECT_DIR$/core-network-api" />
             <option value="$PROJECT_DIR$/core-network-impl" />
             <option value="$PROJECT_DIR$/feature-account-api" />

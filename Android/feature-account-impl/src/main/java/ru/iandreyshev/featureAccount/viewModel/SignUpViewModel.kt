@@ -2,20 +2,21 @@ package ru.iandreyshev.featureAccount.viewModel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import ru.iandreyshev.coreAndroidUtils.SingleLiveEvent
+import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.navigation.IAccountNavigator
-import ru.iandreyshev.featureAccountApi.repository.IAuthRepository
-import ru.iandreyshev.featureAccountApi.repository.ISignUpProperties
-import ru.iandreyshev.featureAccountApi.repository.SignUpResult
-import ru.iandreyshev.viewModel.WaitingViewModel
+import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
+import ru.iandreyshev.featureAccount.repository.IAuthRepository
+import ru.iandreyshev.featureAccountApi.data.SignUpProperties
+import ru.iandreyshev.featureAccountApi.data.SignUpResult
+import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import javax.inject.Inject
 
-class SignUpViewModel
-@Inject constructor(
-        private val authRepository: IAuthRepository,
-        private val navigator: IAccountNavigator
-) : ViewModel() {
+class SignUpViewModel : ViewModel() {
+
+    @Inject
+    lateinit var mAuthRepository: IAuthRepository
+    @Inject
+    lateinit var mNavigator: IAccountNavigator
 
     val waitingObservable: LiveData<Boolean>
         get() = mWaitingObservable.observable
@@ -30,9 +31,9 @@ class SignUpViewModel
         FeatureAccountComponent.get().inject(this)
     }
 
-    fun startSignUp(properties: ISignUpProperties) {
+    fun startSignUp(properties: SignUpProperties) {
         mWaitingObservable.start()
-        authRepository.signUp(properties)
+        mAuthRepository.signUp(properties)
                 .doOnSuccess(::handleSignUpResult)
                 .doOnError(::handleSignUpError)
                 .subscribe { _ ->
@@ -43,7 +44,7 @@ class SignUpViewModel
     private fun handleSignUpResult(result: SignUpResult) {
         when (result) {
             SignUpResult.SUCCESS ->
-                navigator.onSignUpSuccess()
+                mNavigator.onSignUpSuccess()
             SignUpResult.USER_ALREADY_EXISTS,
             SignUpResult.NO_CONNECTION,
             SignUpResult.UNKNOWN ->
