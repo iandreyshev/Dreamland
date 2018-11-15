@@ -14,6 +14,7 @@ import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
+import ru.iandreyshev.coreAndroid.viewModel.observe
 import ru.iandreyshev.featureDreamsApi.data.IDreamsDiaryFragmentFactory
 import javax.inject.Inject
 
@@ -57,6 +58,7 @@ class MenuActivity : BaseAppCompatActivity() {
     private fun initViewModel() {
         mViewModel = viewModel(viewModelFactory) {
             observeNotNull(userObservable, ::handleAccount)
+            observe(backEvent) { finish() }
         }
     }
 

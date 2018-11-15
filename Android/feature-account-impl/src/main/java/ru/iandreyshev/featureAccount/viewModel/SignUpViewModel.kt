@@ -5,18 +5,18 @@ import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
-import ru.iandreyshev.featureAccount.repository.IAuthRepository
 import ru.iandreyshev.featureAccountApi.data.SignUpProperties
 import ru.iandreyshev.featureAccountApi.data.SignUpResult
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
+import ru.iandreyshev.featureAccountApi.useCase.ISignUpUseCase
 import javax.inject.Inject
 
 class SignUpViewModel : ViewModel() {
 
     @Inject
-    lateinit var mAuthRepository: IAuthRepository
-    @Inject
     lateinit var mNavigator: IAccountNavigator
+    @Inject
+    lateinit var mSignUpUseCase: ISignUpUseCase
 
     val waitingObservable: LiveData<Boolean>
         get() = mWaitingObservable.observable
@@ -33,7 +33,7 @@ class SignUpViewModel : ViewModel() {
 
     fun startSignUp(properties: SignUpProperties) {
         mWaitingObservable.start()
-        mAuthRepository.signUp(properties)
+        mSignUpUseCase(properties)
                 .doOnSuccess(::handleSignUpResult)
                 .doOnError(::handleSignUpError)
                 .subscribe { _ ->

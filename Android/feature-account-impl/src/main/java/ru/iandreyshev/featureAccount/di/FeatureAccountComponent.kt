@@ -8,6 +8,8 @@ import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.featureAccount.di.dependencies.IFeatureAccountDependencies
 import ru.iandreyshev.featureAccount.useCase.LogoutUseCase
+import ru.iandreyshev.featureAccount.useCase.SignInUseCase
+import ru.iandreyshev.featureAccount.useCase.SignUpUseCase
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
@@ -42,6 +44,8 @@ abstract class FeatureAccountComponent : IFeatureAccountApi {
     abstract fun inject(viewModel: SignUpViewModel)
     abstract fun inject(viewModel: AuthViewModel)
     abstract fun inject(useCase: LogoutUseCase)
+    abstract fun inject(useCase: SignInUseCase)
+    abstract fun inject(useCase: SignUpUseCase)
 
     @Component(
             dependencies = [

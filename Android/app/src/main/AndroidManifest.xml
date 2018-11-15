@@ -26,7 +26,7 @@
             android:noHistory="true" />
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
         <activity
-            android:name="ru.iandreyshev.featureDreams.fragment.CreateDreamActivity"
+            android:name="ru.iandreyshev.featureDreams.fragment.DreamConstructorActivity"
             android:windowSoftInputMode="adjustResize" />
         <!--ACTIVITY-->
     </application>

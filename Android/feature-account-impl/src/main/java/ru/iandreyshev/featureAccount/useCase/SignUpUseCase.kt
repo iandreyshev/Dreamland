@@ -3,12 +3,12 @@ package ru.iandreyshev.featureAccount.useCase
 import io.reactivex.Single
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.repository.IAuthRepository
-import ru.iandreyshev.featureAccountApi.data.SignInProperties
-import ru.iandreyshev.featureAccountApi.data.SignInResult
-import ru.iandreyshev.featureAccountApi.useCase.ISignInUseCase
+import ru.iandreyshev.featureAccountApi.data.SignUpProperties
+import ru.iandreyshev.featureAccountApi.data.SignUpResult
+import ru.iandreyshev.featureAccountApi.useCase.ISignUpUseCase
 import javax.inject.Inject
 
-class SignInUseCase : ISignInUseCase {
+class SignUpUseCase : ISignUpUseCase {
 
     @Inject
     lateinit var mAuthRepository: IAuthRepository
@@ -17,7 +17,7 @@ class SignInUseCase : ISignInUseCase {
         FeatureAccountComponent.get().inject(this)
     }
 
-    override fun invoke(signInProperties: SignInProperties): Single<SignInResult> =
-            mAuthRepository.signIn(signInProperties)
+    override fun invoke(signUpProperties: SignUpProperties): Single<SignUpResult> =
+            mAuthRepository.signUp(signUpProperties)
 
 }

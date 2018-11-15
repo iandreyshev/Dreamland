@@ -3,16 +3,25 @@ package ru.iandreyshev.featureDreams.fragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_create_dream.*
+import kotlinx.android.synthetic.main.activity_dream_constructor.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.featureDreams.R
+import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
+import ru.iandreyshev.featureDreams.viewModel.DreamConstructorViewModel
+import javax.inject.Inject
 
-class CreateDreamActivity : BaseAppCompatActivity() {
+class DreamConstructorActivity : BaseAppCompatActivity() {
+
+    @Inject
+    lateinit var mViewModel: DreamConstructorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_dream)
+        setContentView(R.layout.activity_dream_constructor)
 
+        FeatureDreamsComponent.get().inject(this)
+
+        initViewModel()
         initActionBar()
     }
 
@@ -33,6 +42,10 @@ class CreateDreamActivity : BaseAppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initViewModel() {
+        mViewModel = viewModel {  }
     }
 
     private fun initActionBar() {

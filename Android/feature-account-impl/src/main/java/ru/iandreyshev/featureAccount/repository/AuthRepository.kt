@@ -1,6 +1,5 @@
 package ru.iandreyshev.featureAccount.repository
 
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.iandreyshev.featureAccountApi.data.*

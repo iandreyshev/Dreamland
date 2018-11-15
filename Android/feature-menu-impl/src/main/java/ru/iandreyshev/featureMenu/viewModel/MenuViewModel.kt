@@ -2,6 +2,7 @@ package ru.iandreyshev.featureMenu.viewModel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.featureAccountApi.useCase.ILogoutUseCase
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
@@ -17,16 +18,28 @@ class MenuViewModel : ViewModel() {
     @Inject
     lateinit var mMenuNavigator: IMenuNavigator
 
+    // Data
     val userObservable: LiveData<User> = liveDataOf()
+
+    // Events
+    val backEvent: LiveData<Unit>
+
+    private val mBackEvent = SingleLiveEvent<Unit>()
 
     init {
         FeatureMenuComponent.get().inject(this)
+
+        backEvent = mBackEvent
     }
 
     fun onCreateDreamClick() =
             mMenuNavigator.onCreateDream()
 
-    fun onLogoutClick() =
-            mLogoutUseCase().subscribe(mMenuNavigator::onCreateDream)
+    fun onLogoutClick() {
+        mLogoutUseCase().subscribe {
+            mBackEvent.call()
+            mMenuNavigator.onLogout()
+        }
+    }
 
 }
