@@ -1,3 +1,6 @@
 package ru.iandreyshev.featureMenuApi.navigation
 
-interface IMenuNavigator
+interface IMenuNavigator {
+    fun onCreateDream()
+    fun onLogout()
+}

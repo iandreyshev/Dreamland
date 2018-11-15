@@ -14,4 +14,10 @@ class MenuViewModel
 
     val userObservable: LiveData<User> = liveDataOf()
 
+    fun onCreateDreamClick() =
+            menuNavigator.onCreateDream()
+
+    fun onLogoutClick() {
+    }
+
 }

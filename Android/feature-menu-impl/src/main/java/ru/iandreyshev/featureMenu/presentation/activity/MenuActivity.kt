@@ -2,6 +2,7 @@ package ru.iandreyshev.featureMenu.presentation.activity
 
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
+import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.view_drawer_header.*
@@ -13,6 +14,7 @@ import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.featureMenuApi.navigation.IMainPageFragmentProvider
+import ru.iandreyshev.view.setOnClickListener
 import javax.inject.Inject
 
 class MenuActivity : BaseAppCompatActivity() {
@@ -36,6 +38,7 @@ class MenuActivity : BaseAppCompatActivity() {
         initActionBar()
         initDrawer()
         initMainPageList()
+        initFabButton()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
@@ -44,6 +47,11 @@ class MenuActivity : BaseAppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return true
     }
 
     private fun initViewModel() {
@@ -73,6 +81,10 @@ class MenuActivity : BaseAppCompatActivity() {
                     .add(R.id.fragment_placeholder, mMainPageFragmentProvider.getFragment(), MAIN_FRAGMENT_TAG)
                     .commit()
         }
+    }
+
+    private fun initFabButton() {
+        floating_action_button.setOnClickListener(mViewModel::onCreateDreamClick)
     }
 
     private fun handleAccount(account: User) {

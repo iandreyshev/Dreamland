@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Dreams</string>
+
+    <string name="create_dream_toolbar_menu_item_record_voice">Record voice</string>
+    <string name="create_dream_toolbar_menu_item_save">Save</string>
+    <string name="create_dream_toolbar_title">New dream</string>
+
+    <string name="dreams_diary_empty_text">You don\'t have any dream yet</string>
+    <string name="dreams_diary_save_first_button">Write first</string>
 </resources>

@@ -25,7 +25,9 @@
             android:name="ru.iandreyshev.featureAccount.presentation.activity.AuthActivity"
             android:noHistory="true" />
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
-        <activity android:name="ru.iandreyshev.featureAccount.presentation.activity.AccountActivity" />
+        <activity
+            android:name="ru.iandreyshev.dreams.presentation.fragment.CreateDreamActivity"
+            android:windowSoftInputMode="adjustResize" />
         <!--ACTIVITY-->
     </application>
 

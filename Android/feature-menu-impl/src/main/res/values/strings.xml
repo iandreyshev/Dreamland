@@ -4,6 +4,8 @@
     <string name="drawer_menu_item_dreams">My dreams diary</string>
     <string name="drawer_menu_item_statistic">My statistic</string>
     <string name="drawer_menu_item_about">About Dreamland</string>
+    <string name="drawer_menu_item_new_dream">New dream</string>
     <string name="drawer_menu_item_log_out">Log out</string>
 
+    <string name="toolbar_menu_item_search">Search</string>
 </resources>
