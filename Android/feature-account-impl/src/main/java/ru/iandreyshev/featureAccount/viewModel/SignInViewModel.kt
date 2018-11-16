@@ -11,12 +11,11 @@ import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureAccountApi.useCase.ISignInUseCase
 import javax.inject.Inject
 
-class SignInViewModel : ViewModel() {
-
-    @Inject
-    lateinit var mNavigator: IAccountNavigator
-    @Inject
-    lateinit var mSignInUseCase: ISignInUseCase
+class SignInViewModel
+@Inject constructor(
+        private val navigator: IAccountNavigator,
+        private val signInUseCase: ISignInUseCase
+) : ViewModel() {
 
     val waitingObservable: LiveData<Boolean>
         get() = mWaitingObservable.observable
@@ -27,13 +26,9 @@ class SignInViewModel : ViewModel() {
     private val mWaitingObservable = WaitingViewModel()
     private val mErrorObservable = SingleLiveEvent<SignInResult>()
 
-    init {
-        FeatureAccountComponent.get().inject(this)
-    }
-
     fun startSignIn(properties: SignInProperties) {
         mWaitingObservable.start()
-        mSignInUseCase(properties)
+        signInUseCase(properties)
                 .doOnSuccess(::handleSignInResult)
                 .doOnError(::handleSignInError)
                 .subscribe { _ ->
@@ -43,7 +38,7 @@ class SignInViewModel : ViewModel() {
 
     private fun handleSignInResult(result: SignInResult) = when (result) {
         SignInResult.SUCCESS ->
-            mNavigator.onSignInSuccess()
+            navigator.onSignInSuccess()
         SignInResult.USER_NOT_EXISTS,
         SignInResult.NO_CONNECTION,
         SignInResult.INCORRECT_DATA,

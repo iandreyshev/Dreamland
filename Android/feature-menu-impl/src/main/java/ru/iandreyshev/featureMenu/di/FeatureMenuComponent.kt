@@ -1,6 +1,5 @@
 package ru.iandreyshev.featureMenu.di
 
-import android.arch.lifecycle.ViewModelProvider
 import dagger.Component
 import ru.iandreyshev.featureAccountApi.api.IFeatureAccountApi
 import ru.iandreyshev.featureDreamsApi.api.IFeatureDreamsApi
@@ -9,8 +8,6 @@ import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator
 import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
 import ru.iandreyshev.featureMenu.presentation.activity.SplashActivity
-import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
-import ru.iandreyshev.featureMenu.viewModel.SplashViewModel
 import javax.inject.Singleton
 
 @Component(
@@ -36,16 +33,13 @@ abstract class FeatureMenuComponent {
 
     abstract fun inject(activity: MenuActivity)
     abstract fun inject(activity: SplashActivity)
-    abstract fun inject(viewModel: MenuViewModel)
-    abstract fun inject(viewModel: SplashViewModel)
 
     @Component(
             dependencies = [
                 IFeatureAccountApi::class,
                 IFeatureDreamsApi::class,
                 ISplashNavigator::class,
-                IMenuNavigator::class,
-                ViewModelProvider.Factory::class]
+                IMenuNavigator::class]
     )
     abstract class DependenciesComponent : IFeatureMenuDependencies
 

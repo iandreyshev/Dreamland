@@ -1,37 +1,15 @@
 package ru.iandreyshev.dreamland.di
 
 import dagger.Component
-import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
+import dagger.android.AndroidInjector
 import ru.iandreyshev.dreamland.application.DreamlandApplication
-import ru.iandreyshev.featureAccount.di.FeatureAccountViewModelModule
-import ru.iandreyshev.featureDreams.di.FeatureDreamsViewModelModule
-import ru.iandreyshev.featureMenu.di.FeatureMenuViewModelModule
 import javax.inject.Singleton
 
-@Component(
-        modules = [
-            AppModule::class,
-            AppViewModelModule::class,
-            AppNavigationModule::class,
-            FeatureMenuViewModelModule::class,
-            FeatureDreamsViewModelModule::class,
-            FeatureAccountViewModelModule::class]
-)
+@Component(modules = [AppModule::class])
 @Singleton
-abstract class AppComponent {
+interface AppComponent : AndroidInjector<DreamlandApplication> {
 
-    companion object {
-        fun init(component: AppComponent) {
-            sInstance = component
-        }
-
-        fun get() = sInstance
-
-        @Volatile
-        private lateinit var sInstance: AppComponent
-    }
-
-    abstract fun inject(application: DreamlandApplication)
-    abstract fun inject(activity: BaseAppCompatActivity)
+    @Component.Builder
+    abstract class Builder : AndroidInjector.Builder<DreamlandApplication>()
 
 }

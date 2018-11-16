@@ -4,18 +4,15 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.featureAccountApi.useCase.ILogoutUseCase
-import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.vext.liveData.liveDataOf
 import javax.inject.Inject
 
-class MenuViewModel : ViewModel() {
-
-    @Inject
-    lateinit var mLogoutUseCase: ILogoutUseCase
-    @Inject
-    lateinit var mMenuNavigator: IMenuNavigator
+class MenuViewModel @Inject constructor(
+        private val logoutUseCase: ILogoutUseCase,
+        private val menuNavigator: IMenuNavigator
+) : ViewModel() {
 
     // Data
     val userObservable: LiveData<User> = liveDataOf()
@@ -26,18 +23,16 @@ class MenuViewModel : ViewModel() {
     private val mBackEvent = SingleLiveEvent<Unit>()
 
     init {
-        FeatureMenuComponent.get().inject(this)
-
         backEvent = mBackEvent
     }
 
     fun onCreateDreamClick() =
-            mMenuNavigator.onCreateDream()
+            menuNavigator.onCreateDream()
 
     fun onLogoutClick() {
-        mLogoutUseCase().subscribe {
+        logoutUseCase().subscribe {
             mBackEvent.call()
-            mMenuNavigator.onLogout()
+            menuNavigator.onLogout()
         }
     }
 

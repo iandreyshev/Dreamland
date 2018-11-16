@@ -1,7 +1,7 @@
 package ru.iandreyshev.featureAccount.di
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import ru.iandreyshev.featureAccount.useCase.GetAuthStateUseCase
 import ru.iandreyshev.featureAccount.useCase.LogoutUseCase
 import ru.iandreyshev.featureAccount.useCase.SignInUseCase
@@ -10,24 +10,25 @@ import ru.iandreyshev.featureAccountApi.useCase.IGetAuthStateUseCase
 import ru.iandreyshev.featureAccountApi.useCase.ILogoutUseCase
 import ru.iandreyshev.featureAccountApi.useCase.ISignInUseCase
 import ru.iandreyshev.featureAccountApi.useCase.ISignUpUseCase
+import javax.inject.Singleton
 
 @Module
-class FeatureAccountUseCaseModule {
+abstract class FeatureAccountUseCaseModule {
 
-    @Provides
-    fun provideSignInUseCase(): ISignInUseCase =
-            SignInUseCase()
+    @Binds
+    @Singleton
+    abstract fun bindSignInUseCase(useCase: SignInUseCase): ISignInUseCase
 
-    @Provides
-    fun provideSignUpUseCase(): ISignUpUseCase =
-            SignUpUseCase()
+    @Binds
+    @Singleton
+    abstract fun bindSignUpUseCase(useCase: SignUpUseCase): ISignUpUseCase
 
-    @Provides
-    fun provideLogoutUseCase(): ILogoutUseCase =
-            LogoutUseCase()
+    @Binds
+    @Singleton
+    abstract fun bindLogoutUseCase(useCase: LogoutUseCase): ILogoutUseCase
 
-    @Provides
-    fun provideGetAuthStateUseCase(): IGetAuthStateUseCase =
-            GetAuthStateUseCase()
+    @Binds
+    @Singleton
+    abstract fun bindGetAuthStateUseCase(useCase: GetAuthStateUseCase): IGetAuthStateUseCase
 
 }

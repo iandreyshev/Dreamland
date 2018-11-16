@@ -2,7 +2,6 @@ package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
 import ru.iandreyshev.featureAccount.database.IUserDatabase
-import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.mapping.toDatabaseEntity
 import ru.iandreyshev.featureAccount.mapping.toRequest
 import ru.iandreyshev.featureAccount.mapping.toResult
@@ -12,19 +11,14 @@ import ru.iandreyshev.featureAccountApi.data.SignUpResult
 import ru.iandreyshev.featureAccountApi.useCase.ISignUpUseCase
 import javax.inject.Inject
 
-class SignUpUseCase : ISignUpUseCase {
-
-    @Inject
-    lateinit var mDatabase: IUserDatabase
-    @Inject
-    lateinit var mServer: IUserServer
-
-    init {
-        FeatureAccountComponent.get().inject(this)
-    }
+class SignUpUseCase
+@Inject constructor(
+        private val database: IUserDatabase,
+        private val server: IUserServer
+): ISignUpUseCase {
 
     override fun invoke(signUpProperties: SignUpProperties): Single<SignUpResult> = Single.create {
-        val responseFromServer = mServer.signUp(signUpProperties.toRequest())
+        val responseFromServer = server.signUp(signUpProperties.toRequest())
 
         val serverError = responseFromServer.error
         if (serverError != null) {
@@ -39,7 +33,7 @@ class SignUpUseCase : ISignUpUseCase {
         }
 
         val databaseEntity = serverAccount.toDatabaseEntity(signUpProperties.password)
-        mDatabase.saveUser(databaseEntity)
+        database.saveUser(databaseEntity)
     }
 
 }

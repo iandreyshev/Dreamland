@@ -3,7 +3,6 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
-import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignUpProperties
 import ru.iandreyshev.featureAccountApi.data.SignUpResult
@@ -11,12 +10,11 @@ import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureAccountApi.useCase.ISignUpUseCase
 import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
-
-    @Inject
-    lateinit var mNavigator: IAccountNavigator
-    @Inject
-    lateinit var mSignUpUseCase: ISignUpUseCase
+class SignUpViewModel
+@Inject constructor(
+        private val navigator: IAccountNavigator,
+        private val signUpUseCase: ISignUpUseCase
+) : ViewModel() {
 
     val waitingObservable: LiveData<Boolean>
         get() = mWaitingObservable.observable
@@ -27,13 +25,9 @@ class SignUpViewModel : ViewModel() {
     private val mWaitingObservable = WaitingViewModel()
     private val mErrorObservable = SingleLiveEvent<SignUpResult>()
 
-    init {
-        FeatureAccountComponent.get().inject(this)
-    }
-
     fun startSignUp(properties: SignUpProperties) {
         mWaitingObservable.start()
-        mSignUpUseCase(properties)
+        signUpUseCase(properties)
                 .doOnSuccess(::handleSignUpResult)
                 .doOnError(::handleSignUpError)
                 .subscribe { _ ->
@@ -41,15 +35,14 @@ class SignUpViewModel : ViewModel() {
                 }
     }
 
-    private fun handleSignUpResult(result: SignUpResult) {
-        when (result) {
-            SignUpResult.SUCCESS ->
-                mNavigator.onSignUpSuccess()
-            SignUpResult.USER_ALREADY_EXISTS,
-            SignUpResult.NO_CONNECTION,
-            SignUpResult.UNKNOWN ->
-                mErrorObservable.setValue(result)
-        }
+    private fun handleSignUpResult(result: SignUpResult) = when (result) {
+        SignUpResult.SUCCESS ->
+            navigator.onSignUpSuccess()
+        SignUpResult.USER_ALREADY_EXISTS,
+        SignUpResult.INCORRECT_DATA,
+        SignUpResult.NO_CONNECTION,
+        SignUpResult.UNKNOWN ->
+            mErrorObservable.setValue(result)
     }
 
     private fun handleSignUpError(error: Throwable) {

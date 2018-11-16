@@ -30,12 +30,4 @@ class FeatureAccountModule {
                     .build()
                     .boxFor(UserDatabaseEntity::class.java)
 
-    @Provides
-    @Singleton
-    fun provideUserDatabase(): IUserDatabase = UserDatabase()
-
-    @Provides
-    @Singleton
-    fun provideUserServer(): IUserServer = UserServer()
-
 }

@@ -1,17 +1,17 @@
 package ru.iandreyshev.dreamland.di
 
-import android.content.Context
+import android.app.Application
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.android.AndroidInjectionModule
 import ru.iandreyshev.dreamland.application.DreamlandApplication
 import javax.inject.Singleton
 
-@Module
-class AppModule {
+@Module(includes = [AndroidInjectionModule::class])
+abstract class AppModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideContext(): Context =
-            DreamlandApplication.instance.applicationContext
+    abstract fun provideContext(application: DreamlandApplication): Application
 
 }

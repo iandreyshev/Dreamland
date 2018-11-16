@@ -1,11 +1,11 @@
 package ru.iandreyshev.dreamland.proxy
 
-import android.arch.lifecycle.ViewModelProvider
+import android.app.Application
 import android.content.Context
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
-import ru.iandreyshev.dreamland.navigation.FeatureAccountNavigator
-import ru.iandreyshev.dreamland.navigation.FeatureMenuMenuNavigator
-import ru.iandreyshev.dreamland.navigation.FeatureMenuSplashNavigator
+import ru.iandreyshev.dreamland.proxy.navigation.FeatureAccountNavigator
+import ru.iandreyshev.dreamland.proxy.navigation.FeatureMenuMenuNavigator
+import ru.iandreyshev.dreamland.proxy.navigation.FeatureMenuSplashNavigator
 import ru.iandreyshev.featureDreams.di.DaggerFeatureDreamsComponent
 import ru.iandreyshev.featureDreams.di.DaggerFeatureDreamsComponent_DependenciesComponent
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
@@ -20,11 +20,10 @@ import javax.inject.Inject
 
 class ProxyInjector
 @Inject constructor(
-        private val context: Context,
+        private val application: Application,
         private val menuNavigator: FeatureMenuMenuNavigator,
         private val splashNavigator: FeatureMenuSplashNavigator,
-        private val accountNavigator: FeatureAccountNavigator,
-        private val viewModelFactory: ViewModelProvider.Factory
+        private val accountNavigator: FeatureAccountNavigator
 ) {
 
     fun featureAccountComponent(): FeatureAccountComponent =
@@ -32,9 +31,8 @@ class ProxyInjector
                     .iFeatureAccountDependencies(DaggerFeatureAccountComponent_DependenciesComponent.builder()
                             .iAccountNavigator(accountNavigator)
                             .iCoreNetworkApi(CoreNetworkComponent.get())
-                            .factory(viewModelFactory)
                             .iContextProvider(object : IContextProvider {
-                                override val applicationContext: Context = context
+                                override val applicationContext: Context = application
                             })
                             .build())
                     .build()
@@ -46,14 +44,12 @@ class ProxyInjector
                             .iFeatureDreamsApi(FeatureDreamsComponent.get())
                             .iSplashNavigator(splashNavigator)
                             .iMenuNavigator(menuNavigator)
-                            .factory(viewModelFactory)
                             .build())
                     .build()
 
     fun featureDreamsComponent(): FeatureDreamsComponent =
             DaggerFeatureDreamsComponent.builder()
                     .iFeatureDreamsDependencies(DaggerFeatureDreamsComponent_DependenciesComponent.builder()
-                            .factory(viewModelFactory)
                             .build())
                     .build()
 

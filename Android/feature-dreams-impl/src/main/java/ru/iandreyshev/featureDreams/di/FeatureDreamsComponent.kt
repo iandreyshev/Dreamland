@@ -36,10 +36,7 @@ abstract class FeatureDreamsComponent : IFeatureDreamsApi {
     abstract fun inject(viewModel: DreamConstructorViewModel)
     abstract fun inject(viewModel: DreamsDiaryViewModel)
 
-    @Component(
-            dependencies = [
-                ViewModelProvider.Factory::class]
-    )
+    @Component
     abstract class DependenciesComponent : IFeatureDreamsDependencies
 
 }

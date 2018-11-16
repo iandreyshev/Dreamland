@@ -1,6 +1,6 @@
-package ru.iandreyshev.dreamland.navigation
+package ru.iandreyshev.dreamland.proxy.navigation
 
-import android.content.Context
+import android.app.Application
 import org.jetbrains.anko.startActivity
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
@@ -8,15 +8,15 @@ import javax.inject.Inject
 
 class FeatureAccountNavigator
 @Inject constructor(
-        private val context: Context
+        private val application: Application
 ) : IAccountNavigator {
 
     override fun onSignInSuccess() {
-        context.startActivity<MenuActivity>()
+        application.startActivity<MenuActivity>()
     }
 
     override fun onSignUpSuccess() {
-        context.startActivity<MenuActivity>()
+        application.startActivity<MenuActivity>()
     }
 
 }

@@ -1,24 +1,31 @@
 package ru.iandreyshev.featureMenu.di
 
 import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
+import ru.iandreyshev.featureDreams.di.viewModel.ViewModelFactory
 import ru.iandreyshev.featureDreams.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.featureMenu.viewModel.SplashViewModel
+import javax.inject.Singleton
 
 @Module
-class FeatureMenuViewModelModule {
+abstract class FeatureMenuViewModelModule {
 
-    @Provides
+    @Binds
+    @Singleton
+    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
     @IntoMap
     @ViewModelKey(MenuViewModel::class)
-    fun bindMenuViewModel(): ViewModel = MenuViewModel()
+    abstract fun bindMenuViewModel(viewModel: MenuViewModel): ViewModel
 
-    @Provides
+    @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
-    fun bindSplashViewModel(): ViewModel = SplashViewModel()
+    abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
 }

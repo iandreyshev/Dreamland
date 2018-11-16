@@ -4,7 +4,6 @@ import android.app.Application
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent
 import ru.iandreyshev.dreamland.di.DaggerAppComponent
-import ru.iandreyshev.dreamland.di.AppComponent
 import ru.iandreyshev.dreamland.proxy.ProxyInjector
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
@@ -24,8 +23,7 @@ class DreamlandApplication : Application() {
         super.onCreate()
         instance = this
 
-        AppComponent.init(DaggerAppComponent.create())
-        AppComponent.get().inject(this)
+        DaggerAppComponent.builder().create(this).inject(this)
 
         CoreNetworkComponent.init(DaggerCoreNetworkComponent.create())
         FeatureAccountComponent.init(proxyInjector.featureAccountComponent())
