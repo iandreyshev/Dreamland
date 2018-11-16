@@ -30,6 +30,7 @@ repositories {
 
 dependencies {
     api project(':core-android')
+    api project(':core-database')
     api project(':core-network-api')
     api project(':feature-account-api')
 
@@ -43,4 +44,7 @@ dependencies {
 
     // Gson
     api 'com.google.code.gson:gson:2.8.5'
+
+    // RxJava-ObjectBox
+    api "io.objectbox:objectbox-rxjava:$objectbox_version"
 }

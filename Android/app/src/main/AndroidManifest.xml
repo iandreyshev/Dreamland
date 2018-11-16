@@ -27,7 +27,7 @@
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
         <activity
             android:name="ru.iandreyshev.featureDreams.fragment.DreamConstructorActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <!--ACTIVITY-->
     </application>
 

@@ -1,12 +1,16 @@
 package ru.iandreyshev.featureAccount.di
 
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Context
 import dagger.Component
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
+import ru.iandreyshev.featureAccount.database.UserDatabase
+import ru.iandreyshev.featureAccount.di.dependencies.IContextProvider
 import ru.iandreyshev.featureAccount.di.dependencies.IFeatureAccountDependencies
+import ru.iandreyshev.featureAccount.network.UserServer
 import ru.iandreyshev.featureAccount.useCase.LogoutUseCase
 import ru.iandreyshev.featureAccount.useCase.SignInUseCase
 import ru.iandreyshev.featureAccount.useCase.SignUpUseCase
@@ -39,16 +43,23 @@ abstract class FeatureAccountComponent : IFeatureAccountApi {
     }
 
     abstract fun inject(activity: BaseAppCompatActivity)
+
     abstract fun inject(fragment: BaseFragment)
+
     abstract fun inject(viewModel: SignInViewModel)
     abstract fun inject(viewModel: SignUpViewModel)
     abstract fun inject(viewModel: AuthViewModel)
+
+    abstract fun inject(database: UserDatabase)
+    abstract fun inject(server: UserServer)
+
     abstract fun inject(useCase: LogoutUseCase)
     abstract fun inject(useCase: SignInUseCase)
     abstract fun inject(useCase: SignUpUseCase)
 
     @Component(
             dependencies = [
+                IContextProvider::class,
                 ViewModelProvider.Factory::class,
                 IAccountNavigator::class,
                 ICoreNetworkApi::class]

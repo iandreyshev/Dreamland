@@ -6,7 +6,6 @@ import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.featureAccountApi.useCase.ILogoutUseCase
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
-import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator
 import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.vext.liveData.liveDataOf
 import javax.inject.Inject

@@ -3,9 +3,7 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
-import ru.iandreyshev.featureAccount.repository.IAuthRepository
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
-import javax.inject.Inject
 
 class AuthViewModel : ViewModel() {
 
@@ -13,8 +11,6 @@ class AuthViewModel : ViewModel() {
         SIGN_IN,
         SIGN_UP
     }
-
-    lateinit var mAuthRepository: IAuthRepository
 
     init {
         FeatureAccountComponent.get().inject(this)

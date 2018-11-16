@@ -9,6 +9,7 @@
 
     <string name="sign_up_error_title">Ошибка регистрации</string>
     <string name="sign_up_error_user_already_exists">Пользователь с такими данными уже существует</string>
+    <string name="sign_up_error_incorrect_data">Данные введены с ошибкой</string>
     <string name="sign_up_error_no_connection">Отсутствует соединение с сервером</string>
     <string name="sign_up_error_unknown">Неизвестная ошибка, попробуйте снова…</string>
 

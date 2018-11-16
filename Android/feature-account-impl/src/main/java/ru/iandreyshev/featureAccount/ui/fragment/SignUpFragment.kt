@@ -47,9 +47,9 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun getProperties() = SignUpProperties(
-        signUpFields_email_field.text.toString(),
-        signUpFields_login_field.text.toString(),
-        signUpFields_password_field.text.toString()
+            signUpFields_email_field.text.toString(),
+            signUpFields_login_field.text.toString(),
+            signUpFields_password_field.text.toString()
     )
 
     private fun handleWaiting(isWait: Boolean) {
@@ -75,9 +75,10 @@ class SignUpFragment : BaseFragment() {
     private fun handleError(error: SignUpResult) {
         activity?.alert {
             titleResource = R.string.sign_up_error_title
-            messageResource = when(error) {
+            messageResource = when (error) {
                 SignUpResult.SUCCESS -> return@alert
                 SignUpResult.USER_ALREADY_EXISTS -> R.string.sign_up_error_user_already_exists
+                SignUpResult.INCORRECT_DATA -> R.string.sign_up_error_incorrect_data
                 SignUpResult.NO_CONNECTION -> R.string.sign_up_error_no_connection
                 SignUpResult.UNKNOWN -> R.string.sign_up_error_unknown
             }
