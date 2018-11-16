@@ -8,4 +8,8 @@
     <string name="drawer_menu_item_log_out">Log out</string>
 
     <string name="toolbar_menu_item_search">Search</string>
+
+    <string name="log_out_alert_btn_ok">Yes</string>
+    <string name="log_out_alert_title">Log out</string>
+    <string name="log_out_alert_message">Do you really want to log out?</string>
 </resources>

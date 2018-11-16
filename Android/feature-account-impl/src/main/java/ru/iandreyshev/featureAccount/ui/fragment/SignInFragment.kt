@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_sign_in.*
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.featureAccount.R
@@ -15,10 +14,13 @@ import ru.iandreyshev.featureAccountApi.data.SignInResult
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
+import ru.iandreyshev.coreAndroid.ui.dialog.buildAlert
+import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.vext.view.invisibleIf
 import ru.iandreyshev.vext.view.visibleIf
 import ru.iandreyshev.vext.view.visibleIfOrGone
 import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
+import ru.iandreyshev.coreAndroid.viewModel.observe
 
 class SignInFragment : BaseFragment() {
 
@@ -39,10 +41,10 @@ class SignInFragment : BaseFragment() {
 
         mSignInViewModel = viewModel {
             signInFields_btnStart.setOnClickListener {
-                startSignIn(getProperties())
+                onStartSignIn(getProperties())
             }
             observeNotNull(waitingObservable, ::handleWaiting)
-            observeNotNull(errorObservable, ::handleError)
+            observe(errorObservable, ::handleError)
         }
     }
 
@@ -68,18 +70,25 @@ class SignInFragment : BaseFragment() {
         signInFields_progressBar.visibleIfOrGone(isWait)
     }
 
-    private fun handleError(error: SignInResult) {
-        activity?.alert {
+    private fun handleError(error: SignInResult?) {
+        if (error == null) {
+            return
+        }
+
+        buildAlert {
             titleResource = R.string.sign_in_error_title
             messageResource = when (error) {
-                SignInResult.SUCCESS -> return@alert
+                SignInResult.SUCCESS -> return@buildAlert
                 SignInResult.USER_NOT_EXISTS -> R.string.sign_in_error_user_not_exists
                 SignInResult.INCORRECT_DATA -> R.string.sign_in_error_incorrect_data
                 SignInResult.NO_CONNECTION -> R.string.sign_in_error_no_connection
                 SignInResult.UNKNOWN -> R.string.sign_in_error_unknown
             }
-            okButton { }
-        }?.show()
+            okButton { mSignInViewModel.onErrorClosed() }
+        } customizeAndShow {
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+        }
     }
 
 }

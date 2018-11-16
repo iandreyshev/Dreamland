@@ -1,9 +1,8 @@
 package ru.iandreyshev.featureAccount.viewModel
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
-import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignInProperties
 import ru.iandreyshev.featureAccountApi.data.SignInResult
@@ -24,16 +23,20 @@ class SignInViewModel
         get() = mErrorObservable
 
     private val mWaitingObservable = WaitingViewModel()
-    private val mErrorObservable = SingleLiveEvent<SignInResult>()
+    private val mErrorObservable = MutableLiveData<SignInResult>()
 
-    fun startSignIn(properties: SignInProperties) {
+    fun onStartSignIn(properties: SignInProperties) {
         mWaitingObservable.start()
         signInUseCase(properties)
                 .doOnSuccess(::handleSignInResult)
                 .doOnError(::handleSignInError)
-                .subscribe { _ ->
+                .subscribe { _, _ ->
                     mWaitingObservable.stop()
                 }
+    }
+
+    fun onErrorClosed() {
+        mErrorObservable.value = null
     }
 
     private fun handleSignInResult(result: SignInResult) = when (result) {

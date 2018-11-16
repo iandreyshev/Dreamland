@@ -6,6 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.view_drawer_header.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.coreAndroid.viewModel.viewModel
@@ -71,7 +73,7 @@ class MenuActivity : BaseAppCompatActivity() {
     private fun initDrawer() {
         nav_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.drawer_item_log_out -> mViewModel.onLogoutClick()
+                R.id.drawer_item_log_out -> onLogOutClick()
             }
             drawer.closeDrawers()
             true
@@ -94,6 +96,15 @@ class MenuActivity : BaseAppCompatActivity() {
 
     private fun handleAccount(account: User) {
         drawerHeader_fullName.text = account.fullName
+    }
+
+    private fun onLogOutClick() {
+        alert {
+            titleResource = R.string.log_out_alert_title
+            messageResource = R.string.log_out_alert_message
+            positiveButton(R.string.log_out_alert_btn_ok) { mViewModel.onLogoutClick() }
+            cancelButton { }
+        }.show()
     }
 
 }
