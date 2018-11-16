@@ -27,8 +27,8 @@
                 android:id="@+id/signUpFields.email.field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="email"
-                android:inputType="text" />
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -38,11 +38,11 @@
             android:layout_height="match_parent">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/signUpFields.login.field"
+                android:id="@+id/signUpFields.full_name.field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="login"
-                android:inputType="textPassword" />
+                android:hint="Full name"
+                android:inputType="textPersonName" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +56,7 @@
                 android:id="@+id/signUpFields.password.field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="password"
+                android:hint="Password"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>

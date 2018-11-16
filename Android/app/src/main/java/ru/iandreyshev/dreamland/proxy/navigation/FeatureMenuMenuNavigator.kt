@@ -3,7 +3,7 @@ package ru.iandreyshev.dreamland.proxy.navigation
 import android.app.Application
 import org.jetbrains.anko.startActivity
 import ru.iandreyshev.featureAccount.ui.activity.AuthActivity
-import ru.iandreyshev.featureDreams.fragment.DreamConstructorActivity
+import ru.iandreyshev.featureDreams.ui.activity.DreamConstructorActivity
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import javax.inject.Inject
 

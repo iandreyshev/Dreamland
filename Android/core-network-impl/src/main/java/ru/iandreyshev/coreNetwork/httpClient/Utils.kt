@@ -1,7 +1,7 @@
 package ru.iandreyshev.coreNetwork.httpClient
 
 import okhttp3.*
-import ru.iandreyshev.coreNetworkApi.UserIdentifier
+import ru.iandreyshev.coreNetwork.properties.UserIdentifier
 import java.io.IOException
 import java.lang.Exception
 import java.lang.IllegalStateException

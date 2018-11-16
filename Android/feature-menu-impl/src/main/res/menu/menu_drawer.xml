@@ -5,9 +5,9 @@
         <item
             android:id="@+id/drawer_item_dreams"
             android:title="@string/drawer_menu_item_dreams" />
-        <item
-            android:id="@+id/drawer_item_statistic"
-            android:title="@string/drawer_menu_item_statistic" />
+        <!--<item-->
+            <!--android:id="@+id/drawer_item_statistic"-->
+            <!--android:title="@string/drawer_menu_item_statistic" />-->
     </group>
 
     <group android:id="@+id/group.logout">

@@ -3,6 +3,8 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import io.reactivex.disposables.Disposable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignInProperties
 import ru.iandreyshev.featureAccountApi.data.SignInResult
@@ -25,18 +27,25 @@ class SignInViewModel
     private val mWaitingObservable = WaitingViewModel()
     private val mErrorObservable = MutableLiveData<SignInResult>()
 
+    private var mSignInTask: Disposable? = null
+
     fun onStartSignIn(properties: SignInProperties) {
         mWaitingObservable.start()
-        signInUseCase(properties)
-                .doOnSuccess(::handleSignInResult)
-                .doOnError(::handleSignInError)
-                .subscribe { _, _ ->
+        mSignInTask = signInUseCase(properties)
+                .ioToMain()
+                .subscribe { result, error ->
+                    result?.let(::handleSignInResult)
+                    error?.let(::handleSignInError)
                     mWaitingObservable.stop()
                 }
     }
 
     fun onErrorClosed() {
         mErrorObservable.value = null
+    }
+
+    override fun onCleared() {
+        mSignInTask?.dispose()
     }
 
     private fun handleSignInResult(result: SignInResult) = when (result) {

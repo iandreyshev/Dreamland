@@ -2,7 +2,6 @@ package ru.iandreyshev.featureMenu.presentation.activity
 
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
-import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.view_drawer_header.view.*
@@ -44,18 +43,20 @@ class MenuActivity : BaseAppCompatActivity() {
         initFabButton()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
-        android.R.id.home -> {
-            drawer.openDrawer(GravityCompat.START)
-            true
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                drawer.openDrawer(GravityCompat.START)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        else -> super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_toolbar, menu)
+//        return true
+//    }
 
     private fun initViewModel() {
         mViewModel = viewModel(viewModelFactory) {

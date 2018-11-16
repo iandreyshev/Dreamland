@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureDreams.dreamsList.adapter
+package ru.iandreyshev.featureDreams.ui.adapter.dreams
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

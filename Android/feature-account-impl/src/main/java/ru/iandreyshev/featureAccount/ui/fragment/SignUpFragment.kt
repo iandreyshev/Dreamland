@@ -48,7 +48,7 @@ class SignUpFragment : BaseFragment() {
 
     private fun getProperties() = SignUpProperties(
             signUpFields_email_field.text.toString(),
-            signUpFields_login_field.text.toString(),
+            signUpFields_full_name_field.text.toString(),
             signUpFields_password_field.text.toString()
     )
 
@@ -59,8 +59,8 @@ class SignUpFragment : BaseFragment() {
         signUpFields_btnSignIn.visibleIf(!isWait)
         signUpFields_btnSignIn.invisibleIf(isWait)
 
-        signUpFields_login_field.isEnabled = !isWait
-        signUpFields_login_field.clearFocus()
+        signUpFields_full_name_field.isEnabled = !isWait
+        signUpFields_full_name_field.clearFocus()
 
         signUpFields_email_field.isEnabled = !isWait
         signUpFields_email_field.clearFocus()

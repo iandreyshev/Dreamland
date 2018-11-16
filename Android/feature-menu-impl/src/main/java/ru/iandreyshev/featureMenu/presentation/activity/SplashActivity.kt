@@ -20,9 +20,7 @@ class SplashActivity : BaseAppCompatActivity() {
 
         FeatureMenuComponent.get().inject(this)
 
-        mViewModel = viewModel(viewModelFactory) {
-            observeNotNull(waitViewModel.observable, progressBar::visibleIfOrGone)
-        }
+        mViewModel = viewModel(viewModelFactory) { }
     }
 
 }

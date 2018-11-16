@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureDreams.fragment
+package ru.iandreyshev.featureDreams.ui.activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -32,12 +32,12 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.home -> {
+            android.R.id.home -> {
                 finish()
                 return true
             }
             R.id.menu_item_save -> {
-                // TODO: Save dream
+                finish()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

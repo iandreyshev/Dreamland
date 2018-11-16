@@ -2,7 +2,6 @@ package ru.iandreyshev.dreamland.application
 
 import android.app.Application
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
-import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent
 import ru.iandreyshev.dreamland.di.DaggerAppComponent
 import ru.iandreyshev.dreamland.proxy.ProxyInjector
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
@@ -25,7 +24,7 @@ class DreamlandApplication : Application() {
 
         DaggerAppComponent.builder().create(this).inject(this)
 
-        CoreNetworkComponent.init(DaggerCoreNetworkComponent.create())
+        CoreNetworkComponent.init(proxyInjector.coreNetworkComponent())
         FeatureAccountComponent.init(proxyInjector.featureAccountComponent())
         FeatureDreamsComponent.init(proxyInjector.featureDreamsComponent())
         FeatureMenuComponent.init(proxyInjector.featureMenuComponent())

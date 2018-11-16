@@ -1,6 +1,16 @@
 package ru.iandreyshev.coreNetwork.di
 
+import dagger.Binds
 import dagger.Module
+import ru.iandreyshev.coreNetwork.httpClient.HttpClient
+import ru.iandreyshev.coreNetworkApi.IHttpClient
+import javax.inject.Singleton
 
 @Module
-internal abstract class CoreNetworkApiModule
+abstract class CoreNetworkApiModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindHttpClient(httpClient: HttpClient): IHttpClient
+
+}

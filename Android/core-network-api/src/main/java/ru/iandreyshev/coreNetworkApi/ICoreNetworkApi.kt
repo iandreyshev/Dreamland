@@ -1,3 +1,5 @@
 package ru.iandreyshev.coreNetworkApi
 
-interface ICoreNetworkApi
+interface ICoreNetworkApi {
+    val httpClient: IHttpClient
+}

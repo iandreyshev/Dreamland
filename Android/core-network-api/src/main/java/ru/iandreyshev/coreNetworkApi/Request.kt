@@ -1,6 +1,7 @@
 package ru.iandreyshev.coreNetworkApi
 
 data class Request(
-        val userIdentifier: UserIdentifier?,
-        val path: String
+        val path: String,
+        val headers: Map<String, String>,
+        val body: String
 )

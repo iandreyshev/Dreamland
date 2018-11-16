@@ -27,7 +27,7 @@
                 android:id="@+id/signInFields.login.field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="emain / login"
+                android:hint="Email"
                 android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
@@ -42,7 +42,7 @@
                 android:id="@+id/signInFields.password.field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="password"
+                android:hint="Password"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
