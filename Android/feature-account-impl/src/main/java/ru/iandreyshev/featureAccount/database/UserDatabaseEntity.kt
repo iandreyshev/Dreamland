@@ -9,6 +9,7 @@ data class UserDatabaseEntity(
         @Id var id: Long = 0,
         @Unique var accountId: Long = 0,
         var password: String = "",
+        var login: String = "",
         var fullName: String = "",
         var avatarUrl: String = ""
 )

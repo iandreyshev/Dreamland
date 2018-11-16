@@ -7,7 +7,11 @@ import ru.iandreyshev.featureAccountApi.data.SignUpProperties
 import ru.iandreyshev.featureAccountApi.data.SignUpResult
 
 internal fun SignUpProperties.toRequest() =
-        SignUpRequest()
+        SignUpRequest(
+                email = email,
+                fullName = fullName,
+                password = password
+        )
 
 internal fun SignUpResponse.Account.toDatabaseEntity(password: String) =
         UserDatabaseEntity(

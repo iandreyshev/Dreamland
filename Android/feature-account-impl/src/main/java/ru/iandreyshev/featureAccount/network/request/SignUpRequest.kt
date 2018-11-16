@@ -1,3 +1,7 @@
 package ru.iandreyshev.featureAccount.network.request
 
-class SignUpRequest
+data class SignUpRequest(
+        val email: String,
+        val fullName: String,
+        val password: String
+)

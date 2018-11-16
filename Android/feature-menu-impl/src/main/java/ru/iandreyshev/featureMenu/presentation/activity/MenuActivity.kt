@@ -5,7 +5,7 @@ import android.support.v4.view.GravityCompat
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_menu.*
-import kotlinx.android.synthetic.main.view_drawer_header.*
+import kotlinx.android.synthetic.main.view_drawer_header.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
@@ -13,10 +13,10 @@ import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.coreAndroid.viewModel.viewModel
 import ru.iandreyshev.featureMenu.R
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
-import ru.iandreyshev.featureMenu.model.User
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
 import ru.iandreyshev.coreAndroid.viewModel.observe
+import ru.iandreyshev.featureAccountApi.data.User
 import ru.iandreyshev.featureDreamsApi.data.IDreamsDiaryFragmentFactory
 import javax.inject.Inject
 
@@ -59,7 +59,7 @@ class MenuActivity : BaseAppCompatActivity() {
 
     private fun initViewModel() {
         mViewModel = viewModel(viewModelFactory) {
-            observeNotNull(userObservable, ::handleAccount)
+            observeNotNull(user, ::handleAccount)
             observe(backEvent) { finish() }
         }
     }
@@ -95,7 +95,7 @@ class MenuActivity : BaseAppCompatActivity() {
     }
 
     private fun handleAccount(account: User) {
-        drawerHeader_fullName.text = account.fullName
+        drawer.drawerHeader_fullName?.text = account.fullName
     }
 
     private fun onLogOutClick() {

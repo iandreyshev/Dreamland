@@ -11,10 +11,10 @@ class UserDatabase
         private val box: Box<UserDatabaseEntity>
 ) : IUserDatabase {
 
-    override val userObservable: Observable<UserDatabaseEntity?>
+    override val userObservable: Observable<UserDatabaseEntity>
         get() = RxQuery.observable(box.query().build())
                 .observeOn(Schedulers.io())
-                .map { it.firstOrNull() }
+                .map { it.firstOrNull() ?: UserDatabaseEntity() }
 
     override fun saveUser(user: UserDatabaseEntity) {
         box.removeAll()

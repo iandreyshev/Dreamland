@@ -1,6 +1,5 @@
 package ru.iandreyshev.featureAccount.network
 
-import com.google.gson.Gson
 import ru.iandreyshev.featureAccount.network.request.DeleteRequest
 import ru.iandreyshev.featureAccount.network.response.DeleteResponse
 import ru.iandreyshev.featureAccount.network.request.SignInRequest
@@ -17,50 +16,49 @@ class UserServer
         private const val PATH_SIGN_IN = "account/sign_in"
         private const val PATH_SIGN_UP = "account/sign_up"
         private const val PATH_DELETE = "account/delete"
+
+        private const val MAIL = "email"
+        private const val NAME = "Ivan"
+        private const val PASS = "pass"
     }
 
-    private val mGson = Gson()
-
-    /**
-     * Sign In
-     **/
     override fun signIn(properties: SignInRequest): SignInResponse {
-//        val request = getRequestTo(PATH_SIGN_IN)
-//        val connError = SignInResponse(null, SignInResponse.Error.NO_CONNECTION)
-//        val serverError = SignInResponse(null, SignInResponse.Error.SERVER_ERROR)
-//
-//        return apiCall(request, connError, serverError) { body ->
-//            mGson.fromJson(body, SignInResponseGson::class.java).toApiModel()
-//        }
-        return SignInResponse(SignInResponse.Error.SERVER_ERROR)
+        if (properties.login != NAME) {
+            return SignInResponse(SignInResponse.Error.USER_NOT_EXISTS)
+        }
+
+        if (properties.password != PASS) {
+            return SignInResponse(SignInResponse.Error.USER_NOT_EXISTS)
+        }
+
+        return SignInResponse(SignInResponse.Account(
+                id = 0,
+                fullName = NAME,
+                avatarUrl = ""
+        ))
     }
 
-    /**
-     * Sign Up
-     **/
     override fun signUp(properties: SignUpRequest): SignUpResponse {
-//        val request = getRequestTo(PATH_SIGN_UP)
-//        val connError = SignUpResponse(null, SignUpResponse.Error.NO_CONNECTION)
-//        val serverError = SignUpResponse(null, SignUpResponse.Error.SERVER_ERROR)
-//
-//        return apiCall(request, connError, serverError) { body ->
-//            mGson.fromJson(body, SignUpResponseGson::class.java).toApiModel()
-//        }
-        return SignUpResponse(SignUpResponse.Error.SERVER_ERROR)
+        if (properties.email != MAIL) {
+            return SignUpResponse(SignUpResponse.Error.USER_ALREADY_EXISTS)
+        }
+
+        if (properties.password != PASS) {
+            return SignUpResponse(SignUpResponse.Error.USER_ALREADY_EXISTS)
+        }
+        
+        if (properties.fullName.isEmpty()) {
+            return SignUpResponse(SignUpResponse.Error.INCORRECT_DATA)
+        }
+
+        return SignUpResponse(SignUpResponse.Account(
+                id = 0,
+                fullName = properties.fullName,
+                avatarUrl = ""
+        ))
     }
 
-
-    /**
-     * Delete
-     **/
     override fun delete(properties: DeleteRequest): DeleteResponse {
-//        val request = getRequestTo(PATH_DELETE)
-//        val connError = DeleteResponse(DeleteResponse.Result.NO_CONNECTION)
-//        val serverError = DeleteResponse(DeleteResponse.Result.SERVER_ERROR)
-//
-//        return apiCall(request, connError, serverError) { body ->
-//            mGson.fromJson(body, DeleteResponseGson::class.java).toApiModel()
-//        }
         return TODO()
     }
 
