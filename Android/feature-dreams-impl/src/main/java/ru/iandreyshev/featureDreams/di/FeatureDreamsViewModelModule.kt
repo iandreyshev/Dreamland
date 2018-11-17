@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 import ru.iandreyshev.featureDreams.di.viewModel.ViewModelFactory
 import ru.iandreyshev.featureDreams.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureDreams.viewModel.DreamConstructorViewModel
-import ru.iandreyshev.featureDreams.viewModel.DreamsDiaryViewModel
+import ru.iandreyshev.featureDreams.viewModel.MyDreamsViewModel
 import javax.inject.Singleton
 
 @Module
@@ -20,8 +20,8 @@ abstract class FeatureDreamsViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(DreamsDiaryViewModel::class)
-    abstract fun bindDreamsDiaryViewModel(viewModel: DreamsDiaryViewModel): ViewModel
+    @ViewModelKey(MyDreamsViewModel::class)
+    abstract fun bindDreamsDiaryViewModel(viewModel: MyDreamsViewModel): ViewModel
 
     @Binds
     @IntoMap

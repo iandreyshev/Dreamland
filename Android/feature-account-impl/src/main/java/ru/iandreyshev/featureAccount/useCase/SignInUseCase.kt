@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.database.IUserDatabase
 import ru.iandreyshev.featureAccount.mapping.toDatabaseEntity
 import ru.iandreyshev.featureAccount.network.IUserServer
@@ -17,7 +18,7 @@ class SignInUseCase
         private val database: IUserDatabase
 ): ISignInUseCase {
 
-    override fun invoke(signInProperties: SignInProperties): Single<SignInResult> = Single.create {
+    override fun invoke(signInProperties: SignInProperties): Single<SignInResult> = Single.create<SignInResult> {
         val responseFromServer = server.signIn(signInProperties.toRequest())
 
         val serverError = responseFromServer.error
@@ -38,6 +39,6 @@ class SignInUseCase
         Thread.sleep(1000)
 
         it.onSuccess(SignInResult.SUCCESS)
-    }
+    }.ioToMain()
 
 }

@@ -2,7 +2,6 @@ package ru.iandreyshev.featureMenu.viewModel
 
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccountApi.useCase.IGetAuthStateUseCase
 import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator
 import javax.inject.Inject
@@ -17,7 +16,6 @@ class SplashViewModel
 
     init {
         mGetAuthStateDisposable = getAuthStateUseCase()
-                .ioToMain()
                 .subscribe(::handleAuthState, ::handleError)
     }
 

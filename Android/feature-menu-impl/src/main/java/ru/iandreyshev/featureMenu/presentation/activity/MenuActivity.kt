@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureMenu.presentation.activity
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.view.MenuItem
@@ -9,15 +10,15 @@ import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.view_drawer_header.view.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
-import ru.iandreyshev.coreAndroid.viewModel.viewModel
 import ru.iandreyshev.featureMenu.R
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
 import ru.iandreyshev.featureAccountApi.data.User
-import ru.iandreyshev.featureDreamsApi.data.IDreamsDiaryFragmentFactory
+import ru.iandreyshev.featureDreamsApi.IDreamsDiaryFragmentFactory
 import ru.iandreyshev.vext.view.gone
 import ru.iandreyshev.vext.view.visible
+import ru.iandreyshev.vext.view.visibleIfOrGone
 import javax.inject.Inject
 
 class MenuActivity : BaseAppCompatActivity() {
@@ -29,14 +30,13 @@ class MenuActivity : BaseAppCompatActivity() {
     @Inject
     lateinit var mMainFragmentFactory: IDreamsDiaryFragmentFactory
 
-    private lateinit var mViewModel: MenuViewModel
+    private val mViewModel by lazy { viewModel<MenuViewModel>() }
 
     private val mDrawerHeader: View?
         get() = nav_view.getHeaderView(0)
-
     private val mMainFragment: Fragment?
         get() = supportFragmentManager.findFragmentByTag(MAIN_FRAGMENT_TAG)
-
+    private var mActionBarLayoutParams: AppBarLayout.LayoutParams? = null
     private val mMenuItems by lazy {
         listOf(
                 nav_view.menu.findItem(R.id.drawer_item_dreams),
@@ -49,7 +49,6 @@ class MenuActivity : BaseAppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         FeatureMenuComponent.get().inject(this)
-        mViewModel = viewModel(viewModelFactory)
 
         initActionBar()
         initDrawer()
@@ -70,8 +69,9 @@ class MenuActivity : BaseAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (mViewModel.menuState != MenuViewModel.MenuState.DREAMS) {
+        if (mViewModel.menuState.value != MenuViewModel.MenuState.DREAMS) {
             mViewModel.onNewMenuState(MenuViewModel.MenuState.DREAMS)
+            drawer.closeDrawer(GravityCompat.START)
             return
         }
         super.onBackPressed()
@@ -81,6 +81,7 @@ class MenuActivity : BaseAppCompatActivity() {
         mViewModel.apply {
             observeNotNull(user, ::handleAccount)
             observeNotNull(menuState, ::handleMenuState)
+            observeNotNull(dreamsAvailability, ::handleDreamsAvailability)
         }
     }
 
@@ -88,6 +89,7 @@ class MenuActivity : BaseAppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        mActionBarLayoutParams = toolbar.layoutParams as? AppBarLayout.LayoutParams
     }
 
     private fun initDrawer() {
@@ -131,6 +133,16 @@ class MenuActivity : BaseAppCompatActivity() {
             MenuViewModel.MenuState.DREAMS -> setupDreamsViewState()
             MenuViewModel.MenuState.SETTINGS -> setupSettingsViewState()
         }
+    }
+
+    private fun handleDreamsAvailability(isAvailable: Boolean) {
+        if (isAvailable) {
+            mActionBarLayoutParams?.scrollFlags =
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+        } else {
+            mActionBarLayoutParams?.scrollFlags = 0
+        }
+        appBar.requestLayout()
     }
 
     private fun setupDreamsViewState() {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_auth.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
-import ru.iandreyshev.coreAndroid.viewModel.viewModel
 import ru.iandreyshev.featureAccount.R
 import ru.iandreyshev.featureAccount.di.FeatureAccountComponent
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
@@ -13,7 +12,7 @@ import ru.iandreyshev.vext.view.visible
 
 class AuthActivity : BaseAppCompatActivity() {
 
-    private lateinit var mViewModel: AuthViewModel
+    private val mViewModel by lazy { viewModel<AuthViewModel>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,7 @@ class AuthActivity : BaseAppCompatActivity() {
 
         FeatureAccountComponent.get().inject(this)
 
-        mViewModel = viewModel(viewModelFactory) {
+        mViewModel.apply {
             observeNotNull(screen, ::screenObserver)
         }
     }

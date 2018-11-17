@@ -6,12 +6,14 @@ import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 import ru.iandreyshev.featureAccountApi.data.User
 import ru.iandreyshev.featureAccountApi.observable.IUserApi
+import ru.iandreyshev.featureDreamsApi.IDreamsRepository
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 import javax.inject.Inject
 
 class MenuViewModel @Inject constructor(
         private val menuNavigator: IMenuNavigator,
+        dreamsRepository: IDreamsRepository,
         userObservableApi: IUserApi
 ) : ViewModel() {
 
@@ -22,24 +24,34 @@ class MenuViewModel @Inject constructor(
 
     val user: LiveData<User>
         get() = mUser
-
     val menuState: LiveData<MenuState>
         get() = mMenuState
+    val dreamsAvailability: LiveData<Boolean>
+        get() = mDreamsAvailability
 
     private val mUser = MutableLiveData<User>()
     private val mMenuState = mutableLiveDataOf(MenuState.DREAMS)
+    private val mDreamsAvailability = mutableLiveDataOf(false)
 
-    private var mUserSubscription: Disposable? = null
+    private val mUserSubscription: Disposable
+    private val mDreamsCountSubscription: Disposable
 
     init {
         mUserSubscription = userObservableApi.observable
                 .subscribe { mUser.value = it }
+        mDreamsCountSubscription = dreamsRepository.countObservable
+                .subscribe { mDreamsAvailability.value = it > 0 }
     }
 
     fun onCreateDream() = menuNavigator.onCreateDream()
 
     fun onNewMenuState(state: MenuState) {
         mMenuState.value = state
+    }
+
+    override fun onCleared() {
+        mUserSubscription.dispose()
+        mDreamsCountSubscription.dispose()
     }
 
 }
