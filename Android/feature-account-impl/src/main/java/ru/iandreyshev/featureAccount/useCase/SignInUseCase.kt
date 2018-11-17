@@ -34,6 +34,10 @@ class SignInUseCase
 
         val databaseEntity = serverAccount.toDatabaseEntity(signInProperties.password)
         database.saveUser(databaseEntity)
+
+        Thread.sleep(1000)
+
+        it.onSuccess(SignInResult.SUCCESS)
     }
 
 }

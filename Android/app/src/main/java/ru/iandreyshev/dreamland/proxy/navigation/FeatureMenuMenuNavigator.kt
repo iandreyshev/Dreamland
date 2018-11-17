@@ -1,7 +1,7 @@
 package ru.iandreyshev.dreamland.proxy.navigation
 
 import android.app.Application
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.*
 import ru.iandreyshev.featureAccount.ui.activity.AuthActivity
 import ru.iandreyshev.featureDreams.ui.activity.DreamConstructorActivity
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
@@ -16,8 +16,15 @@ class FeatureMenuMenuNavigator
         application.startActivity<DreamConstructorActivity>()
     }
 
+    override fun onDeleteUser() {
+        onLogout()
+    }
+
     override fun onLogout() {
-        application.startActivity<AuthActivity>()
+        application.intentFor<AuthActivity>()
+                .clearTask()
+                .newTask()
+                .also(application::startActivity)
     }
 
 }

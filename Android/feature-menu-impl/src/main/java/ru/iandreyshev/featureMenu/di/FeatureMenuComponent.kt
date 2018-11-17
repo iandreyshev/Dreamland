@@ -8,6 +8,7 @@ import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator
 import ru.iandreyshev.featureMenu.presentation.activity.MenuActivity
 import ru.iandreyshev.featureMenu.presentation.activity.SplashActivity
+import ru.iandreyshev.featureMenu.presentation.fragment.SettingsFragment
 import javax.inject.Singleton
 
 @Component(
@@ -32,6 +33,7 @@ abstract class FeatureMenuComponent {
 
     abstract fun inject(activity: MenuActivity)
     abstract fun inject(activity: SplashActivity)
+    abstract fun inject(fragment: SettingsFragment)
 
     @Component(
             dependencies = [

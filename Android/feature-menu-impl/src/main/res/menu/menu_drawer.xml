@@ -4,19 +4,21 @@
     <group android:id="@+id/group.navigation">
         <item
             android:id="@+id/drawer_item_dreams"
+            android:icon="@drawable/ic_library_books_black_24dp"
             android:title="@string/drawer_menu_item_dreams" />
-        <!--<item-->
-            <!--android:id="@+id/drawer_item_statistic"-->
-            <!--android:title="@string/drawer_menu_item_statistic" />-->
     </group>
 
-    <group android:id="@+id/group.logout">
+    <group android:id="@+id/group.options">
+        <item
+            android:id="@+id/drawer_item_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/drawer_menu_item_settings" />
+    </group>
+
+    <group android:id="@+id/group.about">
         <item
             android:id="@+id/drawer_item_about"
             android:title="@string/drawer_menu_item_about" />
-        <item
-            android:id="@+id/drawer_item_log_out"
-            android:title="@string/drawer_menu_item_log_out" />
     </group>
 
 </menu>

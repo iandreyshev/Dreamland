@@ -15,7 +15,7 @@ class SignUpUseCase
 @Inject constructor(
         private val database: IUserDatabase,
         private val server: IUserServer
-): ISignUpUseCase {
+) : ISignUpUseCase {
 
     override fun invoke(signUpProperties: SignUpProperties): Single<SignUpResult> = Single.create {
         val responseFromServer = server.signUp(signUpProperties.toRequest())
@@ -32,8 +32,12 @@ class SignUpUseCase
             return@create
         }
 
+        Thread.sleep(1000)
+
         val databaseEntity = serverAccount.toDatabaseEntity(signUpProperties.password)
         database.saveUser(databaseEntity)
+
+        it.onSuccess(SignUpResult.SUCCESS)
     }
 
 }

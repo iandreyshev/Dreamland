@@ -18,10 +18,10 @@ class SignUpViewModel
         private val signUpUseCase: ISignUpUseCase
 ) : ViewModel() {
 
-    val waitingObservable: LiveData<Boolean>
+    val waiting: LiveData<Boolean>
         get() = mWaitingObservable.observable
 
-    val errorObservable: LiveData<SignUpResult>
+    val error: LiveData<SignUpResult>
         get() = mErrorObservable
 
     private val mWaitingObservable = WaitingViewModel()

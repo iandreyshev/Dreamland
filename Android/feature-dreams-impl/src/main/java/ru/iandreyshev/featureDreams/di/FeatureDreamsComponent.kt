@@ -1,6 +1,5 @@
 package ru.iandreyshev.featureDreams.di
 
-import android.arch.lifecycle.ViewModelProvider
 import dagger.Component
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment

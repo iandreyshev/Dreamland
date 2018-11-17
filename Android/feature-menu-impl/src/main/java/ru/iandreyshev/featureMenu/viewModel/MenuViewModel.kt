@@ -3,42 +3,43 @@ package ru.iandreyshev.featureMenu.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
+import io.reactivex.disposables.Disposable
 import ru.iandreyshev.featureAccountApi.data.User
 import ru.iandreyshev.featureAccountApi.observable.IUserApi
-import ru.iandreyshev.featureAccountApi.useCase.ILogOutUseCase
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
+import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 import javax.inject.Inject
 
 class MenuViewModel @Inject constructor(
-        private val logoutUseCase: ILogOutUseCase,
         private val menuNavigator: IMenuNavigator,
         userObservableApi: IUserApi
 ) : ViewModel() {
 
-    // Data
+    enum class MenuState {
+        DREAMS,
+        SETTINGS
+    }
+
     val user: LiveData<User>
         get() = mUser
 
-    // Events
-    val backEvent: LiveData<Unit>
+    val menuState: LiveData<MenuState>
+        get() = mMenuState
 
-    private val mBackEvent = SingleLiveEvent<Unit>()
     private val mUser = MutableLiveData<User>()
+    private val mMenuState = mutableLiveDataOf(MenuState.DREAMS)
+
+    private var mUserSubscription: Disposable? = null
 
     init {
-        backEvent = mBackEvent
-        userObservableApi.observable.subscribe { mUser.value = it }
+        mUserSubscription = userObservableApi.observable
+                .subscribe { mUser.value = it }
     }
 
-    fun onCreateDreamClick() =
-            menuNavigator.onCreateDream()
+    fun onCreateDream() = menuNavigator.onCreateDream()
 
-    fun onLogoutClick() {
-        logoutUseCase().subscribe {
-            mBackEvent.call()
-            menuNavigator.onLogout()
-        }
+    fun onNewMenuState(state: MenuState) {
+        mMenuState.value = state
     }
 
 }

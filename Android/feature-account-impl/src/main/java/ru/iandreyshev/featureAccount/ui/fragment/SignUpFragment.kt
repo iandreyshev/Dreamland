@@ -41,8 +41,8 @@ class SignUpFragment : BaseFragment() {
             signUpFields_btnStart.setOnClickListener {
                 startSignUp(getProperties())
             }
-            observeNotNull(waitingObservable, ::handleWaiting)
-            observeNotNull(errorObservable, ::handleError)
+            observeNotNull(waiting, ::handleWaiting)
+            observeNotNull(error, ::handleError)
         }
     }
 

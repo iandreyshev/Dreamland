@@ -43,8 +43,8 @@ class SignInFragment : BaseFragment() {
             signInFields_btnStart.setOnClickListener {
                 onStartSignIn(getProperties())
             }
-            observeNotNull(waitingObservable, ::handleWaiting)
-            observe(errorObservable, ::handleError)
+            observeNotNull(waiting, ::handleWaiting)
+            observe(error, ::handleError)
         }
     }
 

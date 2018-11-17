@@ -52,6 +52,7 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
     }
 
 }
