@@ -5,14 +5,15 @@ import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.featureDreams.di.dependencies.IFeatureDreamsDependencies
 import ru.iandreyshev.featureDreams.viewModel.DreamConstructorViewModel
-import ru.iandreyshev.featureDreams.viewModel.DreamsDiaryViewModel
-import ru.iandreyshev.featureDreamsApi.api.IFeatureDreamsApi
+import ru.iandreyshev.featureDreams.viewModel.MyDreamsViewModel
+import ru.iandreyshev.featureDreamsApi.IFeatureDreamsApi
 import javax.inject.Singleton
 
 @Component(
         modules = [
-            FeatureDreamsViewModelModule::class,
-            FeatureDreamsModule::class],
+            FeatureDreamsModule::class,
+            FeatureDreamsBindsModule::class,
+            FeatureDreamsViewModelModule::class],
         dependencies = [
             IFeatureDreamsDependencies::class]
 )
@@ -33,7 +34,7 @@ abstract class FeatureDreamsComponent : IFeatureDreamsApi {
     abstract fun inject(activity: BaseAppCompatActivity)
     abstract fun inject(fragment: BaseFragment)
     abstract fun inject(viewModel: DreamConstructorViewModel)
-    abstract fun inject(viewModel: DreamsDiaryViewModel)
+    abstract fun inject(viewModel: MyDreamsViewModel)
 
     @Component
     abstract class DependenciesComponent : IFeatureDreamsDependencies

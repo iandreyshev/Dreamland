@@ -8,12 +8,10 @@ import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureDreams.viewModel.DreamConstructorViewModel
-import javax.inject.Inject
 
 class DreamConstructorActivity : BaseAppCompatActivity() {
 
-    @Inject
-    lateinit var mViewModel: DreamConstructorViewModel
+    private val mViewModel by lazy { viewModel<DreamConstructorViewModel>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +19,6 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
 
         FeatureDreamsComponent.get().inject(this)
 
-        initViewModel()
         initActionBar()
     }
 
@@ -42,10 +39,6 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun initViewModel() {
-        mViewModel = viewModel {  }
     }
 
     private fun initActionBar() {

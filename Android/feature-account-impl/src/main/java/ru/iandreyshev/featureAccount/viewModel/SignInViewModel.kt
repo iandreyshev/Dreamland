@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignInProperties
 import ru.iandreyshev.featureAccountApi.data.SignInResult
@@ -32,7 +31,6 @@ class SignInViewModel
     fun onStartSignIn(properties: SignInProperties) {
         mWaitingObservable.start()
         mSignInTask = signInUseCase(properties)
-                .ioToMain()
                 .subscribe { result, error ->
                     result?.let(::handleSignInResult)
                     error?.let(::handleSignInError)

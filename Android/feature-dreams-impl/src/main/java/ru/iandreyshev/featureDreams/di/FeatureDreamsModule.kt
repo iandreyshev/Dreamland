@@ -2,8 +2,8 @@ package ru.iandreyshev.featureDreams.di
 
 import dagger.Module
 import dagger.Provides
-import ru.iandreyshev.featureDreams.ui.fragment.DreamsDiaryFragment
-import ru.iandreyshev.featureDreamsApi.data.IDreamsDiaryFragmentFactory
+import ru.iandreyshev.featureDreams.ui.fragment.MyDreamsFragment
+import ru.iandreyshev.featureDreamsApi.IDreamsDiaryFragmentFactory
 
 @Module
 class FeatureDreamsModule {
@@ -11,7 +11,7 @@ class FeatureDreamsModule {
     @Provides
     fun provideDreamsDiaryFragmentFactory(): IDreamsDiaryFragmentFactory {
         return object : IDreamsDiaryFragmentFactory {
-            override fun create() = DreamsDiaryFragment()
+            override fun create() = MyDreamsFragment()
         }
     }
 

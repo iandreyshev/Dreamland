@@ -29,4 +29,9 @@ dependencies {
 
     // Android
     api "com.android.support:appcompat-v7:$support_version"
+
+    // RxJava
+    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'android.arch.lifecycle:reactivestreams:1.1.1'
 }

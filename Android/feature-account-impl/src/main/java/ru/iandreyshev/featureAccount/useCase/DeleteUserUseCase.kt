@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.database.IUserDatabase
 import ru.iandreyshev.featureAccount.network.IUserServer
 import ru.iandreyshev.featureAccountApi.data.DeleteUserResult
@@ -13,10 +14,10 @@ class DeleteUserUseCase
         private val server: IUserServer
 ) : IDeleteUserUseCase {
 
-    override fun invoke(): Single<DeleteUserResult> = Single.create {
+    override fun invoke(): Single<DeleteUserResult> = Single.create<DeleteUserResult> {
         Thread.sleep(1000)
         database.clear()
         it.onSuccess(DeleteUserResult.SUCCESS)
-    }
+    }.ioToMain()
 
 }

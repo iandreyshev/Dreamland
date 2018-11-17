@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureAccountApi.data.DeleteUserResult
 import ru.iandreyshev.featureAccountApi.useCase.IDeleteUserUseCase
@@ -33,7 +32,6 @@ class SettingsViewModel
 
     fun onLogOut() {
         mLogOutUseCaseSubscription = logOutUseCase()
-                .ioToMain()
                 .doOnSubscribe { mWaitingObservable.start() }
                 .subscribe {
                     mWaitingObservable.stop()
@@ -43,7 +41,6 @@ class SettingsViewModel
 
     fun onDeleteUser() {
         mDeleteUserUseCaseSubscription = deleteUserUseCase()
-                .ioToMain()
                 .doOnSubscribe { mWaitingObservable.start() }
                 .subscribe { result, error ->
                     handleDeleteUserResult(result)
