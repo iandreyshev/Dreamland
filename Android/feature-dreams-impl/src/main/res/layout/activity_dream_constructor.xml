@@ -61,9 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@id/dream_options"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/dream_options" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/dream_options"
@@ -76,20 +76,61 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <FrameLayout
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/design_default_color_primary" />
+                android:background="@drawable/background_option_picker"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp"
+                android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_marginStart="6dp"
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+                <TextView
+                    android:paddingLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/design_default_color_primary_dark" />
+                android:layout_marginStart="6dp"
+                android:background="@drawable/background_option_picker"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_star_border_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lucid"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

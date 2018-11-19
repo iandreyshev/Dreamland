@@ -7,8 +7,8 @@ import ru.iandreyshev.featureAccount.network.response.DeleteResponse
 import ru.iandreyshev.featureAccount.network.response.SignInResponse
 import ru.iandreyshev.featureAccount.network.response.SignUpResponse
 
-interface IUserServer {
-    fun signIn(properties: SignInRequest): SignInResponse
-    fun signUp(properties: SignUpRequest): SignUpResponse
-    fun delete(properties: DeleteRequest): DeleteResponse
+interface IUserServerApi {
+    fun signIn(request: SignInRequest): SignInResponse
+    fun signUp(request: SignUpRequest): SignUpResponse
+    fun delete(request: DeleteRequest): DeleteResponse
 }

@@ -4,7 +4,7 @@ import io.reactivex.Single
 import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.database.IUserDatabase
 import ru.iandreyshev.featureAccount.mapping.toDatabaseEntity
-import ru.iandreyshev.featureAccount.network.IUserServer
+import ru.iandreyshev.featureAccount.network.IUserServerApi
 import ru.iandreyshev.featureAccount.mapping.toRequest
 import ru.iandreyshev.featureAccount.mapping.toResult
 import ru.iandreyshev.featureAccountApi.data.SignInProperties
@@ -14,12 +14,12 @@ import javax.inject.Inject
 
 class SignInUseCase
 @Inject constructor(
-        private val server: IUserServer,
+        private val serverApi: IUserServerApi,
         private val database: IUserDatabase
 ): ISignInUseCase {
 
     override fun invoke(signInProperties: SignInProperties): Single<SignInResult> = Single.create<SignInResult> {
-        val responseFromServer = server.signIn(signInProperties.toRequest())
+        val responseFromServer = serverApi.signIn(signInProperties.toRequest())
 
         val serverError = responseFromServer.error
         if (serverError != null) {

@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureAccount.mapping
 
 import ru.iandreyshev.featureAccount.database.UserDatabaseEntity
+import ru.iandreyshev.featureAccount.network.parser.SignInResponseJson
 import ru.iandreyshev.featureAccount.network.request.SignInRequest
 import ru.iandreyshev.featureAccount.network.response.SignInResponse
 import ru.iandreyshev.featureAccountApi.data.SignInProperties
@@ -24,3 +25,21 @@ internal fun SignInResponse.Error.toResult() =
             SignInResponse.Error.NO_CONNECTION -> SignInResult.NO_CONNECTION
             SignInResponse.Error.SERVER_ERROR -> SignInResult.UNKNOWN
         }
+
+internal fun SignInResponseJson.toApplicationModel(): SignInResponse {
+    when (error) {
+        SignInResponseJson.Error.USER_NOT_EXISTS ->
+            return SignInResponse(SignInResponse.Error.USER_NOT_EXISTS)
+        SignInResponseJson.Error.INCORRECT_DATA ->
+            return SignInResponse(SignInResponse.Error.INCORRECT_DATA)
+    }
+
+    val accountFromResponse = account
+            ?: return SignInResponse(SignInResponse.Error.SERVER_ERROR)
+
+    return SignInResponse(SignInResponse.Account(
+            id = accountFromResponse.id,
+            fullName = accountFromResponse.name,
+            avatarUrl = accountFromResponse.avatarUrl
+    ))
+}

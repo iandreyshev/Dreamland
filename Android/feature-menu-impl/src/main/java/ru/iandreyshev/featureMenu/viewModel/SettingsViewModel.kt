@@ -43,8 +43,8 @@ class SettingsViewModel
         mDeleteUserUseCaseSubscription = deleteUserUseCase()
                 .doOnSubscribe { mWaitingObservable.start() }
                 .subscribe { result, error ->
-                    handleDeleteUserResult(result)
-                    handleDeleteUserError(error)
+                    result?.let(::handleDeleteUserResult)
+                    error?.let(::handleDeleteUserError)
                     mWaitingObservable.stop()
                 }
 
@@ -54,7 +54,6 @@ class SettingsViewModel
         when (result) {
             DeleteUserResult.SUCCESS ->
                 navigator.onDeleteUser()
-            DeleteUserResult.USER_NOT_EXISTS,
             DeleteUserResult.NO_CONNECTION,
             DeleteUserResult.UNKNOWN ->
                 mDeleteUserResult.setValue(result)

@@ -10,7 +10,7 @@ data class Response(
 
     class Body(
             val code: Int,
-            val body: ByteArray
+            val bodyString: String?
     )
 
     enum class Error {
@@ -18,5 +18,8 @@ data class Response(
         PARSING,
         UNDEFINED;
     }
+
+    val bodyString: String
+        get() = body?.bodyString ?: ""
 
 }

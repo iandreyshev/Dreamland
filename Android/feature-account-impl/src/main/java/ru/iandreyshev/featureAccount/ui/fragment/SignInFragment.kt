@@ -19,7 +19,6 @@ import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.vext.view.invisibleIf
 import ru.iandreyshev.vext.view.visibleIf
 import ru.iandreyshev.vext.view.visibleIfOrGone
-import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
 import ru.iandreyshev.coreAndroid.viewModel.observe
 
 class SignInFragment : BaseFragment() {
@@ -36,7 +35,9 @@ class SignInFragment : BaseFragment() {
         FeatureAccountComponent.get().inject(this)
 
         mAuthViewModel = activityViewModel {
-            signInFields_btnSignUp.setOnClickListener(::wantSignUp)
+            signInFields_btnSignUp.setOnClickListener {
+                wantSignUp()
+            }
         }
 
         mSignInViewModel = viewModel {
@@ -84,7 +85,12 @@ class SignInFragment : BaseFragment() {
                 SignInResult.NO_CONNECTION -> R.string.sign_in_error_no_connection
                 SignInResult.UNKNOWN -> R.string.sign_in_error_unknown
             }
-            okButton { mSignInViewModel.onErrorClosed() }
+            okButton {
+                if (error == SignInResult.USER_NOT_EXISTS) {
+                    mAuthViewModel.wantSignUp()
+                }
+                mSignInViewModel.onErrorClosed()
+            }
         } customizeAndShow {
             setCancelable(false)
             setCanceledOnTouchOutside(false)
