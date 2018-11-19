@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Dreamland.Services.Account;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,8 @@ public class Startup
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddMvc();
+
+		services.AddTransient<IAccountService, AccountService>();
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
