@@ -7,7 +7,7 @@ namespace Dreamland.Controllers.Account
 		[JsonProperty("account", NullValueHandling = NullValueHandling.Ignore)]
 		public AccountResponse Account { get; set; }
 
-		[JsonProperty("error")]
+		[JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
 		public string Error { get; set; }
 	}
 }

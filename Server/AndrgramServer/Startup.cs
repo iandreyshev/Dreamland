@@ -18,7 +18,7 @@ public class Startup
 	{
 		services.AddMvc();
 
-		services.AddTransient<IAccountService, AccountService>();
+		services.AddSingleton<IAccountService, AccountService>();
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

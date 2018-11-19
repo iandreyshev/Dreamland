@@ -43,12 +43,15 @@ namespace Dreamland.Services.Account
 				return new SignUpResult(SignUpResult.Error.INCORRECT_DATA);
 			}
 
-			var entity = _storage.Add(email, password, name);
+			var entity = _storage.Find(email);
 
-			if (entity == null)
+			if (entity != null)
 			{
 				return new SignUpResult(SignUpResult.Error.ALREADY_EXISTS);
 			}
+
+			_storage.Add(email, password, name);
+			entity = _storage.Find(email, password);
 
 			return new SignUpResult(entity);
 		}

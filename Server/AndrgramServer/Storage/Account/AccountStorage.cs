@@ -7,28 +7,34 @@ namespace Dreamland.Storage.Account
 		private int _lastId = 0;
 		private List<UserEntity> _users = new List<UserEntity>();
 
-		public UserEntity Add(string email, string password, string name)
+		public void Add(string email, string password, string name)
 		{
 			var userEntity = _users.Find(user =>
 			{
 				return user.Email == email && user.Password == password;
 			});
 
-			if (userEntity == null)
+			if (userEntity != null)
 			{
-				_users.Add(new UserEntity
-				{
-					Id = ++_lastId,
-					Email = email,
-					Password = password,
-					Name = name,
-					AvatarUrl = ""
-				});
-
-				return _users[_users.Count - 1];
+				return;
 			}
 
-			return null;
+			_users.Add(new UserEntity
+			{
+				Id = ++_lastId,
+				Email = email,
+				Password = password,
+				Name = name,
+				AvatarUrl = ""
+			});
+		}
+
+		public UserEntity Find(string email)
+		{
+			return _users.Find(user =>
+			{
+				return user.Email == email;
+			});
 		}
 
 		public UserEntity Find(string email, string password)
