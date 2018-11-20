@@ -7,11 +7,11 @@ IF "%~1"=="" (
 SET BUILD_DIR=Build/Server_v%~1
 SET CONFIG_DIR=config
 SET CONFIG_EXT=json
-SET SRC_DIR=Server
-
+SET SRC_DIR=Backend
+SET PROJECT_DIR=Server
 SET PROJECT_NAME=Dreamland
-SET BACKEND_CONFIG=%SRC_DIR%\%PROJECT_NAME%\config.%CONFIG_EXT%
-SET BACKEND_WINDOW_NAME=%PROJECT_NAME% %BUILD_DIR%
+SET BACKEND_CONFIG=%SRC_DIR%\%PROJECT_DIR%\config.%CONFIG_EXT%
+SET BACKEND_WINDOW_NAME=%BUILD_DIR%
 
 SET PROPERTIES_FILE_PATH=%CONFIG_DIR%\properties.cfg
 
@@ -35,7 +35,7 @@ EXIT /B 0
   EXIT /B 0
 
 :Build
-  CALL :BuildComponent %PROJECT_NAME%
+  CALL :BuildComponent %PROJECT_DIR%
   IF %ERRORLEVEL% NEQ 0 EXIT /B 1
 
   EXIT /B 0
@@ -59,8 +59,8 @@ EXIT /B 0
   SET VCR=%%VowelConsRater%%
 
   @ECHO @ECHO OFF                                                                                           > %DEST_FILE%
-  @ECHO copy "%CONFIG_DIR%\%PROJECT_NAME%.%CONFIG_EXT%" "%PROJECT_NAME%\config.%CONFIG_EXT%"               >> %DEST_FILE%
-  @ECHO start "%BACKEND_WINDOW_NAME%" dotnet %PROJECT_NAME%\%PROJECT_NAME%.dll                             >> %DEST_FILE%
+  @ECHO copy "%CONFIG_DIR%\%PROJECT_NAME%.%CONFIG_EXT%" "%PROJECT_DIR%\config.%CONFIG_EXT%"               >> %DEST_FILE%
+  @ECHO start "%BACKEND_WINDOW_NAME%" dotnet %PROJECT_DIR%\%PROJECT_NAME%.dll                             >> %DEST_FILE%
   EXIT /B 0
 
 :CreateStopScript
