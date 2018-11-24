@@ -2,8 +2,8 @@ package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
 import ru.iandreyshev.coreAndroid.rx.ioToMain
-import ru.iandreyshev.featureAccount.database.IUserDatabase
-import ru.iandreyshev.featureAccount.mapping.toDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.IUserStorage
+import ru.iandreyshev.featureAccount.mapping.toStorageEntity
 import ru.iandreyshev.featureAccount.network.IUserServerApi
 import ru.iandreyshev.featureAccount.mapping.toRequest
 import ru.iandreyshev.featureAccount.mapping.toResult
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SignInUseCase
 @Inject constructor(
         private val serverApi: IUserServerApi,
-        private val database: IUserDatabase
+        private val storage: IUserStorage
 ): ISignInUseCase {
 
     override fun invoke(signInProperties: SignInProperties): Single<SignInResult> = Single.create<SignInResult> {
@@ -33,8 +33,8 @@ class SignInUseCase
             return@create
         }
 
-        val databaseEntity = serverAccount.toDatabaseEntity(signInProperties.password)
-        database.saveUser(databaseEntity)
+        val entity = serverAccount.toStorageEntity(signInProperties.password)
+        storage.saveUser(entity)
 
         Thread.sleep(1000)
 

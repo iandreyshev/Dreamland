@@ -2,7 +2,7 @@ package ru.iandreyshev.featureMenu.di
 
 import dagger.Component
 import ru.iandreyshev.featureAccountApi.api.IFeatureAccountApi
-import ru.iandreyshev.featureDreamsApi.IFeatureDreamsApi
+import ru.iandreyshev.featureDreamsApi.api.IFeatureDreamsApi
 import ru.iandreyshev.featureMenu.di.dependencies.IFeatureMenuDependencies
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator

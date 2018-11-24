@@ -4,7 +4,8 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import ru.iandreyshev.coreAndroid.rx.ioToMain
-import ru.iandreyshev.featureDreamsApi.IDreamsRepository
+import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
+import ru.iandreyshev.featureDreamsApi.data.DreamListItem
 import javax.inject.Inject
 
 class DreamsRepository
@@ -13,8 +14,8 @@ class DreamsRepository
     private val mCountSubject = PublishSubject.create<Int>()
     private var mRefreshesCount = 0
 
-    override val countObservable: Observable<Int>
-        get() = mCountSubject.ioToMain()
+    override val dreamsObservable: Observable<List<DreamListItem>>
+        get() = Observable.just(listOf())
 
     override fun refresh(): Completable = Completable.create {
         Thread.sleep(1500)

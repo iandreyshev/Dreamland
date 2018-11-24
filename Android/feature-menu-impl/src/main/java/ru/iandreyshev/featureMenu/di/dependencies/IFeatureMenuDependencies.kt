@@ -1,11 +1,11 @@
 package ru.iandreyshev.featureMenu.di.dependencies
 
-import ru.iandreyshev.featureAccountApi.observable.IUserApi
+import ru.iandreyshev.featureAccountApi.api.IUserApi
 import ru.iandreyshev.featureAccountApi.useCase.IDeleteUserUseCase
 import ru.iandreyshev.featureAccountApi.useCase.IGetAuthStateUseCase
 import ru.iandreyshev.featureAccountApi.useCase.ILogOutUseCase
-import ru.iandreyshev.featureDreamsApi.IDreamsDiaryFragmentFactory
-import ru.iandreyshev.featureDreamsApi.IDreamsRepository
+import ru.iandreyshev.featureDreamsApi.api.IDreamsDiaryFragmentFactory
+import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
 
 interface IFeatureMenuDependencies {
     val mainFragmentFactory: IDreamsDiaryFragmentFactory

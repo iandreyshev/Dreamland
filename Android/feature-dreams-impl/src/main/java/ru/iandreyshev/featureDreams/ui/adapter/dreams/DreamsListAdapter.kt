@@ -4,20 +4,20 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.iandreyshev.featureDreams.R
+import ru.iandreyshev.featureDreamsApi.data.DreamListItem
 
-class DreamsListAdapter : RecyclerView.Adapter<DreamsListViewHolder>() {
+class DreamsListAdapter : RecyclerView.Adapter<DreamListViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DreamsListViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_dream_diary_item, parent, false)
-        return DreamsListViewHolder(view)
-    }
+    var dreams: List<DreamListItem> = listOf()
 
-    override fun onBindViewHolder(p0: DreamsListViewHolder, p1: Int) {
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DreamListViewHolder =
+            LayoutInflater.from(parent.context)
+                    .inflate(R.layout.view_dream_diary_item, parent, false)
+                    .let { DreamListViewHolder(it) }
 
-    override fun getItemCount(): Int {
-        return 100
-    }
+    override fun onBindViewHolder(viewHolder: DreamListViewHolder, position: Int) =
+            viewHolder.bind(dreams[position])
+
+    override fun getItemCount(): Int = dreams.count()
 
 }

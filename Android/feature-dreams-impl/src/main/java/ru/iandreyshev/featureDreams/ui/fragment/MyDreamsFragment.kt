@@ -10,13 +10,15 @@ import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureDreams.ui.adapter.dreams.DreamsListAdapter
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
-import ru.iandreyshev.featureDreams.viewModel.MyDreamsViewModel
+import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
+import ru.iandreyshev.featureDreamsApi.data.DreamListItem
 import ru.iandreyshev.vext.view.goneIfOrVisible
 import ru.iandreyshev.vext.view.visibleIfOrGone
 
 class MyDreamsFragment : BaseFragment() {
 
-    private val mViewModel by lazy { viewModel<MyDreamsViewModel>() }
+    private val mViewModel by lazy { viewModel<DreamListViewModel>() }
+    private val mDreamsAdapter by lazy { DreamsListAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_my_dreams, container, false)
@@ -34,7 +36,7 @@ class MyDreamsFragment : BaseFragment() {
     }
 
     private fun initDreamsList() {
-        dreamsList.adapter = DreamsListAdapter()
+        dreamsList.adapter = mDreamsAdapter
     }
 
     private fun initRefreshers() {
@@ -44,19 +46,23 @@ class MyDreamsFragment : BaseFragment() {
 
     private fun subscribeToViewModel() {
         mViewModel.apply {
+            observeNotNull(dreams, ::handleDreams)
             observeNotNull(refreshing, ::handleRefreshing)
-            observeNotNull(dreamsAvailability, ::handleDreamsAvailability)
         }
+    }
+
+    private fun handleDreams(dreams: List<DreamListItem>) {
+        val isAvailable = dreams.isNotEmpty()
+        list_refresher.visibleIfOrGone(isAvailable)
+        empty_refresher.goneIfOrVisible(isAvailable)
+
+        mDreamsAdapter.dreams = dreams
+        mDreamsAdapter.notifyDataSetChanged()
     }
 
     private fun handleRefreshing(isRefresh: Boolean) {
         list_refresher.isRefreshing = isRefresh
         empty_refresher.isRefreshing = isRefresh
-    }
-
-    private fun handleDreamsAvailability(isAvailable: Boolean) {
-        list_refresher.visibleIfOrGone(isAvailable)
-        empty_refresher.goneIfOrVisible(isAvailable)
     }
 
 }

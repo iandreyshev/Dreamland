@@ -2,7 +2,7 @@ package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
 import ru.iandreyshev.coreAndroid.rx.ioToMain
-import ru.iandreyshev.featureAccount.database.IUserDatabase
+import ru.iandreyshev.featureAccount.storage.IUserStorage
 import ru.iandreyshev.featureAccount.mapping.toResult
 import ru.iandreyshev.featureAccount.network.IUserServerApi
 import ru.iandreyshev.featureAccount.network.request.DeleteRequest
@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 class DeleteUserUseCase
 @Inject constructor(
-        private val database: IUserDatabase,
+        private val storage: IUserStorage,
         private val serverApi: IUserServerApi
 ) : IDeleteUserUseCase {
 
     override fun invoke(): Single<DeleteUserResult> = Single.create<DeleteUserResult> {
-        val user = database.user
+        val user = storage.user
 
         if (user == null) {
             it.onSuccess(DeleteUserResult.UNKNOWN)
@@ -30,7 +30,7 @@ class DeleteUserUseCase
 
         return@create when (result) {
             DeleteUserResult.SUCCESS -> {
-                database.clear()
+                storage.clear()
                 it.onSuccess(DeleteUserResult.SUCCESS)
                 return@create
             }

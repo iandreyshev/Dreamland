@@ -1,9 +1,9 @@
 package ru.iandreyshev.featureAccount.mapping
 
-import ru.iandreyshev.featureAccount.database.UserDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.UserStorageEntity
 import ru.iandreyshev.featureAccountApi.data.User
 
-fun UserDatabaseEntity.toUser() =
+fun UserStorageEntity.toUser() =
         User(
                 login = login,
                 fullName = fullName,

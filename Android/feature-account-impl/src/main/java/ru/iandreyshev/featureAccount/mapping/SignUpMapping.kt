@@ -1,6 +1,6 @@
 package ru.iandreyshev.featureAccount.mapping
 
-import ru.iandreyshev.featureAccount.database.UserDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.UserStorageEntity
 import ru.iandreyshev.featureAccount.network.parser.SignUpResponseJson
 import ru.iandreyshev.featureAccount.network.request.SignUpRequest
 import ru.iandreyshev.featureAccount.network.response.SignUpResponse
@@ -14,8 +14,8 @@ internal fun SignUpProperties.toRequest() =
                 password = password
         )
 
-internal fun SignUpResponse.Account.toDatabaseEntity(password: String) =
-        UserDatabaseEntity(
+internal fun SignUpResponse.Account.toStorageEntity(password: String) =
+        UserStorageEntity(
                 accountId = id,
                 fullName = fullName,
                 password = password,

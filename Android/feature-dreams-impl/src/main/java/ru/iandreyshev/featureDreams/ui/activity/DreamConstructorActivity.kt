@@ -7,11 +7,11 @@ import kotlinx.android.synthetic.main.activity_dream_constructor.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
-import ru.iandreyshev.featureDreams.viewModel.DreamConstructorViewModel
+import ru.iandreyshev.featureDreams.viewModel.EditDreamViewModel
 
 class DreamConstructorActivity : BaseAppCompatActivity() {
 
-    private val mViewModel by lazy { viewModel<DreamConstructorViewModel>() }
+    private val mViewModel by lazy { viewModel<EditDreamViewModel>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

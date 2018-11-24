@@ -15,10 +15,9 @@ import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
 import ru.iandreyshev.featureAccountApi.data.User
-import ru.iandreyshev.featureDreamsApi.IDreamsDiaryFragmentFactory
+import ru.iandreyshev.featureDreamsApi.api.IDreamsDiaryFragmentFactory
 import ru.iandreyshev.vext.view.gone
 import ru.iandreyshev.vext.view.visible
-import ru.iandreyshev.vext.view.visibleIfOrGone
 import javax.inject.Inject
 
 class MenuActivity : BaseAppCompatActivity() {

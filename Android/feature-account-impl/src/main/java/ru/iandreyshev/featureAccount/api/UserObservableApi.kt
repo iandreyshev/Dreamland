@@ -2,19 +2,19 @@ package ru.iandreyshev.featureAccount.api
 
 import io.reactivex.Observable
 import ru.iandreyshev.coreAndroid.rx.ioToMain
-import ru.iandreyshev.featureAccount.database.IUserDatabase
+import ru.iandreyshev.featureAccount.storage.IUserStorage
 import ru.iandreyshev.featureAccount.mapping.toUser
 import ru.iandreyshev.featureAccountApi.data.User
-import ru.iandreyshev.featureAccountApi.observable.IUserApi
+import ru.iandreyshev.featureAccountApi.api.IUserApi
 import javax.inject.Inject
 
 class UserObservableApi
 @Inject constructor(
-        private val database: IUserDatabase
+        private val storage: IUserStorage
 ) : IUserApi {
 
     override val observable: Observable<User>
-        get() = database.userObservable
+        get() = storage.userObservable
                 .map { it.toUser() }
                 .ioToMain()
 

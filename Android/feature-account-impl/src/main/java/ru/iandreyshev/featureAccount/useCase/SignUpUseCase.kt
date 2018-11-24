@@ -2,8 +2,8 @@ package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
 import ru.iandreyshev.coreAndroid.rx.ioToMain
-import ru.iandreyshev.featureAccount.database.IUserDatabase
-import ru.iandreyshev.featureAccount.mapping.toDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.IUserStorage
+import ru.iandreyshev.featureAccount.mapping.toStorageEntity
 import ru.iandreyshev.featureAccount.mapping.toRequest
 import ru.iandreyshev.featureAccount.mapping.toResult
 import ru.iandreyshev.featureAccount.network.IUserServerApi
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class SignUpUseCase
 @Inject constructor(
-        private val database: IUserDatabase,
+        private val storage: IUserStorage,
         private val serverApi: IUserServerApi
 ) : ISignUpUseCase {
 
@@ -35,8 +35,8 @@ class SignUpUseCase
 
         Thread.sleep(1000)
 
-        val databaseEntity = serverAccount.toDatabaseEntity(signUpProperties.password)
-        database.saveUser(databaseEntity)
+        val entity = serverAccount.toStorageEntity(signUpProperties.password)
+        storage.saveUser(entity)
 
         it.onSuccess(SignUpResult.SUCCESS)
     }.ioToMain()

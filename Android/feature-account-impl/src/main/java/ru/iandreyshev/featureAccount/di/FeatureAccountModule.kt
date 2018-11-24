@@ -3,8 +3,8 @@ package ru.iandreyshev.featureAccount.di
 import dagger.Module
 import dagger.Provides
 import io.objectbox.Box
-import ru.iandreyshev.featureAccount.database.MyObjectBox
-import ru.iandreyshev.featureAccount.database.UserDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.MyObjectBox
+import ru.iandreyshev.featureAccount.storage.UserStorageEntity
 import ru.iandreyshev.featureAccount.di.dependencies.IContextProvider
 import javax.inject.Singleton
 
@@ -13,10 +13,10 @@ class FeatureAccountModule {
 
     @Provides
     @Singleton
-    fun provideUserBox(contextProvider: IContextProvider): Box<UserDatabaseEntity> =
+    fun provideUserBox(contextProvider: IContextProvider): Box<UserStorageEntity> =
             MyObjectBox.builder()
                     .androidContext(contextProvider.applicationContext)
                     .build()
-                    .boxFor(UserDatabaseEntity::class.java)
+                    .boxFor(UserStorageEntity::class.java)
 
 }

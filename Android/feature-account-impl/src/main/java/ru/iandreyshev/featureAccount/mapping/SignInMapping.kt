@@ -1,6 +1,6 @@
 package ru.iandreyshev.featureAccount.mapping
 
-import ru.iandreyshev.featureAccount.database.UserDatabaseEntity
+import ru.iandreyshev.featureAccount.storage.UserStorageEntity
 import ru.iandreyshev.featureAccount.network.parser.SignInResponseJson
 import ru.iandreyshev.featureAccount.network.request.SignInRequest
 import ru.iandreyshev.featureAccount.network.response.SignInResponse
@@ -10,8 +10,8 @@ import ru.iandreyshev.featureAccountApi.data.SignInResult
 internal fun SignInProperties.toRequest() =
         SignInRequest(login, password)
 
-internal fun SignInResponse.Account.toDatabaseEntity(password: String) =
-        UserDatabaseEntity(
+internal fun SignInResponse.Account.toStorageEntity(password: String) =
+        UserStorageEntity(
                 accountId = id,
                 fullName = fullName,
                 password = password,

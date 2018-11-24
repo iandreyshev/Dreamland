@@ -5,13 +5,14 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 import ru.iandreyshev.featureAccountApi.data.User
-import ru.iandreyshev.featureAccountApi.observable.IUserApi
-import ru.iandreyshev.featureDreamsApi.IDreamsRepository
+import ru.iandreyshev.featureAccountApi.api.IUserApi
+import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
 import ru.iandreyshev.featureMenu.di.dependencies.IMenuNavigator
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 import javax.inject.Inject
 
-class MenuViewModel @Inject constructor(
+class MenuViewModel
+@Inject constructor(
         private val menuNavigator: IMenuNavigator,
         dreamsRepository: IDreamsRepository,
         userObservableApi: IUserApi
@@ -39,8 +40,9 @@ class MenuViewModel @Inject constructor(
     init {
         mUserSubscription = userObservableApi.observable
                 .subscribe { mUser.value = it }
-        mDreamsCountSubscription = dreamsRepository.countObservable
-                .subscribe { mDreamsAvailability.value = it > 0 }
+        mDreamsCountSubscription = dreamsRepository.dreamsObservable
+                .map { it.isNotEmpty() }
+                .subscribe { mDreamsAvailability.value = it }
     }
 
     fun onCreateDream() = menuNavigator.onCreateDream()

@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion target_sdk
@@ -23,6 +24,7 @@ android {
 
 dependencies {
     api project(':core-android')
+    api project(':core-database')
     api project(':core-network-api')
     api project(':feature-dreams-api')
 
