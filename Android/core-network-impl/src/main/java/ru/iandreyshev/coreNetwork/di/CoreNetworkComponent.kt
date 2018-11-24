@@ -3,7 +3,7 @@ package ru.iandreyshev.coreNetwork.di
 import dagger.Component
 import ru.iandreyshev.coreNetwork.di.dependencies.IContextProvider
 import ru.iandreyshev.coreNetwork.di.dependencies.ICoreNetworkDependencies
-import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
+import ru.iandreyshev.coreNetworkApi.api.ICoreNetworkApi
 import javax.inject.Singleton
 
 @Component(

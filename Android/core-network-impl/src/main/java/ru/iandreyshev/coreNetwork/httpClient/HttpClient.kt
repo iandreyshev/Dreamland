@@ -8,10 +8,10 @@ import ru.iandreyshev.coreNetwork.di.dependencies.IContextProvider
 import ru.iandreyshev.coreNetwork.extension.applyOptions
 import ru.iandreyshev.coreNetwork.extension.toApplicationResponse
 import ru.iandreyshev.coreNetwork.extension.uriString
-import ru.iandreyshev.coreNetworkApi.ApiRequestOptions
-import ru.iandreyshev.coreNetworkApi.IHttpClient
-import ru.iandreyshev.coreNetworkApi.Request
-import ru.iandreyshev.coreNetworkApi.Response
+import ru.iandreyshev.coreNetworkApi.data.ApiRequestOptions
+import ru.iandreyshev.coreNetworkApi.api.IHttpClient
+import ru.iandreyshev.coreNetworkApi.data.Request
+import ru.iandreyshev.coreNetworkApi.data.Response
 import java.io.IOException
 import java.lang.Exception
 import javax.inject.Inject

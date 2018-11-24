@@ -1,4 +1,4 @@
-package ru.iandreyshev.coreNetworkApi
+package ru.iandreyshev.coreNetworkApi.data
 
 data class Response(
         val body: Body?,

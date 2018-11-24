@@ -4,8 +4,8 @@ import android.net.Uri
 import ru.iandreyshev.coreNetwork.httpClient.HEADER_ACCOUNT_ID
 import ru.iandreyshev.coreNetwork.httpClient.HEADER_PASSWORD
 import ru.iandreyshev.coreNetwork.httpClient.MOBILE_API_URL
-import ru.iandreyshev.coreNetworkApi.ApiRequestOptions
-import ru.iandreyshev.coreNetworkApi.Request
+import ru.iandreyshev.coreNetworkApi.data.ApiRequestOptions
+import ru.iandreyshev.coreNetworkApi.data.Request
 
 fun Request.applyOptions(options: ApiRequestOptions): Request {
     return Request(

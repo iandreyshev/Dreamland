@@ -2,7 +2,7 @@ package ru.iandreyshev.featureAccount.di
 
 import dagger.Component
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
-import ru.iandreyshev.coreNetworkApi.ICoreNetworkApi
+import ru.iandreyshev.coreNetworkApi.api.ICoreNetworkApi
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.featureAccount.di.dependencies.IContextProvider

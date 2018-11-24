@@ -1,10 +1,10 @@
 package ru.iandreyshev.featureAccount.network
 
 import com.google.gson.Gson
-import ru.iandreyshev.coreNetworkApi.ApiRequestOptions
-import ru.iandreyshev.coreNetworkApi.IHttpClient
-import ru.iandreyshev.coreNetworkApi.Request
-import ru.iandreyshev.coreNetworkApi.Response
+import ru.iandreyshev.coreNetworkApi.data.ApiRequestOptions
+import ru.iandreyshev.coreNetworkApi.api.IHttpClient
+import ru.iandreyshev.coreNetworkApi.data.Request
+import ru.iandreyshev.coreNetworkApi.data.Response
 import ru.iandreyshev.featureAccount.mapping.toApplicationModel
 import ru.iandreyshev.featureAccount.network.parser.DeleteResponseJson
 import ru.iandreyshev.featureAccount.network.parser.SignInResponseJson
