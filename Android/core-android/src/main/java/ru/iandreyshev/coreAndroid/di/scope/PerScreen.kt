@@ -1,8 +1,8 @@
-package ru.iandreyshev.featureDreams.di.scope
+package ru.iandreyshev.coreAndroid.di.scope
 
 import javax.inject.Scope
 
 @Scope
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
-annotation class PerFeature
+annotation class PerScreen

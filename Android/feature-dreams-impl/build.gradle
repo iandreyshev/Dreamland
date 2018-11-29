@@ -32,4 +32,7 @@ dependencies {
     api 'com.google.dagger:dagger-android:2.16'
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
+
+    // RxJava-ObjectBox
+    implementation "io.objectbox:objectbox-rxjava:$objectbox_version"
 }

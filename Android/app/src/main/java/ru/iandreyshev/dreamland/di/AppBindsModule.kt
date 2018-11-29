@@ -8,7 +8,7 @@ import ru.iandreyshev.dreamland.application.DreamlandApplication
 import javax.inject.Singleton
 
 @Module(includes = [AndroidInjectionModule::class])
-abstract class AppModule {
+abstract class AppBindsModule {
 
     @Binds
     @Singleton

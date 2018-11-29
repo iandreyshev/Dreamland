@@ -5,7 +5,11 @@ import dagger.android.AndroidInjector
 import ru.iandreyshev.dreamland.application.DreamlandApplication
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class])
+@Component(
+        modules = [
+            AppBindsModule::class
+        ]
+)
 @Singleton
 interface AppComponent : AndroidInjector<DreamlandApplication> {
 

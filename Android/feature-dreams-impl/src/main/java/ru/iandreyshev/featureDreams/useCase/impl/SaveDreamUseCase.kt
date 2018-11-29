@@ -1,12 +1,14 @@
 package ru.iandreyshev.featureDreams.useCase.impl
 
 import io.reactivex.Single
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.network.IDreamsServerApi
 import ru.iandreyshev.featureDreams.useCase.ISaveDreamUseCase
-import ru.iandreyshev.featureDreamsApi.data.DreamIdentifier
 import ru.iandreyshev.featureDreams.domain.DreamProperties
+import ru.iandreyshev.featureDreams.domain.DreamSyncState
 import ru.iandreyshev.featureDreams.domain.SaveDreamResult
+import ru.iandreyshev.featureDreams.storage.entity.DreamStorageEntity
 import javax.inject.Inject
 
 class SaveDreamUseCase
@@ -15,8 +17,13 @@ class SaveDreamUseCase
         private val serverApi: IDreamsServerApi
 ) : ISaveDreamUseCase {
 
-    override fun invoke(identifier: DreamIdentifier?, dream: DreamProperties): Single<SaveDreamResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun invoke(dream: DreamProperties) = Single.create<SaveDreamResult> {
+        val entity = DreamStorageEntity(
+                syncState = DreamSyncState.WAIT,
+                description = dream.description
+        )
+        storage.save(entity)
+        it.onSuccess(SaveDreamResult())
+    }.ioToMain()
 
 }

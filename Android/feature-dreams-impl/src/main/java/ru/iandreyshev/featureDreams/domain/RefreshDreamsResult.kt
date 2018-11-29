@@ -1,3 +1,5 @@
 package ru.iandreyshev.featureDreams.domain
 
-class RefreshDreamsResult
+enum class RefreshDreamsResult {
+    SUCCESS
+}

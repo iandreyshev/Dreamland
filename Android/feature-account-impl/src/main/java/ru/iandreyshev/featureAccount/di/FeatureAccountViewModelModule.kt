@@ -5,11 +5,11 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.iandreyshev.featureDreams.di.viewModel.ViewModelKey
+import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
-import ru.iandreyshev.featureDreams.di.viewModel.ViewModelFactory
+import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelFactory
 import javax.inject.Singleton
 
 @Module

@@ -1,7 +1,7 @@
 package ru.iandreyshev.coreNetwork.di
 
 import dagger.Component
-import ru.iandreyshev.coreNetwork.di.dependencies.IContextProvider
+import ru.iandreyshev.coreAndroid.di.context.IContextProvider
 import ru.iandreyshev.coreNetwork.di.dependencies.ICoreNetworkDependencies
 import ru.iandreyshev.coreNetworkApi.api.ICoreNetworkApi
 import javax.inject.Singleton

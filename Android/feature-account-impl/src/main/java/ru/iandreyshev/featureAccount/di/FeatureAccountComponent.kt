@@ -1,11 +1,11 @@
 package ru.iandreyshev.featureAccount.di
 
 import dagger.Component
+import ru.iandreyshev.coreAndroid.di.context.IContextProvider
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreNetworkApi.api.ICoreNetworkApi
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
-import ru.iandreyshev.featureAccount.di.dependencies.IContextProvider
 import ru.iandreyshev.featureAccount.di.dependencies.IFeatureAccountDependencies
 import ru.iandreyshev.featureAccountApi.api.IFeatureAccountApi
 import javax.inject.Singleton

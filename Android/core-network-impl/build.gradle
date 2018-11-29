@@ -26,6 +26,7 @@ android {
 
 dependencies {
     api project(':core-network-api')
+    api project(':core-android')
 
     api fileTree(dir: 'libs', include: ['*.jar'])
 

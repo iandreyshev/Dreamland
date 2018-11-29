@@ -4,7 +4,7 @@ import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Headers
 import okhttp3.OkHttpClient
-import ru.iandreyshev.coreNetwork.di.dependencies.IContextProvider
+import ru.iandreyshev.coreAndroid.di.context.IContextProvider
 import ru.iandreyshev.coreNetwork.extension.applyOptions
 import ru.iandreyshev.coreNetwork.extension.toApplicationResponse
 import ru.iandreyshev.coreNetwork.extension.uriString
@@ -22,7 +22,7 @@ class HttpClient
 ) : IHttpClient {
 
     init {
-        Stetho.initializeWithDefaults(contextProvider.applicationContext)
+        Stetho.initializeWithDefaults(contextProvider.context)
     }
 
     private val mOkHttpClient: OkHttpClient = OkHttpClient.Builder()

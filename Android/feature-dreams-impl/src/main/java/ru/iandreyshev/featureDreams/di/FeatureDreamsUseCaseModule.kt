@@ -29,4 +29,8 @@ abstract class FeatureDreamsUseCaseModule {
     @Singleton
     abstract fun bindSyncDreamsUseCase(useCase: SyncDreamsUseCase): ISyncDreamsUseCase
 
+    @Binds
+    @Singleton
+    abstract fun bindRefreshDreansUseCase(useCase: RefreshDreamsUseCase): IRefreshDreamsUseCase
+
 }

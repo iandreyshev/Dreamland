@@ -3,11 +3,12 @@ package ru.iandreyshev.featureDreams.useCase.impl
 import io.reactivex.Single
 import ru.iandreyshev.featureDreams.useCase.IRefreshDreamsUseCase
 import ru.iandreyshev.featureDreams.domain.RefreshDreamsResult
+import javax.inject.Inject
 
-class RefreshDreamsUseCase : IRefreshDreamsUseCase {
+class RefreshDreamsUseCase
+@Inject constructor() : IRefreshDreamsUseCase {
 
-    override fun invoke(): Single<RefreshDreamsResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun invoke(): Single<RefreshDreamsResult> =
+            Single.just(RefreshDreamsResult.SUCCESS)
 
 }

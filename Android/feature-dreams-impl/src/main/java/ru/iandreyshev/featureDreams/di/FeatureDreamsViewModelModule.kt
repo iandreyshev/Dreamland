@@ -5,8 +5,8 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.iandreyshev.featureDreams.di.viewModel.ViewModelFactory
-import ru.iandreyshev.featureDreams.di.viewModel.ViewModelKey
+import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelFactory
+import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureDreams.viewModel.EditDreamViewModel
 import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
 import javax.inject.Singleton

@@ -1,7 +1,7 @@
 package ru.iandreyshev.dreamland.proxy
 
 import android.app.Application
-import android.content.Context
+import ru.iandreyshev.coreAndroid.di.context.asProvider
 import ru.iandreyshev.coreNetwork.di.CoreNetworkComponent
 import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent
 import ru.iandreyshev.coreNetwork.di.DaggerCoreNetworkComponent_DependenciesComponent
@@ -27,29 +27,21 @@ class ProxyInjector
         private val accountNavigator: FeatureAccountNavigator
 ) {
 
-    fun coreNetworkComponent(): CoreNetworkComponent {
-        val contextProvider = object : ru.iandreyshev.coreNetwork.di.dependencies.IContextProvider {
-            override val applicationContext: Context = application
-        }
-        return DaggerCoreNetworkComponent.builder()
-                .iCoreNetworkDependencies(DaggerCoreNetworkComponent_DependenciesComponent.builder()
-                        .iContextProvider(contextProvider)
-                        .build())
-                .build()
-    }
+    fun coreNetworkComponent(): CoreNetworkComponent =
+            DaggerCoreNetworkComponent.builder()
+                    .iCoreNetworkDependencies(DaggerCoreNetworkComponent_DependenciesComponent.builder()
+                            .iContextProvider(application.asProvider())
+                            .build())
+                    .build()
 
-    fun featureAccountComponent(): FeatureAccountComponent {
-        val contextProvider = object : ru.iandreyshev.featureAccount.di.dependencies.IContextProvider {
-            override val applicationContext: Context = application
-        }
-        return DaggerFeatureAccountComponent.builder()
-                .iFeatureAccountDependencies(DaggerFeatureAccountComponent_DependenciesComponent.builder()
-                        .iAccountNavigator(accountNavigator)
-                        .iCoreNetworkApi(CoreNetworkComponent.get())
-                        .iContextProvider(contextProvider)
-                        .build())
-                .build()
-    }
+    fun featureAccountComponent(): FeatureAccountComponent =
+            DaggerFeatureAccountComponent.builder()
+                    .iFeatureAccountDependencies(DaggerFeatureAccountComponent_DependenciesComponent.builder()
+                            .iAccountNavigator(accountNavigator)
+                            .iCoreNetworkApi(CoreNetworkComponent.get())
+                            .iContextProvider(application.asProvider())
+                            .build())
+                    .build()
 
     fun featureMenuComponent(): FeatureMenuComponent =
             DaggerFeatureMenuComponent.builder()
@@ -64,6 +56,7 @@ class ProxyInjector
     fun featureDreamsComponent(): FeatureDreamsComponent =
             DaggerFeatureDreamsComponent.builder()
                     .iFeatureDreamsDependencies(DaggerFeatureDreamsComponent_DependenciesComponent.builder()
+                            .iContextProvider(application.asProvider())
                             .build())
                     .build()
 

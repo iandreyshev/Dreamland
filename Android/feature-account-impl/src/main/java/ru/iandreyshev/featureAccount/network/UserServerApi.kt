@@ -5,6 +5,7 @@ import ru.iandreyshev.coreNetworkApi.data.ApiRequestOptions
 import ru.iandreyshev.coreNetworkApi.api.IHttpClient
 import ru.iandreyshev.coreNetworkApi.data.Request
 import ru.iandreyshev.coreNetworkApi.data.Response
+import ru.iandreyshev.featureAccount.debug.Debug
 import ru.iandreyshev.featureAccount.mapping.toApplicationModel
 import ru.iandreyshev.featureAccount.network.parser.DeleteResponseJson
 import ru.iandreyshev.featureAccount.network.parser.SignInResponseJson
@@ -25,6 +26,8 @@ class UserServerApi
     private val mJsonParser = Gson()
 
     override fun signIn(request: SignInRequest): SignInResponse {
+        Debug.signInResponse(request)?.let { return it }
+
         val apiRequest = Request(query = mapOf(
                 EMAIL_QUERY_KEY to request.login,
                 PASSWORD_QUERY_KEY to request.password)

@@ -1,4 +1,4 @@
-package ru.iandreyshev.featureDreams.di.viewModel
+package ru.iandreyshev.coreAndroid.di.viewModel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

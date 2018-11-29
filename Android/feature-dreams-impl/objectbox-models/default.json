@@ -4,60 +4,51 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "2:8847600193213478267",
-      "lastPropertyId": "7:2495397109520566281",
+      "id": "1:3770196133259514733",
+      "lastPropertyId": "7:4532994290183187535",
       "name": "DreamStorageEntity",
       "properties": [
         {
-          "id": "1:8024635523784524050",
+          "id": "1:4189395883304815171",
           "name": "id"
         },
         {
-          "id": "2:2639862499964563838",
+          "id": "2:3050175108932265569",
           "name": "remoteId"
         },
         {
-          "id": "3:3133643418009796612",
+          "id": "3:5516453383483140599",
           "name": "syncState"
         },
         {
-          "id": "4:6487242051268530574",
+          "id": "4:6417685975912563974",
           "name": "date"
         },
         {
-          "id": "5:945930894564749011",
+          "id": "5:5647861649402179499",
           "name": "duration"
         },
         {
-          "id": "6:5039395326124288741",
+          "id": "6:6578176199722520480",
           "name": "description"
         },
         {
-          "id": "7:2495397109520566281",
+          "id": "7:4532994290183187535",
           "name": "idLucid"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:8847600193213478267",
+  "lastEntityId": "1:3770196133259514733",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [
-    4979275581666696979
-  ],
+  "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    67886116379298304,
-    6482028662614494268,
-    2213766433073461936,
-    508141120497632165,
-    4927907846685632294,
-    2592852516693443968
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

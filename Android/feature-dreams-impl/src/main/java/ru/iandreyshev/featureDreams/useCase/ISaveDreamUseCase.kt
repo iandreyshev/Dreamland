@@ -6,5 +6,5 @@ import ru.iandreyshev.featureDreams.domain.DreamProperties
 import ru.iandreyshev.featureDreams.domain.SaveDreamResult
 
 interface ISaveDreamUseCase {
-    operator fun invoke(identifier: DreamIdentifier?, dream: DreamProperties): Single<SaveDreamResult>
+    operator fun invoke(dream: DreamProperties): Single<SaveDreamResult>
 }

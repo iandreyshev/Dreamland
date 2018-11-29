@@ -5,8 +5,10 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_dream_constructor.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
+import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
+import ru.iandreyshev.featureDreams.domain.DreamProperties
 import ru.iandreyshev.featureDreams.viewModel.EditDreamViewModel
 
 class DreamConstructorActivity : BaseAppCompatActivity() {
@@ -20,6 +22,11 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
         FeatureDreamsComponent.get().inject(this)
 
         initActionBar()
+
+        mViewModel.apply {
+            observeNotNull(saveWaiting, ::handleSaveWaiting)
+            observeNotNull(closeEvent) { finish() }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -34,7 +41,7 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
                 return true
             }
             R.id.menu_item_save -> {
-                finish()
+                mViewModel.saveDream(createDream())
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -46,6 +53,15 @@ class DreamConstructorActivity : BaseAppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
+    }
+
+    private fun handleSaveWaiting(isWait: Boolean) {
+    }
+
+    private fun createDream(): DreamProperties {
+        return DreamProperties(
+                description = dream_text.text.toString()
+        )
     }
 
 }

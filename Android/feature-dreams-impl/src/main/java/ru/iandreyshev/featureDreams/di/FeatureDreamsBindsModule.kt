@@ -13,7 +13,7 @@ import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
 import javax.inject.Singleton
 
 @Module
-abstract class FeatureDreamsSharedBindsModule {
+abstract class FeatureDreamsBindsModule {
 
     @Binds
     @Singleton
