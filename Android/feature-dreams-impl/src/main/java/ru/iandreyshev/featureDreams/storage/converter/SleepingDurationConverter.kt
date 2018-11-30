@@ -6,11 +6,11 @@ import ru.iandreyshev.featureDreams.domain.SleepingDuration
 class SleepingDurationConverter : PropertyConverter<SleepingDuration, Int> {
 
     override fun convertToDatabaseValue(entityProperty: SleepingDuration?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return 0
     }
 
     override fun convertToEntityProperty(databaseValue: Int?): SleepingDuration {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return SleepingDuration(0)
     }
 
 }

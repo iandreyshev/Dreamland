@@ -1,7 +1,7 @@
 package ru.iandreyshev.featureDreamsApi.data
 
 data class DreamListItem(
-//        val identifier: DreamIdentifier,
+        val key: DreamKey,
         val description: String//,
 //        val date: Long,
 //        val durationHours: Byte,

@@ -9,7 +9,7 @@ import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureAccount.viewModel.AuthViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignInViewModel
 import ru.iandreyshev.featureAccount.viewModel.SignUpViewModel
-import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelFactory
+import ru.iandreyshev.coreAndroid.di.viewModel.MapBasedViewModelFactory
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +17,7 @@ abstract class FeatureAccountViewModelModule {
 
     @Binds
     @Singleton
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: MapBasedViewModelFactory): ViewModelProvider.Factory
 
     @Binds
     @IntoMap

@@ -36,7 +36,7 @@ dependencies {
     implementation project(':feature-dreams-api')
     implementation project(':feature-dreams-impl')
 
-    implementation project(':feature-statistic')
+    implementation project(':feature-statistic-api')
 
     implementation project(':feature-menu-api')
     implementation project(':feature-menu-impl')

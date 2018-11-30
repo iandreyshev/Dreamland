@@ -26,6 +26,16 @@ inline fun <reified T : ViewModel> Fragment.activityViewModel(factory: ViewModel
     return vm
 }
 
+inline fun <reified T : ViewModel> AppCompatActivity.viewModel(crossinline factory: () -> T): T {
+    val factoryObject = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T = factory() as T
+    }
+    return viewModel(factoryObject)
+}
+
+inline fun <reified T : ViewModel> AppCompatActivity.viewModel(factory: ViewModelProvider.Factory): T =
+        ViewModelProviders.of(this, factory)[T::class.java]
+
 inline fun <reified T : ViewModel> AppCompatActivity.viewModel(factory: ViewModelProvider.Factory, body: T.() -> Unit = {}): T {
     val vm = ViewModelProviders.of(this, factory)[T::class.java]
     vm.body()

@@ -15,22 +15,10 @@ abstract class FeatureDreamsUseCaseModule {
 
     @Binds
     @Singleton
-    abstract fun bindSaveDraftUseCase(useCase: SaveDraftUseCase): ISaveDraftUseCase
-
-    @Binds
-    @Singleton
-    abstract fun bindEditDreamUseCase(useCase: EditDreamUseCase): IEditDreamUseCase
-
-    @Binds
-    @Singleton
     abstract fun bindDeleteDreamUseCase(useCase: DeleteDreamUseCase): IDeleteDreamUseCase
 
     @Binds
     @Singleton
-    abstract fun bindSyncDreamsUseCase(useCase: SyncDreamsUseCase): ISyncDreamsUseCase
-
-    @Binds
-    @Singleton
-    abstract fun bindRefreshDreansUseCase(useCase: RefreshDreamsUseCase): IRefreshDreamsUseCase
+    abstract fun bindRefreshDreansUseCase(useCase: FetchDreamsUseCase): IFetchDreamsUseCase
 
 }

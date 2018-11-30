@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelFactory
+import ru.iandreyshev.coreAndroid.di.viewModel.MapBasedViewModelFactory
 import ru.iandreyshev.coreAndroid.di.viewModel.ViewModelKey
 import ru.iandreyshev.featureMenu.viewModel.MenuViewModel
 import ru.iandreyshev.featureMenu.viewModel.SettingsViewModel
@@ -17,7 +17,7 @@ abstract class FeatureMenuViewModelModule {
 
     @Binds
     @Singleton
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: MapBasedViewModelFactory): ViewModelProvider.Factory
 
     @Binds
     @IntoMap

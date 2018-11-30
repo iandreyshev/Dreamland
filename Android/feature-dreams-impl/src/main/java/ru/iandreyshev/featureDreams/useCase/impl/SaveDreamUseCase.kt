@@ -9,6 +9,7 @@ import ru.iandreyshev.featureDreams.domain.DreamProperties
 import ru.iandreyshev.featureDreams.domain.DreamSyncState
 import ru.iandreyshev.featureDreams.domain.SaveDreamResult
 import ru.iandreyshev.featureDreams.storage.entity.DreamStorageEntity
+import ru.iandreyshev.featureDreamsApi.data.DreamKey
 import javax.inject.Inject
 
 class SaveDreamUseCase
@@ -17,7 +18,7 @@ class SaveDreamUseCase
         private val serverApi: IDreamsServerApi
 ) : ISaveDreamUseCase {
 
-    override fun invoke(dream: DreamProperties) = Single.create<SaveDreamResult> {
+    override fun invoke(dream: DreamProperties, key: DreamKey?) = Single.create<SaveDreamResult> {
         val entity = DreamStorageEntity(
                 syncState = DreamSyncState.WAIT,
                 description = dream.description

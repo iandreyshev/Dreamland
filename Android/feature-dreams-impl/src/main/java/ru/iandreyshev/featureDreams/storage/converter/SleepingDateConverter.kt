@@ -6,11 +6,11 @@ import ru.iandreyshev.featureDreams.domain.SleepingDate
 class SleepingDateConverter : PropertyConverter<SleepingDate, Long> {
 
     override fun convertToDatabaseValue(entityProperty: SleepingDate?): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return 0
     }
 
     override fun convertToEntityProperty(databaseValue: Long?): SleepingDate {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return SleepingDate(0)
     }
 
 }

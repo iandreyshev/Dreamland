@@ -5,7 +5,7 @@ import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.network.IDreamsServerApi
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
 import ru.iandreyshev.featureDreams.domain.DeleteDreamResult
-import ru.iandreyshev.featureDreamsApi.data.DreamIdentifier
+import ru.iandreyshev.featureDreamsApi.data.DreamKey
 import javax.inject.Inject
 
 class DeleteDreamUseCase
@@ -14,7 +14,7 @@ class DeleteDreamUseCase
         private val serverApi: IDreamsServerApi
 ) : IDeleteDreamUseCase {
 
-    override fun invoke(identifier: DreamIdentifier): Single<DeleteDreamResult> {
+    override fun invoke(key: DreamKey): Single<DeleteDreamResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

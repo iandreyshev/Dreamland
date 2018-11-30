@@ -1,8 +1,8 @@
 package ru.iandreyshev.featureDreams.domain
 
-import ru.iandreyshev.featureDreamsApi.data.DreamIdentifier
+import ru.iandreyshev.featureDreamsApi.data.DreamKey
 
 data class Dream(
-        val identifier: DreamIdentifier,
+        val key: DreamKey,
         val properties: DreamProperties
 )

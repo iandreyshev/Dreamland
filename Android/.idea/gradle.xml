@@ -19,7 +19,7 @@
             <option value="$PROJECT_DIR$/feature-dreams-impl" />
             <option value="$PROJECT_DIR$/feature-menu-api" />
             <option value="$PROJECT_DIR$/feature-menu-impl" />
-            <option value="$PROJECT_DIR$/feature-statistic" />
+            <option value="$PROJECT_DIR$/feature-statistic-api" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

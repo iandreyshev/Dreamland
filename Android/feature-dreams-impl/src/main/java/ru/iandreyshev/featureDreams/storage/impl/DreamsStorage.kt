@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.storage.entity.DreamStorageEntity
 import ru.iandreyshev.featureDreams.storage.entity.DreamStorageEntity_
-import ru.iandreyshev.featureDreamsApi.data.DreamIdentifier
+import ru.iandreyshev.featureDreamsApi.data.DreamKey
 import javax.inject.Inject
 
 class DreamsStorage
@@ -18,13 +18,14 @@ class DreamsStorage
         get() = RxQuery.observable(dreamsBox.query().notNull(DreamStorageEntity_.__ID_PROPERTY).build())
 
     override fun save(dream: DreamStorageEntity) {
+        dreamsBox.all
         dreamsBox.put(dream)
     }
 
     override fun save(dream: List<DreamStorageEntity>) {
     }
 
-    override fun delete(identifier: DreamIdentifier) {
+    override fun delete(key: DreamKey) {
     }
 
     override fun clear() {
