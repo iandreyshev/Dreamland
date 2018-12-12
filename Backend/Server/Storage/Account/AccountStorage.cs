@@ -18,8 +18,14 @@ namespace Dreamland.Storage.Account
 
 		public User Find(string email, string password)
 		{
-			return _users.Where(u => u.Email == email && u.Password == password)
-				.First();
+			var users = _users.Where(u => u.Email == email && u.Password == password);
+
+			if (users.Count() == 0)
+			{
+				return null;
+			}
+
+			return users.First();
 		}
 
 		public void Add(User user)

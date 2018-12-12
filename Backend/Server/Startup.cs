@@ -3,10 +3,8 @@ using Dreamland.Storage.Account;
 using Dreamland.UseCase.Account;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data.SqlClient;
 
 public class Startup
 {
@@ -22,17 +20,13 @@ public class Startup
 	{
 		services.AddMvc();
 
-		var conn = new SqlConnection(Configuration.GetConnectionString("Database"));
-		conn.Open();
-
 		// UseCase`s
 		services.AddTransient<SignInUseCase>();
 		services.AddTransient<SignUpUseCase>();
 		services.AddTransient<DeleteAccountUseCase>();
 
 		// Storage
-		services.AddDbContext<DatabaseContext>(options =>
-			options.UseSqlServer(Configuration.GetConnectionString("Database")));
+		services.AddDbContext<DatabaseContext>();
 		services.AddTransient<IAccountStorage, AccountStorage>();
 	}
 
