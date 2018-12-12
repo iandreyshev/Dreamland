@@ -1,58 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using Dreamland.Domain;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace Dreamland.Storage.Account
 {
-	public class AccountStorage
+	public class AccountStorage : IAccountStorage
 	{
-		private int _lastId = 0;
-		private List<UserEntity> _users = new List<UserEntity>();
-
-		public void Add(string email, string password, string name)
+		public AccountStorage(DatabaseContext context)
 		{
-			var userEntity = _users.Find(user =>
-			{
-				return user.Email == email && user.Password == password;
-			});
-
-			if (userEntity != null)
-			{
-				return;
-			}
-
-			_users.Add(new UserEntity
-			{
-				Id = ++_lastId,
-				Email = email,
-				Password = password,
-				Name = name,
-				AvatarUrl = ""
-			});
+			_context = context;
+			_users = _context.Users;
 		}
 
-		public UserEntity Find(string email)
+		private DatabaseContext _context;
+		private DbSet<User> _users;
+
+		public User Find(string email, string password)
 		{
-			return _users.Find(user =>
-			{
-				return user.Email == email;
-			});
+			return _users.Where(u => u.Email == email && u.Password == password)
+				.First();
 		}
 
-		public UserEntity Find(string email, string password)
+		public void Add(User user)
 		{
-			return _users.Find(user =>
-			{
-				return user.Email == email && user.Password == password;
-			});
+			_users.Add(user);
+			_context.SaveChanges();
 		}
 
-		public bool Delete(int id, string password)
+		public void Delete(long id)
 		{
-			var userEntity = _users.Find(user =>
-			{
-				return user.Id == id && user.Password == password;
-			});
-
-			return _users.Remove(userEntity);
+			var user = new User { Id = id };
+			_users.Attach(user);
+			_users.Remove(user);
+			_context.SaveChanges();
 		}
+
+		public TResult Transaction<TResult>(TResult errVal, Func<int, TResult> body)
+			=> _context.Transaction(errVal, body);
 	}
 }

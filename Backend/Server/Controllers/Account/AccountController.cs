@@ -1,5 +1,5 @@
 ﻿using Dreamland.Controllers.Account.Mapper;
-using Dreamland.Services.Account;
+using Dreamland.UseCase.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dreamland.Controllers.Account
@@ -7,11 +7,18 @@ namespace Dreamland.Controllers.Account
 	[Route("account")]
 	public class AccountController : Controller
 	{
-		private readonly IAccountService _service;
+		private SignInUseCase _signInUseCase;
+		private SignUpUseCase _signUpUseCase;
+		private DeleteAccountUseCase _deleteAccountUseCase;
 
-		public AccountController(IAccountService service)
+		public AccountController(
+			SignInUseCase signInUseCase,
+			SignUpUseCase signUpUseCase,
+			DeleteAccountUseCase deleteAccountUseCase)
 		{
-			_service = service;
+			_signInUseCase = signInUseCase;
+			_signUpUseCase = signUpUseCase;
+			_deleteAccountUseCase = deleteAccountUseCase;
 		}
 
 		[HttpGet("sign_in")]
@@ -19,8 +26,10 @@ namespace Dreamland.Controllers.Account
 			string email,
 			string password)
 		{
-			var serviceResult = _service.SignIn(email, password);
+			var serviceResult = _signInUseCase.Execute(email, password);
 			var response = AccountMapper.Map(serviceResult);
+
+
 
 			return new JsonResult(response);
 		}
@@ -32,7 +41,7 @@ namespace Dreamland.Controllers.Account
 			string password,
 			[FromQuery(Name = "name")] string name)
 		{
-			var serviceResult = _service.SignUp(email, password, name);
+			var serviceResult = _signUpUseCase.Execute(email, password, name);
 			var response = AccountMapper.Map(serviceResult);
 
 			return new JsonResult(response);
@@ -44,7 +53,7 @@ namespace Dreamland.Controllers.Account
 			int id,
 			string password)
 		{
-			var serviceResult = _service.Delete(id, password);
+			var serviceResult = _deleteAccountUseCase.Execute(id, password);
 			var response = AccountMapper.Map(serviceResult);
 
 			return new JsonResult(response);
