@@ -33,6 +33,7 @@ dependencies {
     api project(':core-database')
     api project(':core-network-api')
     api project(':feature-account-api')
+    api project(':feature-dreams-api')
 
     // Dagger 2
     api 'com.google.dagger:dagger-android:2.16'

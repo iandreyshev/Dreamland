@@ -8,6 +8,7 @@ import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.featureAccount.di.dependencies.IFeatureAccountDependencies
 import ru.iandreyshev.featureAccountApi.api.IFeatureAccountApi
+import ru.iandreyshev.featureDreamsApi.api.IFeatureDreamsApi
 import javax.inject.Singleton
 
 @Component(
@@ -40,7 +41,8 @@ abstract class FeatureAccountComponent : IFeatureAccountApi {
             dependencies = [
                 IContextProvider::class,
                 IAccountNavigator::class,
-                ICoreNetworkApi::class]
+                ICoreNetworkApi::class,
+                IFeatureDreamsApi::class]
     )
     abstract class DependenciesComponent : IFeatureAccountDependencies
 

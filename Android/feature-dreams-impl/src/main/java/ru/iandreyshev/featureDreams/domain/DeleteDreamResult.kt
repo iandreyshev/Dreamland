@@ -1,3 +1,3 @@
 package ru.iandreyshev.featureDreams.domain
 
-class DeleteDreamResult
+sealed class DeleteDreamResult

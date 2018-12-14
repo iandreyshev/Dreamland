@@ -68,11 +68,15 @@ class MenuActivity : BaseAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (mViewModel.menuState.value != MenuViewModel.MenuState.DREAMS) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+            return
+        } else if (mViewModel.menuState.value != MenuViewModel.MenuState.DREAMS) {
             mViewModel.onNewMenuState(MenuViewModel.MenuState.DREAMS)
             drawer.closeDrawer(GravityCompat.START)
             return
         }
+
         super.onBackPressed()
     }
 

@@ -1,7 +1,6 @@
 package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Completable
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.storage.IUserStorage
 import ru.iandreyshev.featureAccountApi.useCase.ILogOutUseCase
 import javax.inject.Inject
@@ -15,6 +14,6 @@ class LogOutUseCase
         Thread.sleep(1000)
         mStorage.clear()
         it.onComplete()
-    }.ioToMain()
+    }
 
 }

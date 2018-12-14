@@ -3,14 +3,15 @@ package ru.iandreyshev.featureDreams.ui.activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_dream_constructor.*
+import kotlinx.android.synthetic.main.activity_dream_editor.*
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
-import ru.iandreyshev.featureDreams.domain.DreamProperties
+import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.IViewModelFactory
+import ru.iandreyshev.vext.view.visibleIfOrGone
 import javax.inject.Inject
 
 class DreamEditorActivity : BaseAppCompatActivity() {
@@ -22,13 +23,13 @@ class DreamEditorActivity : BaseAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dream_constructor)
+        setContentView(R.layout.activity_dream_editor)
 
         FeatureDreamsComponent.get().inject(this)
 
         initActionBar()
 
-        mViewModel = mViewModelFactory.editorViewModel(this, savedInstanceState) {
+        mViewModel = mViewModelFactory.dreamEditorViewModel(this, savedInstanceState).apply {
             observeNotNull(saveWaiting, ::handleSaveWaiting)
             observeNotNull(closeEvent) { finish() }
         }
@@ -61,6 +62,7 @@ class DreamEditorActivity : BaseAppCompatActivity() {
     }
 
     private fun handleSaveWaiting(isWait: Boolean) {
+        progressBar.visibleIfOrGone(isWait)
     }
 
     private fun createDream(): DreamProperties {

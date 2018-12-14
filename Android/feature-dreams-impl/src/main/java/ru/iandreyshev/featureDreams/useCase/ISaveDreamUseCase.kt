@@ -1,8 +1,8 @@
 package ru.iandreyshev.featureDreams.useCase
 
 import io.reactivex.Single
-import ru.iandreyshev.featureDreamsApi.data.DreamKey
-import ru.iandreyshev.featureDreams.domain.DreamProperties
+import ru.iandreyshev.featureDreamsApi.domain.DreamKey
+import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.domain.SaveDreamResult
 
 interface ISaveDreamUseCase {

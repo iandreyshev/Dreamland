@@ -4,15 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/ui_kit_toolbar_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/create_dream_toolbar_title" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/ui_kit_toolbar_light"
+                app:title="@string/create_dream_toolbar_title" />
+
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_gravity="bottom"
+                android:indeterminate="true"
+                app:mpb_progressStyle="horizontal"
+                app:mpb_useIntrinsicPadding="false" />
+
+        </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <View
         android:id="@+id/divider"
@@ -21,7 +44,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nested_scroll"
@@ -85,11 +108,11 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_option_picker"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="8dp"
                 android:paddingTop="4dp"
                 android:paddingRight="8dp"
-                android:paddingBottom="4dp"
-                android:orientation="horizontal">
+                android:paddingBottom="4dp">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -98,9 +121,9 @@
                     app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
                 <TextView
-                    android:paddingLeft="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
                     android:text="Today"
                     android:textSize="16sp" />
 

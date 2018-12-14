@@ -1,7 +1,6 @@
 package ru.iandreyshev.featureAccount.api
 
 import io.reactivex.Observable
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.storage.IUserStorage
 import ru.iandreyshev.featureAccount.mapping.toUser
 import ru.iandreyshev.featureAccountApi.data.User
@@ -16,6 +15,5 @@ class UserObservableApi
     override val observable: Observable<User>
         get() = storage.userObservable
                 .map { it.toUser() }
-                .ioToMain()
 
 }

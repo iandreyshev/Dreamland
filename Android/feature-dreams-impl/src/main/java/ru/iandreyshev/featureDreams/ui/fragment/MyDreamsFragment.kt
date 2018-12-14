@@ -1,19 +1,24 @@
 package ru.iandreyshev.featureDreams.ui.fragment
 
-import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_my_dreams.*
-import org.jetbrains.anko.support.v4.alert
+import kotlinx.android.synthetic.main.view_dream_diary_item.view.*
+import org.jetbrains.anko.support.v4.intentFor
+import ru.iandreyshev.coreAndroid.ui.dialog.buildAlert
+import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureDreams.ui.adapter.dreams.DreamsListAdapter
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
+import ru.iandreyshev.featureDreams.ui.activity.DreamActivity
 import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
-import ru.iandreyshev.featureDreamsApi.data.DreamListItem
+import ru.iandreyshev.featureDreamsApi.domain.Dream
 import ru.iandreyshev.vext.view.goneIfOrVisible
 import ru.iandreyshev.vext.view.visibleIfOrGone
 
@@ -21,8 +26,6 @@ class MyDreamsFragment : BaseFragment() {
 
     private val mViewModel by lazy { viewModel<DreamListViewModel>() }
     private val mDreamsAdapter by lazy { DreamsListAdapter(DreamActionListener()) }
-
-    private var mOptionsAlert: DialogInterface? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_my_dreams, container, false)
@@ -54,7 +57,7 @@ class MyDreamsFragment : BaseFragment() {
         observeNotNull(optionsTarget, ::handleOptionsTarget)
     }
 
-    private fun handleDreams(dreams: List<DreamListItem>) {
+    private fun handleDreams(dreams: List<Dream>) {
         val isAvailable = dreams.isNotEmpty()
         list_refresher.visibleIfOrGone(isAvailable)
         empty_refresher.goneIfOrVisible(isAvailable)
@@ -68,22 +71,33 @@ class MyDreamsFragment : BaseFragment() {
         empty_refresher.isRefreshing = isRefresh
     }
 
-    private fun handleOptionsTarget(target: DreamListItem) {
-        mOptionsAlert = alert {
+    private fun handleOptionsTarget(target: Dream) {
+        buildAlert {
             title = "Dream options"
-        }.show()
+            onCancelled { mViewModel.onCloseDreamOptions() }
+        } customizeAndShow {
+            setCancelable(false)
+            setCanceledOnTouchOutside(true)
+        }
     }
 
     private inner class DreamActionListener : DreamsListAdapter.IDreamActionListener {
-        override fun onClick(dream: DreamListItem) {
-            mViewModel.onOpenDream(dream)
+        override fun onClick(view: View, dream: Dream) {
+            val intent = intentFor<DreamActivity>()
+            intent.putExtra(DreamActivity.KEY_DREAM, dream.toBundle())
+
+            val sharedDescription = Pair.create(view.tvDescription as View, "trans_key_dream_description")
+            val sharedDate = Pair.create(view.tvDate as View, "trans_key_dream_date")
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    activity ?: return, sharedDescription, sharedDate)
+
+            startActivity(intent, options.toBundle())
         }
 
-        override fun onLongClick(dream: DreamListItem): Boolean {
-            if (mViewModel.optionsTarget.value != null) {
-                return false
+        override fun onLongClick(dream: Dream): Boolean {
+            if (mViewModel.optionsTarget.value == null) {
+                mViewModel.onOpenDreamOptions(dream)
             }
-            mViewModel.onOpenDreamOptions(dream)
 
             return true
         }

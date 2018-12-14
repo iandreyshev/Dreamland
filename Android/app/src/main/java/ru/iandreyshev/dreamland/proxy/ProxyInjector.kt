@@ -40,6 +40,7 @@ class ProxyInjector
                             .iAccountNavigator(accountNavigator)
                             .iCoreNetworkApi(CoreNetworkComponent.get())
                             .iContextProvider(application.asProvider())
+                            .iFeatureDreamsApi(FeatureDreamsComponent.get())
                             .build())
                     .build()
 

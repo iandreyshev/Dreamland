@@ -39,6 +39,6 @@ class DeleteUserUseCase
                 it.onSuccess(result)
             }
         }
-    }.ioToMain()
+    }
 
 }

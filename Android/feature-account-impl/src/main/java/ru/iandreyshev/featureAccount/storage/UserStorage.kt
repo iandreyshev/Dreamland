@@ -3,7 +3,7 @@ package ru.iandreyshev.featureAccount.storage
 import io.objectbox.Box
 import io.objectbox.rx.RxQuery
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import javax.inject.Inject
 
 class UserStorage
@@ -16,7 +16,7 @@ class UserStorage
 
     override val userObservable: Observable<UserStorageEntity>
         get() = RxQuery.observable(box.query().build())
-                .observeOn(Schedulers.io())
+                .ioToMain()
                 .map { it.firstOrNull() ?: UserStorageEntity() }
 
     override val isUserExists: Boolean

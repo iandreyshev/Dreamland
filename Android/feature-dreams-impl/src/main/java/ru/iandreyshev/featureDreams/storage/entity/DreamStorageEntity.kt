@@ -7,8 +7,8 @@ import ru.iandreyshev.featureDreams.storage.converter.SleepingDateConverter
 import ru.iandreyshev.featureDreams.storage.converter.SleepingDurationConverter
 import ru.iandreyshev.featureDreams.storage.converter.SyncStateConverter
 import ru.iandreyshev.featureDreams.domain.DreamSyncState
-import ru.iandreyshev.featureDreams.domain.SleepingDate
 import ru.iandreyshev.featureDreams.domain.SleepingDuration
+import ru.iandreyshev.featureDreamsApi.domain.SleepingDate
 
 @Entity
 data class DreamStorageEntity(

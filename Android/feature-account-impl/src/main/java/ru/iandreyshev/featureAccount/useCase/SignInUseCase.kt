@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SignInUseCase
 @Inject constructor(
         private val serverApi: IUserServerApi,
-        private val storage: IUserStorage
+        private val userStorage: IUserStorage
 ): ISignInUseCase {
 
     override fun invoke(signInProperties: SignInProperties): Single<SignInResult> = Single.create<SignInResult> {
@@ -34,11 +34,11 @@ class SignInUseCase
         }
 
         val entity = serverAccount.toStorageEntity(signInProperties.password)
-        storage.saveUser(entity)
+        userStorage.saveUser(entity)
 
         Thread.sleep(1000)
 
         it.onSuccess(SignInResult.SUCCESS)
-    }.ioToMain()
+    }
 
 }

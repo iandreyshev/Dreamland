@@ -33,6 +33,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_compiller_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_android_processor_version"
 
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.1.7'
+
     // RxJava-ObjectBox
     implementation "io.objectbox:objectbox-rxjava:$objectbox_version"
 }

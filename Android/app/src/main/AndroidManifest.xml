@@ -31,6 +31,7 @@
         <activity
             android:name="ru.iandreyshev.featureDreams.ui.activity.DreamEditorActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name="ru.iandreyshev.featureDreams.ui.activity.DreamActivity" />
         <!--ACTIVITY-->
     </application>
 

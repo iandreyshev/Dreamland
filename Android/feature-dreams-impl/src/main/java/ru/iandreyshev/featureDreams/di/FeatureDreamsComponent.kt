@@ -2,9 +2,11 @@ package ru.iandreyshev.featureDreams.di
 
 import dagger.Component
 import ru.iandreyshev.coreAndroid.di.context.IContextProvider
+import ru.iandreyshev.coreAndroid.di.scope.PerFeature
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.featureDreams.di.dependencies.IFeatureDreamsDependencies
+import ru.iandreyshev.featureDreams.ui.activity.DreamActivity
 import ru.iandreyshev.featureDreams.ui.activity.DreamEditorActivity
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
@@ -20,7 +22,7 @@ import javax.inject.Singleton
         dependencies = [
             IFeatureDreamsDependencies::class]
 )
-@Singleton
+@PerFeature
 abstract class FeatureDreamsComponent : IFeatureDreamsApi {
 
     companion object {
@@ -35,6 +37,7 @@ abstract class FeatureDreamsComponent : IFeatureDreamsApi {
     }
 
     abstract fun inject(activity: BaseAppCompatActivity)
+    abstract fun inject(activity: DreamActivity)
     abstract fun inject(activity: DreamEditorActivity)
     abstract fun inject(fragment: BaseFragment)
     abstract fun inject(viewModel: DreamEditorViewModel)

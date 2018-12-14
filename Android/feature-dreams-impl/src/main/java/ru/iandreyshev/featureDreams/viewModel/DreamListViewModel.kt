@@ -7,27 +7,27 @@ import io.reactivex.disposables.Disposable
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
 import ru.iandreyshev.featureDreams.useCase.IFetchDreamsUseCase
 import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
-import ru.iandreyshev.featureDreamsApi.data.DreamListItem
+import ru.iandreyshev.featureDreamsApi.domain.Dream
 import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 import javax.inject.Inject
 
 class DreamListViewModel
 @Inject constructor(
-        private val repository: IDreamsRepository,
+        repository: IDreamsRepository,
         private val fetchDreamsUseCase: IFetchDreamsUseCase,
         private val deleteDreamUseCase: IDeleteDreamUseCase
 ) : ViewModel() {
 
-    val dreams: LiveData<List<DreamListItem>>
+    val dreams: LiveData<List<Dream>>
         get() = mDreams
     val refreshing: LiveData<Boolean>
         get() = mRefreshing
-    val optionsTarget: LiveData<DreamListItem>
+    val optionsTarget: LiveData<Dream>
         get() = mOptionsTarget
 
-    private val mDreams = MutableLiveData<List<DreamListItem>>()
+    private val mDreams = MutableLiveData<List<Dream>>()
     private val mRefreshing = mutableLiveDataOf(false)
-    private val mOptionsTarget = MutableLiveData<DreamListItem>()
+    private val mOptionsTarget = MutableLiveData<Dream>()
 
     private val mDreamsSubscription: Disposable
     private var mRefreshingSubscription: Disposable? = null
@@ -44,16 +44,13 @@ class DreamListViewModel
                 .subscribe { mRefreshing.value = false }
     }
 
-    fun onOpenDream(dream: DreamListItem) {
-    }
-
     fun onEditDream() {
     }
 
     fun onDeleteDream() {
     }
 
-    fun onOpenDreamOptions(dream: DreamListItem) {
+    fun onOpenDreamOptions(dream: Dream) {
         mOptionsTarget.value = dream
     }
 

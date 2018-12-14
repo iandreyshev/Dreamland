@@ -2,15 +2,16 @@ package ru.iandreyshev.featureDreams.ui.adapter.dreams
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ru.iandreyshev.featureDreams.R
-import ru.iandreyshev.featureDreamsApi.data.DreamListItem
+import ru.iandreyshev.featureDreamsApi.domain.Dream
 
 class DreamsListAdapter(
         private val actionListener: IDreamActionListener? = null
 ) : RecyclerView.Adapter<DreamListViewHolder>() {
 
-    var dreams: List<DreamListItem> = listOf()
+    var dreams: List<Dream> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DreamListViewHolder =
             LayoutInflater.from(parent.context)
@@ -19,15 +20,15 @@ class DreamsListAdapter(
 
     override fun onBindViewHolder(viewHolder: DreamListViewHolder, position: Int) {
         viewHolder.setItem(dreams[position])
-                .onClick { actionListener?.onClick(it) }
+                .onClick { view, item -> actionListener?.onClick(view, item) }
                 .onLongClick { actionListener?.onLongClick(it) ?: false }
     }
 
     override fun getItemCount(): Int = dreams.count()
 
     interface IDreamActionListener {
-        fun onClick(dream: DreamListItem)
-        fun onLongClick(dream: DreamListItem): Boolean = false
+        fun onClick(view: View, dream: Dream)
+        fun onLongClick(dream: Dream): Boolean = false
     }
 
 }

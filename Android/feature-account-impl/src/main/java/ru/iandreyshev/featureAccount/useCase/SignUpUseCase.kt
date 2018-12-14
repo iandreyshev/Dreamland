@@ -39,6 +39,6 @@ class SignUpUseCase
         storage.saveUser(entity)
 
         it.onSuccess(SignUpResult.SUCCESS)
-    }.ioToMain()
+    }
 
 }

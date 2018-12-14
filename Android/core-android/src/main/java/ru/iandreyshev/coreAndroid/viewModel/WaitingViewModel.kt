@@ -8,6 +8,9 @@ class WaitingViewModel(default: Boolean = false) {
     val observable: LiveData<Boolean>
         get() = mWaitState
 
+    val isWait: Boolean
+        get() = mWaitState.value ?: false
+
     private val mWaitState = mutableLiveDataOf(default)
 
     fun start() {

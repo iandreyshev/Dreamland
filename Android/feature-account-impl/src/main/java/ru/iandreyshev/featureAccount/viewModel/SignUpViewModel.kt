@@ -3,7 +3,7 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
-import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
+import ru.iandreyshev.coreAndroid.viewModel.SingleLiveTypedEvent
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignUpProperties
 import ru.iandreyshev.featureAccountApi.data.SignUpResult
@@ -24,7 +24,7 @@ class SignUpViewModel
         get() = mErrorObservable
 
     private val mWaitingObservable = WaitingViewModel()
-    private val mErrorObservable = SingleLiveEvent<SignUpResult>()
+    private val mErrorObservable = SingleLiveTypedEvent<SignUpResult>()
 
     private var mSignUpTask: Disposable? = null
 

@@ -1,4 +1,3 @@
 package ru.iandreyshev.featureDreams.domain
 
-class SaveDreamResult {
-}
+class SaveDreamResult

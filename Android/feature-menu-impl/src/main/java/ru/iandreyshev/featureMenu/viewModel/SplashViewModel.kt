@@ -2,14 +2,14 @@ package ru.iandreyshev.featureMenu.viewModel
 
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
-import ru.iandreyshev.featureAccountApi.useCase.IGetAuthStateUseCase
+import ru.iandreyshev.featureAccountApi.useCase.IStartUpUseCase
 import ru.iandreyshev.featureMenu.di.dependencies.ISplashNavigator
 import javax.inject.Inject
 
 class SplashViewModel
 @Inject constructor(
         private val navigator: ISplashNavigator,
-        getAuthStateUseCase: IGetAuthStateUseCase
+        getAuthStateUseCase: IStartUpUseCase
 ) : ViewModel() {
 
     private val mGetAuthStateDisposable: Disposable

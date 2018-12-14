@@ -2,6 +2,7 @@ package ru.iandreyshev.featureDreams.di
 
 import dagger.Binds
 import dagger.Module
+import ru.iandreyshev.coreAndroid.di.scope.PerFeature
 import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.network.IDreamsServerApi
 import ru.iandreyshev.featureDreams.network.impl.DreamsServerApi
@@ -16,19 +17,19 @@ import javax.inject.Singleton
 abstract class FeatureDreamsBindsModule {
 
     @Binds
-    @Singleton
+    @PerFeature
     abstract fun bindDreamsRepository(repository: DreamsRepository): IDreamsRepository
 
     @Binds
-    @Singleton
+    @PerFeature
     abstract fun bindDreamsServerApi(serverApi: DreamsServerApi): IDreamsServerApi
 
     @Binds
-    @Singleton
+    @PerFeature
     abstract fun bindDreamsStorage(storage: DreamsStorage): IDreamsStorage
 
     @Binds
-    @Singleton
+    @PerFeature
     abstract fun bindDraftStorage(storage: DraftStorage): IDraftStorage
 
 }

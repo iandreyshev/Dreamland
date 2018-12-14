@@ -11,6 +11,8 @@
 
         <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
         <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
+
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
 </resources>

@@ -5,7 +5,7 @@ import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.network.IDreamsServerApi
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
 import ru.iandreyshev.featureDreams.domain.DeleteDreamResult
-import ru.iandreyshev.featureDreamsApi.data.DreamKey
+import ru.iandreyshev.featureDreamsApi.domain.DreamKey
 import javax.inject.Inject
 
 class DeleteDreamUseCase
