@@ -35,7 +35,6 @@ class MyDreamsFragment : BaseFragment() {
 
         FeatureDreamsComponent.get().inject(this)
 
-        retainInstance = true
         initDreamsList()
         initRefreshers()
 
@@ -95,10 +94,7 @@ class MyDreamsFragment : BaseFragment() {
         }
 
         override fun onLongClick(dream: Dream): Boolean {
-            if (mViewModel.optionsTarget.value == null) {
-                mViewModel.onOpenDreamOptions(dream)
-            }
-
+            mViewModel.onOpenDreamOptions(dream)
             return true
         }
     }

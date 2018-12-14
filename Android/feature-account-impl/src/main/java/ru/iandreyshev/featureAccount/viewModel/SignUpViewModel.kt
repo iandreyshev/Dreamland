@@ -3,6 +3,7 @@ package ru.iandreyshev.featureAccount.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveTypedEvent
 import ru.iandreyshev.featureAccount.di.dependencies.IAccountNavigator
 import ru.iandreyshev.featureAccountApi.data.SignUpProperties
@@ -31,6 +32,7 @@ class SignUpViewModel
     fun startSignUp(properties: SignUpProperties) {
         mWaitingObservable.start()
         mSignUpTask = signUpUseCase(properties)
+                .ioToMain()
                 .subscribe { result, error ->
                     result?.let(::handleSignUpResult)
                     error?.let(::handleSignUpError)

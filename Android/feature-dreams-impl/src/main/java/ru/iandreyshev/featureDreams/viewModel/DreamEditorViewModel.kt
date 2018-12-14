@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.os.Bundle
 import io.reactivex.disposables.Disposable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.rx.subscribe
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
@@ -32,6 +33,7 @@ class DreamEditorViewModel(
     fun saveDream(dream: DreamProperties) {
         mWaitingViewModel.start()
         mSaveDreamSubscription = saveDreamUseCase(dream, mDreamKey)
+                .ioToMain()
                 .subscribe(::handleSaveResult, ::handleSaveError) {
                     mWaitingViewModel.stop()
                 }

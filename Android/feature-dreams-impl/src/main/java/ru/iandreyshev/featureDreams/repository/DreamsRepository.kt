@@ -1,6 +1,7 @@
 package ru.iandreyshev.featureDreams.repository
 
 import io.reactivex.Observable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
 import ru.iandreyshev.featureDreamsApi.domain.*
@@ -13,6 +14,7 @@ class DreamsRepository
 
     override val dreamsObservable: Observable<List<Dream>>
         get() = storage.dreamObservable
+                .ioToMain()
                 .map { list ->
                     list.map { entity ->
                         val properties = DreamProperties(entity.description)

@@ -71,4 +71,8 @@ class DreamEditorActivity : BaseAppCompatActivity() {
         )
     }
 
+    companion object {
+        const val KEY_DREAM = "key_dream_to_edit"
+    }
+
 }

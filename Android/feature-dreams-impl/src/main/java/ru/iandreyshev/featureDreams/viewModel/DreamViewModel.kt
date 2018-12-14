@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.os.Bundle
 import io.reactivex.disposables.Disposable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.rx.subscribe
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
@@ -23,7 +24,7 @@ class DreamViewModel
 
     val deleteDreamWaiting: LiveData<Boolean>
         get() = mDeleteWaitingViewModel.observable
-    val dream: LiveData<DreamProperties>
+    val dream: LiveData<Dream>
         get() = mDreamViewModel
 
     val loadingErrorEvent: LiveData<Unit>
@@ -31,10 +32,8 @@ class DreamViewModel
     val unknownErrorEvent: LiveData<Unit>
         get() = mUnknownErrorEvent
 
-    private val mDream: Dream? = Dream.create(bundle)
-
     private val mDeleteWaitingViewModel = WaitingViewModel()
-    private val mDreamViewModel = mutableLiveDataOf(mDream?.properties)
+    private val mDreamViewModel = mutableLiveDataOf<Dream>()
 
     private val mLoadingErrorEvent = SingleLiveEvent()
     private val mUnknownErrorEvent = SingleLiveEvent()
@@ -43,19 +42,21 @@ class DreamViewModel
     private var mDeleteDreamSubscription: Disposable? = null
 
     init {
-        if (mDream == null) {
+        val dream: Dream? = Dream.create(bundle)
+        if (dream == null) {
             mLoadingErrorEvent.call()
         } else {
-            mLoadDreamSubscription = dreamsRepository.getDreamObservable(mDream.key)
+            mDreamViewModel.value = dream
+            mLoadDreamSubscription = dreamsRepository.getDreamObservable(dream.key)
                     .subscribe(::handleLoadDreamResult, ::handleLoadDreamError)
         }
     }
 
     fun delete() {
-        mDream ?: return
-
+        val dream = mDreamViewModel.value ?: return
         mDeleteWaitingViewModel.start()
-        mDeleteDreamSubscription = deleteUseCase.invoke(mDream.key)
+        mDeleteDreamSubscription = deleteUseCase.invoke(dream.key)
+                .ioToMain()
                 .subscribe(::handleDeleteResult, ::handleDeleteError) {
                     mDeleteWaitingViewModel.stop()
                 }
@@ -70,7 +71,8 @@ class DreamViewModel
             is LoadingDreamCompleted -> {
             }
             is UpdateDreamCompleted -> {
-                mDreamViewModel.value = result.properties
+                mDreamViewModel.value = mDreamViewModel.value
+                        ?.copy(properties = result.properties)
             }
             is ErrorDreamDeleted -> mLoadingErrorEvent.call()
         }

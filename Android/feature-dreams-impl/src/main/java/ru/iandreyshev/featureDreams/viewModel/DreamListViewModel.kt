@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
+import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
 import ru.iandreyshev.featureDreams.useCase.IFetchDreamsUseCase
 import ru.iandreyshev.featureDreamsApi.api.IDreamsRepository
@@ -39,6 +40,7 @@ class DreamListViewModel
 
     fun onRefresh() {
         mRefreshingSubscription = fetchDreamsUseCase()
+                .ioToMain()
                 .ignoreElement()
                 .doOnSubscribe { mRefreshing.value = true }
                 .subscribe { mRefreshing.value = false }
@@ -51,7 +53,9 @@ class DreamListViewModel
     }
 
     fun onOpenDreamOptions(dream: Dream) {
-        mOptionsTarget.value = dream
+        if (mOptionsTarget.value == null) {
+            mOptionsTarget.value = dream
+        }
     }
 
     fun onCloseDreamOptions() {

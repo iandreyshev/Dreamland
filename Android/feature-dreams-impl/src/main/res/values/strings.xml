@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Dreams</string>
 
-    <string name="create_dream_toolbar_menu_item_record_voice">Record voice</string>
     <string name="create_dream_toolbar_menu_item_save">Save</string>
     <string name="create_dream_toolbar_title">New dream</string>
 
     <string name="dreams_diary_empty_text">You have no dreams yet.\nMaybe you sleep…</string>
     <string name="dreams_diary_save_first_button">Write first</string>
+
+    <string name="dream_toolbar_edit">Edit</string>
+    <string name="dream_toolbar_delete">Delete</string>
+    <string name="dream_delete_popup_title">Delete dream</string>
+    <string name="dream_delete_popup_message">Do you really want to delete this dream?</string>
 </resources>
