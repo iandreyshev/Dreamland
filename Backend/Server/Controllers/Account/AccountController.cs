@@ -29,8 +29,6 @@ namespace Dreamland.Controllers.Account
 			var serviceResult = _signInUseCase.Execute(email, password);
 			var response = AccountMapper.Map(serviceResult);
 
-
-
 			return new JsonResult(response);
 		}
 
@@ -50,10 +48,10 @@ namespace Dreamland.Controllers.Account
 		[HttpDelete]
 		[Route("delete")]
 		public IActionResult Delete(
-			int id,
-			string password)
+			[FromHeader(Name = AuthProperties.HEADER_AUTH_ID)] string userId,
+			[FromHeader(Name = AuthProperties.HEADER_AUTH_PASSOWRD)] string userPassword)
 		{
-			var serviceResult = _deleteAccountUseCase.Execute(id, password);
+			var serviceResult = _deleteAccountUseCase.Execute(userId, userPassword);
 			var response = AccountMapper.Map(serviceResult);
 
 			return new JsonResult(response);

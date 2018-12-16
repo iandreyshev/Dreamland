@@ -1,20 +1,29 @@
 ﻿using Dreamland.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 
 namespace Dreamland.Storage.Account
 {
-	public class AccountStorage : IAccountStorage
+	public class AccountStorage : Storage, IAccountStorage
 	{
-		public AccountStorage(DatabaseContext context)
+		public AccountStorage(DatabaseContext context) : base(context)
 		{
-			_context = context;
-			_users = _context.Users;
+			_users = Context.Users;
 		}
 
-		private DatabaseContext _context;
 		private DbSet<User> _users;
+
+		public User Find(long userId, string password)
+		{
+			var users = _users.Where(u => u.Id == userId && u.Password == password);
+
+			if (users.Count() == 0)
+			{
+				return null;
+			}
+
+			return users.First();
+		}
 
 		public User Find(string email, string password)
 		{
@@ -31,7 +40,7 @@ namespace Dreamland.Storage.Account
 		public void Add(User user)
 		{
 			_users.Add(user);
-			_context.SaveChanges();
+			Context.SaveChanges();
 		}
 
 		public void Delete(long id)
@@ -39,10 +48,7 @@ namespace Dreamland.Storage.Account
 			var user = new User { Id = id };
 			_users.Attach(user);
 			_users.Remove(user);
-			_context.SaveChanges();
+			Context.SaveChanges();
 		}
-
-		public TResult Transaction<TResult>(TResult errVal, Func<int, TResult> body)
-			=> _context.Transaction(errVal, body);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Dreamland.Domain;
+﻿using Dreamland.Controllers.Account.Response;
+using Dreamland.Domain;
 using Dreamland.UseCase.Account;
 
 namespace Dreamland.Controllers.Account.Mapper
@@ -15,7 +16,7 @@ namespace Dreamland.Controllers.Account.Mapper
 				case SignInUseCase.Result.Error.NOT_EXISTS:
 					error = "0";
 					break;
-				case SignInUseCase.Result.Error.UNDEFINED:
+				case null:
 					account = Map(result.user);
 					break;
 			}
@@ -56,12 +57,15 @@ namespace Dreamland.Controllers.Account.Mapper
 		{
 			string error = null;
 
-			switch (result.error)
+			switch (result)
 			{
-				case DeleteAccountUseCase.Result.Error.NOT_EXISTS:
+				case DeleteAccountUseCase.Result.SUCCESS:
+					break;
+				case DeleteAccountUseCase.Result.ERROR_INCORRECT_DATA:
 					error = "0";
 					break;
-				case DeleteAccountUseCase.Result.Error.UNDEFINED:
+				case DeleteAccountUseCase.Result.ERROR_UNDEFINED:
+					error = "1";
 					break;
 			}
 

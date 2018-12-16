@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Dreamland.Controllers.Account
+namespace Dreamland.Controllers.Account.Response
 {
 	public class AccountResponse
 	{

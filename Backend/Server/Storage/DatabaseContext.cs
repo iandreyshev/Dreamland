@@ -9,6 +9,7 @@ namespace Dreamland.Storage
 	public class DatabaseContext : DbContext
 	{
 		public DbSet<User> Users { get; set; }
+		public DbSet<Dream> Dreams { get; set; }
 
 		private IConfiguration Configuration { get; }
 

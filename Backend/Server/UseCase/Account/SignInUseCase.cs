@@ -1,5 +1,5 @@
-﻿using Dreamland.Domain;
-using Dreamland.Conditions;
+﻿using Dreamland.Conditions;
+using Dreamland.Domain;
 using Dreamland.Storage.Account;
 
 namespace Dreamland.UseCase.Account
@@ -19,34 +19,27 @@ namespace Dreamland.UseCase.Account
 
 			if (user == null)
 			{
-				return new Result(Result.Error.NOT_EXISTS);
+				return new Result
+				{
+					error = Result.Error.NOT_EXISTS
+				};
 			}
 
-			return new Result(user);
+			return new Result
+			{
+				user = user
+			};
 		}
 
 		public class Result
 		{
 			public enum Error
 			{
-				NOT_EXISTS,
-				UNDEFINED
-			}
-
-			public Result(User user)
-			{
-				this.user = user;
-				error = Error.UNDEFINED;
-			}
-
-			public Result(Error error)
-			{
-				user = null;
-				this.error = error;
+				NOT_EXISTS
 			}
 
 			public User user;
-			public Error error;
+			public Error? error = null;
 		}
 	}
 }

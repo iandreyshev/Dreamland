@@ -1,26 +1,49 @@
-﻿namespace Dreamland.UseCase.Account
+﻿using Dreamland.Storage.Account;
+
+namespace Dreamland.UseCase.Account
 {
 	public class DeleteAccountUseCase
 	{
-		public Result Execute(int id, string password)
+		private IAccountStorage _storage;
+
+		public DeleteAccountUseCase(IAccountStorage accountStorage)
 		{
-			throw new System.NotImplementedException();
+			_storage = accountStorage;
 		}
 
-		public class Result
+		public Result Execute(string userIdString, string userPassword)
 		{
-			public enum Error
+			long userId = 0;
+
+			try
 			{
-				NOT_EXISTS,
-				UNDEFINED
+				userId = long.Parse(userIdString);
+			}
+			catch
+			{
+				return Result.ERROR_INCORRECT_DATA;
 			}
 
-			public Result(Error error)
+			return _storage.Transaction(Result.ERROR_UNDEFINED, _ =>
 			{
-				this.error = error;
-			}
+				var user = _storage.Find(userId, userPassword);
 
-			public Error error;
+				if (user == null)
+				{
+					return Result.SUCCESS;
+				}
+
+				_storage.Delete(userId);
+
+				return Result.SUCCESS;
+			});
+		}
+
+		public enum Result
+		{
+			SUCCESS,
+			ERROR_INCORRECT_DATA,
+			ERROR_UNDEFINED
 		}
 	}
 }

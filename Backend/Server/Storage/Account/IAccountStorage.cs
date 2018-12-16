@@ -3,11 +3,11 @@ using System;
 
 namespace Dreamland.Storage.Account
 {
-	public interface IAccountStorage
+	public interface IAccountStorage : IStorage
 	{
-		TResult Transaction<TResult>(TResult errVal, Func<int, TResult> body);
 		void Add(User user);
+		User Find(long userId, string password);
 		User Find(string email, string password);
-		void Delete(long user);
+		void Delete(long userId);
 	}
 }

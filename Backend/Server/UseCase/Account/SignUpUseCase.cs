@@ -1,16 +1,63 @@
-﻿using Dreamland.Domain;
+﻿using Dreamland.Conditions;
+using Dreamland.Domain;
+using Dreamland.Storage.Account;
 
 namespace Dreamland.UseCase.Account
 {
     public class SignUpUseCase
-    {
+	{
+		private IAccountStorage _storage;
+
+		public SignUpUseCase(IAccountStorage accountStorage)
+		{
+			_storage = accountStorage;
+		}
+
 		public Result Execute(string email, string password, string name)
 		{
-			throw new System.NotImplementedException();
+			if (!Condition.IsValidEmail(email))
+			{
+				return Result.IncorrectData();
+			}
+			if (!Condition.IsValidName(name))
+			{
+				return Result.IncorrectData();
+			}
+			if (!Condition.IsValidPassword(password))
+			{
+				return Result.IncorrectData();
+			}
+
+			return _storage.Transaction(Result.Undefined(), _ =>
+			{
+				var user = _storage.Find(email, password);
+
+				if (user != null)
+				{
+					return Result.AlreadyExists();
+				}
+
+				return new Result { user = user };
+			});
 		}
 
 		public class Result
 		{
+			public static Result IncorrectData()
+			{
+				return new Result { error = Error.INCORRECT_DATA };
+			}
+
+			public static Result AlreadyExists()
+			{
+				return new Result { error = Error.ALREADY_EXISTS };
+			}
+
+			public static Result Undefined()
+			{
+				return new Result { error = Error.UNDEFINED };
+			}
+
 			public enum Error
 			{
 				INCORRECT_DATA,
@@ -18,20 +65,8 @@ namespace Dreamland.UseCase.Account
 				UNDEFINED
 			}
 
-			public Result(User user)
-			{
-				this.user = user;
-				error = Error.UNDEFINED;
-			}
-
-			public Result(Error error)
-			{
-				user = null;
-				this.error = error;
-			}
-
 			public User user;
-			public Error error;
+			public Error? error = null;
 		}
 	}
 }
