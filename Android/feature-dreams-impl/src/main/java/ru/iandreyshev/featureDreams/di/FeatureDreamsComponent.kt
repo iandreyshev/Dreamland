@@ -5,13 +5,14 @@ import ru.iandreyshev.coreAndroid.di.context.IContextProvider
 import ru.iandreyshev.coreAndroid.di.scope.PerFeature
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
+import ru.iandreyshev.coreNetworkApi.api.ICoreNetworkApi
+import ru.iandreyshev.featureAccountApi.api.IFeatureAccountApi
 import ru.iandreyshev.featureDreams.di.dependencies.IFeatureDreamsDependencies
 import ru.iandreyshev.featureDreams.ui.activity.DreamActivity
 import ru.iandreyshev.featureDreams.ui.activity.DreamEditorActivity
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
 import ru.iandreyshev.featureDreamsApi.api.IFeatureDreamsApi
-import javax.inject.Singleton
 
 @Component(
         modules = [
@@ -43,7 +44,11 @@ abstract class FeatureDreamsComponent : IFeatureDreamsApi {
     abstract fun inject(viewModel: DreamEditorViewModel)
     abstract fun inject(viewModel: DreamListViewModel)
 
-    @Component(dependencies = [IContextProvider::class])
+    @Component(dependencies = [
+        IContextProvider::class,
+        ICoreNetworkApi::class,
+        IFeatureAccountApi::class]
+    )
     abstract class DependenciesComponent : IFeatureDreamsDependencies
 
 }

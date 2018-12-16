@@ -11,7 +11,6 @@ class LogOutUseCase
 ) : ILogOutUseCase {
 
     override fun invoke(): Completable = Completable.create {
-        Thread.sleep(1000)
         mStorage.clear()
         it.onComplete()
     }

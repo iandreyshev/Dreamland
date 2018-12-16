@@ -10,7 +10,7 @@ import ru.iandreyshev.featureAccountApi.data.SignUpResult
 internal fun SignUpProperties.toRequest() =
         SignUpRequest(
                 email = email,
-                fullName = fullName,
+                fullName = name,
                 password = password
         )
 
@@ -24,10 +24,10 @@ internal fun SignUpResponse.Account.toStorageEntity(password: String) =
 
 internal fun SignUpResponse.Error.toResult() =
         when (this) {
-            SignUpResponse.Error.USER_ALREADY_EXISTS -> SignUpResult.USER_ALREADY_EXISTS
-            SignUpResponse.Error.INCORRECT_DATA -> SignUpResult.INCORRECT_DATA
-            SignUpResponse.Error.NO_CONNECTION -> SignUpResult.NO_CONNECTION
-            SignUpResponse.Error.SERVER_ERROR -> SignUpResult.UNKNOWN
+            SignUpResponse.Error.USER_ALREADY_EXISTS -> SignUpResult.ERROR_USER_ALREADY_EXISTS
+            SignUpResponse.Error.INCORRECT_DATA -> SignUpResult.ERROR_INCORRECT_DATA
+            SignUpResponse.Error.NO_CONNECTION -> SignUpResult.ERROR_NO_CONNECTION
+            SignUpResponse.Error.SERVER_ERROR -> SignUpResult.ERROR_UNKNOWN
         }
 
 internal fun SignUpResponseJson.toApplicationModel(): SignUpResponse {

@@ -77,10 +77,10 @@ class SignUpFragment : BaseFragment() {
             titleResource = R.string.sign_up_error_title
             messageResource = when (error) {
                 SignUpResult.SUCCESS -> return@alert
-                SignUpResult.USER_ALREADY_EXISTS -> R.string.sign_up_error_user_already_exists
-                SignUpResult.INCORRECT_DATA -> R.string.sign_up_error_incorrect_data
-                SignUpResult.NO_CONNECTION -> R.string.sign_up_error_no_connection
-                SignUpResult.UNKNOWN -> R.string.sign_up_error_unknown
+                SignUpResult.ERROR_USER_ALREADY_EXISTS -> R.string.sign_up_error_user_already_exists
+                SignUpResult.ERROR_INCORRECT_DATA -> R.string.sign_up_error_incorrect_data
+                SignUpResult.ERROR_NO_CONNECTION -> R.string.sign_up_error_no_connection
+                SignUpResult.ERROR_UNKNOWN -> R.string.sign_up_error_unknown
             }
             okButton { }
         }?.show()

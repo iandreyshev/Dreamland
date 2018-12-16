@@ -11,7 +11,6 @@ class ClearDreamsStorageUseCase
 ) : IClearDreamsStorageUseCase {
 
     override fun invoke(): Completable = Completable.create {
-        Thread.sleep(1000)
         storage.clear()
         it.onComplete()
     }

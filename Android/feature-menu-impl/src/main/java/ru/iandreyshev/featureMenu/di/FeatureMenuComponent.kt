@@ -13,7 +13,8 @@ import javax.inject.Singleton
 
 @Component(
         modules = [
-            FeatureMenuViewModelModule::class],
+            FeatureMenuViewModelModule::class,
+            FeatureMenuUseCaseModule::class],
         dependencies = [
             IFeatureMenuDependencies::class]
 )

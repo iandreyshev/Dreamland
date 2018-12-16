@@ -94,7 +94,7 @@ class MyDreamsFragment : BaseFragment() {
         }
 
         override fun onLongClick(dream: Dream): Boolean {
-            mViewModel.onOpenDreamOptions(dream)
+//            mViewModel.onOpenDreamOptions(dream)
             return true
         }
     }

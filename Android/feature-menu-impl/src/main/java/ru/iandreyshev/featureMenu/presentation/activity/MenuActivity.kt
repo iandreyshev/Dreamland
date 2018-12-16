@@ -136,15 +136,25 @@ class MenuActivity : BaseAppCompatActivity() {
             MenuViewModel.MenuState.DREAMS -> setupDreamsViewState()
             MenuViewModel.MenuState.SETTINGS -> setupSettingsViewState()
         }
+
+        refreshActionBar()
     }
 
     private fun handleDreamsAvailability(isAvailable: Boolean) {
-        if (isAvailable) {
+        refreshActionBar()
+    }
+
+    private fun refreshActionBar() {
+        val isDreamsAvailable = mViewModel.dreamsAvailability.value ?: false
+        val isDreamsOpen = mViewModel.menuState.value == MenuViewModel.MenuState.DREAMS
+
+        if (isDreamsOpen && isDreamsAvailable) {
             mActionBarLayoutParams?.scrollFlags =
                     AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
         } else {
             mActionBarLayoutParams?.scrollFlags = 0
         }
+
         appBar.requestLayout()
     }
 

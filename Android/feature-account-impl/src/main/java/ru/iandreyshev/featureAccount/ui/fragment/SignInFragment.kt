@@ -80,13 +80,13 @@ class SignInFragment : BaseFragment() {
             titleResource = R.string.sign_in_error_title
             messageResource = when (error) {
                 SignInResult.SUCCESS -> return@buildAlert
-                SignInResult.USER_NOT_EXISTS -> R.string.sign_in_error_user_not_exists
-                SignInResult.INCORRECT_DATA -> R.string.sign_in_error_incorrect_data
-                SignInResult.NO_CONNECTION -> R.string.sign_in_error_no_connection
-                SignInResult.UNKNOWN -> R.string.sign_in_error_unknown
+                SignInResult.ERROR_USER_NOT_EXISTS -> R.string.sign_in_error_user_not_exists
+                SignInResult.ERROR_INCORRECT_DATA -> R.string.sign_in_error_incorrect_data
+                SignInResult.ERROR_NO_CONNECTION -> R.string.sign_in_error_no_connection
+                SignInResult.ERROR_UNKNOWN -> R.string.sign_in_error_unknown
             }
             okButton {
-                if (error == SignInResult.USER_NOT_EXISTS) {
+                if (error == SignInResult.ERROR_USER_NOT_EXISTS) {
                     mAuthViewModel.wantSignUp()
                 }
                 mSignInViewModel.onErrorClosed()

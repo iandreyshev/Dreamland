@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:3770196133259514733",
-      "lastPropertyId": "7:4532994290183187535",
+      "lastPropertyId": "8:6080853715122793338",
       "name": "DreamStorageEntity",
       "properties": [
         {
@@ -13,28 +13,16 @@
           "name": "id"
         },
         {
-          "id": "2:3050175108932265569",
-          "name": "remoteId"
-        },
-        {
-          "id": "3:5516453383483140599",
-          "name": "syncState"
-        },
-        {
           "id": "4:6417685975912563974",
           "name": "date"
-        },
-        {
-          "id": "5:5647861649402179499",
-          "name": "duration"
         },
         {
           "id": "6:6578176199722520480",
           "name": "description"
         },
         {
-          "id": "7:4532994290183187535",
-          "name": "idLucid"
+          "id": "8:6080853715122793338",
+          "name": "isLucid"
         }
       ],
       "relations": []
@@ -48,7 +36,12 @@
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    3050175108932265569,
+    5516453383483140599,
+    5647861649402179499,
+    4532994290183187535
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

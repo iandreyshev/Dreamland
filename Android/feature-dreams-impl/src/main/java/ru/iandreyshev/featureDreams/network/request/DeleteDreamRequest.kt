@@ -1,3 +1,7 @@
 package ru.iandreyshev.featureDreams.network.request
 
-class DeleteDreamRequest
+data class DeleteDreamRequest(
+        val userId: Long,
+        val userPassword: String,
+        val id: Long
+)

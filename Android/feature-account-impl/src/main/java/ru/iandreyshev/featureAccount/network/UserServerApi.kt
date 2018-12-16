@@ -29,8 +29,8 @@ class UserServerApi
         Debug.signInResponse(request)?.let { return it }
 
         val apiRequest = Request(query = mapOf(
-                EMAIL_QUERY_KEY to request.login,
-                PASSWORD_QUERY_KEY to request.password)
+                QUERY_EMAIL to request.login,
+                QUERY_PASSWORD to request.password)
         )
         val apiOptions = ApiRequestOptions(path = PATH_SIGN_IN)
         val apiResponse = httpClient.get(apiRequest, apiOptions)
@@ -50,9 +50,9 @@ class UserServerApi
 
     override fun signUp(request: SignUpRequest): SignUpResponse {
         val apiRequest = Request(query = mapOf(
-                EMAIL_QUERY_KEY to request.email,
-                PASSWORD_QUERY_KEY to request.password,
-                NAME_QUERY_KEY to request.fullName)
+                QUERY_EMAIL to request.email,
+                QUERY_PASSWORD to request.password,
+                QUERY_NAME to request.fullName)
         )
         val apiOptions = ApiRequestOptions(path = PATH_SIGN_UP)
         val apiResponse = httpClient.get(apiRequest, apiOptions)
@@ -72,18 +72,18 @@ class UserServerApi
 
     override fun delete(request: DeleteRequest): DeleteResponse {
         val apiRequest = Request(query = mapOf(
-                ID_QUERY_KEY to request.id.toString(),
-                PASSWORD_QUERY_KEY to request.password)
+                QUERY_ID to request.id.toString(),
+                QUERY_PASSWORD to request.password)
         )
         val apiOptions = ApiRequestOptions(path = PATH_DELETE)
         val apiResponse = httpClient.delete(apiRequest, apiOptions)
 
         when (apiResponse.error) {
             Response.Error.CONNECTION ->
-                return DeleteResponse(DeleteResponse.Result.NO_CONNECTION)
+                return DeleteResponse.NO_CONNECTION
             Response.Error.PARSING,
             Response.Error.UNDEFINED ->
-                return DeleteResponse(DeleteResponse.Result.SERVER_ERROR)
+                return DeleteResponse.SERVER_ERROR
         }
 
         return mJsonParser
@@ -96,10 +96,10 @@ class UserServerApi
         private const val PATH_SIGN_UP = "/account/sign_up"
         private const val PATH_DELETE = "/account/delete"
 
-        private const val EMAIL_QUERY_KEY = "email"
-        private const val PASSWORD_QUERY_KEY = "password"
-        private const val NAME_QUERY_KEY = "name"
-        private const val ID_QUERY_KEY = "id"
+        private const val QUERY_EMAIL = "email"
+        private const val QUERY_PASSWORD = "password"
+        private const val QUERY_NAME = "name"
+        private const val QUERY_ID = "id"
     }
 
 }

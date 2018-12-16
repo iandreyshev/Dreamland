@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">core-android-utils</string>
+
+    <string name="save_error_title">Ошибка сохранения</string>
+    <string name="save_error_empty">Текст сна не может быть пустым</string>
+    <string name="save_error_large">Текст сна не может быть на столько большим!</string>
+    <string name="save_error_no_connection">Произошла ошибка при соединении с сервером</string>
+    <string name="save_error_undefined">Произошла неизвестная ошибка…</string>
 </resources>

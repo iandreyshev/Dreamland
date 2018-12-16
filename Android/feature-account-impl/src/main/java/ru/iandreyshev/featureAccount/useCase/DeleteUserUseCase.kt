@@ -1,7 +1,6 @@
 package ru.iandreyshev.featureAccount.useCase
 
 import io.reactivex.Single
-import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.featureAccount.storage.IUserStorage
 import ru.iandreyshev.featureAccount.mapping.toResult
 import ru.iandreyshev.featureAccount.network.IUserServerApi

@@ -27,6 +27,7 @@ dependencies {
     api project(':core-database')
     api project(':core-network-api')
     api project(':feature-dreams-api')
+    api project(':feature-account-api')
 
     // Dagger 2
     api 'com.google.dagger:dagger-android:2.16'
@@ -37,4 +38,7 @@ dependencies {
 
     // RxJava-ObjectBox
     implementation "io.objectbox:objectbox-rxjava:$objectbox_version"
+
+    // Gson
+    api 'com.google.code.gson:gson:2.8.5'
 }

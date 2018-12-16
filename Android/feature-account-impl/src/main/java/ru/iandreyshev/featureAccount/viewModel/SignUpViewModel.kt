@@ -48,17 +48,17 @@ class SignUpViewModel
         when (result) {
             SignUpResult.SUCCESS ->
                 navigator.onSignUpSuccess()
-            SignUpResult.USER_ALREADY_EXISTS,
-            SignUpResult.INCORRECT_DATA,
-            SignUpResult.NO_CONNECTION,
-            SignUpResult.UNKNOWN ->
+            SignUpResult.ERROR_USER_ALREADY_EXISTS,
+            SignUpResult.ERROR_INCORRECT_DATA,
+            SignUpResult.ERROR_NO_CONNECTION,
+            SignUpResult.ERROR_UNKNOWN ->
                 mErrorObservable.setValue(result)
         }
     }
 
     private fun handleSignUpError(error: Throwable) {
         error.printStackTrace()
-        mErrorObservable.value = SignUpResult.UNKNOWN
+        mErrorObservable.value = SignUpResult.ERROR_UNKNOWN
     }
 
 }

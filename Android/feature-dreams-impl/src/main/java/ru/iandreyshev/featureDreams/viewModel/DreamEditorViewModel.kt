@@ -6,6 +6,7 @@ import android.os.Bundle
 import io.reactivex.disposables.Disposable
 import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.rx.subscribe
+import ru.iandreyshev.coreAndroid.viewModel.DialogViewModel
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
@@ -18,6 +19,8 @@ class DreamEditorViewModel(
         bundle: Bundle?
 ) : ViewModel() {
 
+    val saveResult: LiveData<SaveDreamResult>
+        get() = mErrorViewModel.observable
     val saveWaiting: LiveData<Boolean>
         get() = mWaitingViewModel.observable
     val closeEvent: LiveData<Unit>
@@ -25,6 +28,7 @@ class DreamEditorViewModel(
 
     private val mDreamKey: DreamKey? = DreamKey.create(bundle)
 
+    private val mErrorViewModel = DialogViewModel<SaveDreamResult>()
     private val mWaitingViewModel = WaitingViewModel()
     private val mCloseEvent = SingleLiveEvent()
 
@@ -39,15 +43,24 @@ class DreamEditorViewModel(
                 }
     }
 
+    fun onCloseSaveResult() {
+        mErrorViewModel.close()
+    }
+
     override fun onCleared() {
         mSaveDreamSubscription?.dispose()
     }
 
     private fun handleSaveResult(result: SaveDreamResult) {
-        mCloseEvent()
+        if (result == SaveDreamResult.SUCCESS) {
+            mCloseEvent()
+            return
+        }
+        mErrorViewModel.update(result)
     }
 
     private fun handleSaveError(error: Throwable) {
+        mErrorViewModel.update(SaveDreamResult.ERROR_UNDEFINED)
         error.printStackTrace()
     }
 

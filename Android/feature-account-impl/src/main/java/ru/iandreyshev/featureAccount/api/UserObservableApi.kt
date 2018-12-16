@@ -12,6 +12,9 @@ class UserObservableApi
         private val storage: IUserStorage
 ) : IUserApi {
 
+    override val user: User?
+        get() = storage.user?.toUser()
+
     override val observable: Observable<User>
         get() = storage.userObservable
                 .map { it.toUser() }

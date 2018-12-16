@@ -13,10 +13,11 @@ import ru.iandreyshev.coreAndroid.ui.view.setOnClickListener
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.coreAndroid.viewModel.viewModel
 import ru.iandreyshev.featureAccountApi.data.DeleteUserResult
+import ru.iandreyshev.featureAccountApi.data.User
 import ru.iandreyshev.featureMenu.R
 import ru.iandreyshev.featureMenu.di.FeatureMenuComponent
 import ru.iandreyshev.featureMenu.viewModel.SettingsViewModel
-import ru.iandreyshev.vext.view.goneIfOrVisible
+import ru.iandreyshev.vext.view.invisibleIfOrVisible
 import ru.iandreyshev.vext.view.visibleIfOrGone
 
 class SettingsFragment : BaseFragment() {
@@ -36,13 +37,10 @@ class SettingsFragment : BaseFragment() {
         btnDeleteProfile.setOnClickListener(::onDeleteUserClick)
         btnLogOut.setOnClickListener(::onLogOutClick)
 
-        subscribeToViewModel()
-    }
-
-    private fun subscribeToViewModel() {
         mViewModel.apply {
             observeNotNull(waiting, ::handleWaiting)
             observeNotNull(deleteResult, ::handleDeleteUserResult)
+            observeNotNull(user, ::handleUser)
         }
     }
 
@@ -64,18 +62,28 @@ class SettingsFragment : BaseFragment() {
         }?.show()
     }
 
+    private fun handleUser(user: User) {
+        tvEmail.text = user.login
+        tvName.text = user.fullName
+    }
+
     private fun handleWaiting(isWaiting: Boolean) {
-        progressBar.visibleIfOrGone(isWaiting)
-        btnLogOut.goneIfOrVisible(isWaiting)
-        btnDeleteProfile.goneIfOrVisible(isWaiting)
+        pbLogout.visibleIfOrGone(isWaiting)
+        btnLogOut.invisibleIfOrVisible(isWaiting)
+        btnDeleteProfile.invisibleIfOrVisible(isWaiting)
     }
 
     private fun handleDeleteUserResult(result: DeleteUserResult) {
-        buildAlert {
+        val alert = buildAlert {
             title = "Profile deleting"
             message = result.toString()
-            okButton { }
-        }?.show()
+            okButton { it.cancel() }
+            onCancelled { mViewModel.onCloseDeleteError() }
+        }
+
+        alert?.setCanceledOnTouchOutside(false)
+        alert?.setCancelable(false)
+        alert?.show()
     }
 
 }

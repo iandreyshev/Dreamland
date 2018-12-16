@@ -23,10 +23,6 @@ abstract class FeatureAccountUseCaseModule {
 
     @Binds
     @Singleton
-    abstract fun bindGetAuthStateUseCase(useCase: StartUpUseCase): IStartUpUseCase
-
-    @Binds
-    @Singleton
     abstract fun bindDeleteUserUseCase(useCase: DeleteUserUseCase): IDeleteUserUseCase
 
 }

@@ -15,10 +15,4 @@
             android:title="@string/drawer_menu_item_settings" />
     </group>
 
-    <group android:id="@+id/group.about">
-        <item
-            android:id="@+id/drawer_item_about"
-            android:title="@string/drawer_menu_item_about" />
-    </group>
-
 </menu>

@@ -25,8 +25,8 @@ class DreamlandApplication : Application() {
         DaggerAppComponent.builder().create(this).inject(this)
 
         CoreNetworkComponent.init(proxyInjector.coreNetworkComponent())
-        FeatureDreamsComponent.init(proxyInjector.featureDreamsComponent())
         FeatureAccountComponent.init(proxyInjector.featureAccountComponent())
+        FeatureDreamsComponent.init(proxyInjector.featureDreamsComponent())
         FeatureMenuComponent.init(proxyInjector.featureMenuComponent())
     }
 

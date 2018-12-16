@@ -2,8 +2,7 @@ package ru.iandreyshev.coreNetwork.httpClient
 
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import okhttp3.Headers
-import okhttp3.OkHttpClient
+import okhttp3.*
 import ru.iandreyshev.coreAndroid.di.context.IContextProvider
 import ru.iandreyshev.coreNetwork.extension.applyOptions
 import ru.iandreyshev.coreNetwork.extension.toApplicationResponse
@@ -14,6 +13,7 @@ import ru.iandreyshev.coreNetworkApi.data.Request
 import ru.iandreyshev.coreNetworkApi.data.Response
 import java.io.IOException
 import java.lang.Exception
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HttpClient
@@ -21,13 +21,16 @@ class HttpClient
         contextProvider: IContextProvider
 ) : IHttpClient {
 
+    private val mOkHttpClient: OkHttpClient = OkHttpClient.Builder()
+            .readTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .addNetworkInterceptor(StethoInterceptor())
+            .build()
+
     init {
         Stetho.initializeWithDefaults(contextProvider.context)
     }
-
-    private val mOkHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .addNetworkInterceptor(StethoInterceptor())
-            .build()
 
     override fun get(request: Request): Response = okhttp3.Request.Builder()
             .get()
@@ -38,6 +41,16 @@ class HttpClient
 
     override fun get(request: Request, options: ApiRequestOptions): Response =
             request.applyOptions(options).let(::get)
+
+    override fun post(request: Request): Response = okhttp3.Request.Builder()
+            .post(RequestBody.create(JSON, request.body))
+            .url(request.uriString)
+            .headers(Headers.of(request.headers))
+            .build()
+            .call(::toApplicationResponse)
+
+    override fun post(request: Request, options: ApiRequestOptions): Response =
+            request.applyOptions(options).let(::post)
 
     override fun delete(request: Request): Response = okhttp3.Request.Builder()
             .delete()
@@ -71,6 +84,10 @@ class HttpClient
         } catch (ex: Exception) {
             Response(Response.Error.PARSING)
         }
+    }
+
+    companion object {
+        private val JSON = MediaType.parse("application/json; charset=utf-8")
     }
 
 }

@@ -5,5 +5,5 @@ import ru.iandreyshev.featureAccountApi.data.SignUpProperties
 import ru.iandreyshev.featureAccountApi.data.SignUpResult
 
 interface ISignUpUseCase {
-    operator fun invoke(signUpProperties: SignUpProperties): Single<SignUpResult>
+    operator fun invoke(properties: SignUpProperties): Single<SignUpResult>
 }

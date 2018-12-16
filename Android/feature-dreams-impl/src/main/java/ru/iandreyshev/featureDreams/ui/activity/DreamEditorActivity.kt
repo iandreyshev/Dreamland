@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_dream_editor.*
+import org.jetbrains.anko.cancelButton
 import ru.iandreyshev.coreAndroid.ui.activity.BaseAppCompatActivity
+import ru.iandreyshev.coreAndroid.ui.dialog.buildAlert
+import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
+import ru.iandreyshev.featureDreams.domain.SaveDreamResult
 import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.IViewModelFactory
@@ -30,6 +34,7 @@ class DreamEditorActivity : BaseAppCompatActivity() {
         initActionBar()
 
         mViewModel = mViewModelFactory.dreamEditorViewModel(this, savedInstanceState).apply {
+            observeNotNull(saveResult, ::handleSaveResult)
             observeNotNull(saveWaiting, ::handleSaveWaiting)
             observeNotNull(closeEvent) { finish() }
         }
@@ -59,6 +64,28 @@ class DreamEditorActivity : BaseAppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
+    }
+
+    private fun handleSaveResult(result: SaveDreamResult) {
+        if (result == SaveDreamResult.SUCCESS) {
+            return
+        }
+
+        buildAlert {
+            titleResource = R.string.save_error_title
+            messageResource = when (result) {
+                SaveDreamResult.ERROR_EMPTY_DREAM,
+                SaveDreamResult.ERROR_BLANK_DREAM -> R.string.save_error_empty
+                SaveDreamResult.ERROR_LARGE_DREAM -> R.string.save_error_large
+                SaveDreamResult.ERROR_NO_CONNECTION -> R.string.save_error_no_connection
+                SaveDreamResult.SUCCESS,
+                SaveDreamResult.ERROR_UNDEFINED -> R.string.save_error_undefined
+            }
+            cancelButton { mViewModel.onCloseSaveResult() }
+        } customizeAndShow {
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+        }
     }
 
     private fun handleSaveWaiting(isWait: Boolean) {

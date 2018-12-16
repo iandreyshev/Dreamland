@@ -4,9 +4,8 @@ import android.os.Bundle
 
 data class DreamProperties(
         val description: String,
-        val sleepingDate: SleepingDate = SleepingDate(0)//,
-//        val duration: SleepingDuration,
-//        val isLucid: Boolean
+        val sleepingDate: SleepingDate = SleepingDate(0),
+        val isLucid: Boolean = false
 ) {
 
     fun toBundle(): Bundle {

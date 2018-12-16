@@ -51,16 +51,16 @@ class SignInViewModel
     private fun handleSignInResult(result: SignInResult) = when (result) {
         SignInResult.SUCCESS ->
             navigator.onSignInSuccess()
-        SignInResult.USER_NOT_EXISTS,
-        SignInResult.NO_CONNECTION,
-        SignInResult.INCORRECT_DATA,
-        SignInResult.UNKNOWN ->
+        SignInResult.ERROR_USER_NOT_EXISTS,
+        SignInResult.ERROR_NO_CONNECTION,
+        SignInResult.ERROR_INCORRECT_DATA,
+        SignInResult.ERROR_UNKNOWN ->
             mErrorObservable.setValue(result)
     }
 
     private fun handleSignInError(error: Throwable) {
         error.printStackTrace()
-        mErrorObservable.value = SignInResult.UNKNOWN
+        mErrorObservable.value = SignInResult.ERROR_UNKNOWN
     }
 
 }

@@ -83,7 +83,7 @@ class DreamViewModel
         error.printStackTrace()
     }
 
-    private fun handleDeleteResult(result: DeleteDreamResult) {
+    private fun handleDeleteResult(result: DeleteResult) {
     }
 
     private fun handleDeleteError(error: Throwable) {

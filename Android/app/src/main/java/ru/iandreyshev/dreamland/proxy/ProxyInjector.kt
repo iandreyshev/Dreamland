@@ -40,7 +40,6 @@ class ProxyInjector
                             .iAccountNavigator(accountNavigator)
                             .iCoreNetworkApi(CoreNetworkComponent.get())
                             .iContextProvider(application.asProvider())
-                            .iFeatureDreamsApi(FeatureDreamsComponent.get())
                             .build())
                     .build()
 
@@ -58,6 +57,8 @@ class ProxyInjector
             DaggerFeatureDreamsComponent.builder()
                     .iFeatureDreamsDependencies(DaggerFeatureDreamsComponent_DependenciesComponent.builder()
                             .iContextProvider(application.asProvider())
+                            .iCoreNetworkApi(CoreNetworkComponent.get())
+                            .iFeatureAccountApi(FeatureAccountComponent.get())
                             .build())
                     .build()
 
