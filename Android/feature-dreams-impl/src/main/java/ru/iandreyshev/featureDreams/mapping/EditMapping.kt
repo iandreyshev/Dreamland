@@ -38,8 +38,7 @@ fun DreamProperties.toEntity(key: DreamKey) =
 
 fun EditResponseJson.toApplicationModel(): EditResponse =
         when (error) {
-            EditResponseJson.Error.USER_NOT_EXISTS ->
-                EditResponse.USER_NOT_EXISTS
-            null ->
-                EditResponse.SUCCESS
+            EditResponseJson.Error.USER_NOT_EXISTS -> EditResponse.USER_NOT_EXISTS
+            EditResponseJson.Error.UNDEFINED -> EditResponse.ERROR_SERVER_ERROR
+            null -> EditResponse.SUCCESS
         }

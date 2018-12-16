@@ -17,8 +17,11 @@ fun toFetchDreamsRequest(user: User): FetchDreamsRequest =
 
 fun FetchDreamsResponse.Error.toResult(): FetchDreamsResult =
         when (this) {
-            FetchDreamsResponse.Error.NO_CONNECTION -> FetchDreamsResult.ERROR_NO_CONNECTION
-            FetchDreamsResponse.Error.SERVER_ERROR -> FetchDreamsResult.ERROR_UNDEFINED
+            FetchDreamsResponse.Error.NO_CONNECTION ->
+                FetchDreamsResult.ERROR_NO_CONNECTION
+            FetchDreamsResponse.Error.USER_NOT_EXISTS,
+            FetchDreamsResponse.Error.SERVER_ERROR ->
+                FetchDreamsResult.ERROR_UNDEFINED
         }
 
 fun DreamJson.toEntity(): DreamStorageEntity =
@@ -32,6 +35,8 @@ fun DreamJson.toEntity(): DreamStorageEntity =
 fun FetchResponseJson.toApplicationModel(): FetchDreamsResponse =
         when (error) {
             FetchResponseJson.Error.USER_NOT_EXISTS ->
+                FetchDreamsResponse(FetchDreamsResponse.Error.USER_NOT_EXISTS)
+            FetchResponseJson.Error.UNDEFINED ->
                 FetchDreamsResponse(FetchDreamsResponse.Error.SERVER_ERROR)
             null -> {
                 val result = FetchDreamsResponse.Result(dreams ?: listOf())

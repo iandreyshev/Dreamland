@@ -1,16 +1,53 @@
-﻿namespace Dreamland.UseCase.Dreams
+﻿using Dreamland.Storage.Account;
+using Dreamland.Storage.Dreams;
+using System;
+
+namespace Dreamland.UseCase.Dreams
 {
 	public class DeleteDreamUseCase
 	{
-		public Result Execute(string userId, string userPassword, long dreamId)
+		private IAccountStorage _accountStorage;
+		private IDreamsStorage _dreamsStorage;
+
+		public DeleteDreamUseCase(
+			IAccountStorage accountStorage,
+			IDreamsStorage storage)
 		{
-			throw new System.NotImplementedException();
+			_accountStorage = accountStorage;
+			_dreamsStorage = storage;
+		}
+
+		public Result Execute(string userIdStr, string userPassword, long dreamId)
+		{
+			long userId = 0;
+
+			try
+			{
+				userId = long.Parse(userIdStr);
+			}
+			catch (Exception)
+			{
+				return Result.ERROR_USER_NOT_EXISTS;
+			}
+
+			return _accountStorage.Transaction(Result.ERROR_UNDEFINED, _ =>
+			{
+				if (!_accountStorage.UserExists(userId))
+				{
+					return Result.ERROR_USER_NOT_EXISTS;
+				}
+
+				_dreamsStorage.Delete(dreamId);
+
+				return Result.SUCCESS;
+			});
 		}
 
 		public enum Result
 		{
 			SUCCESS,
-			ERROR_USER_NOT_FOUND
+			ERROR_USER_NOT_EXISTS,
+			ERROR_UNDEFINED
 		}
 	}
 }

@@ -11,14 +11,14 @@ namespace Dreamland.UseCase.Dreams
 
 		public class Result
 		{
-			public enum ErrorCore
+			public enum Error
 			{
-				SUCCESS,
-				ERROR_USER_NOT_EXISTS
+				USER_NOT_EXISTS,
+				UNDEFINED
 			};
 
-			public long DreamId { get; set; }
-			public ErrorCore Error { get; set; }
+			public long dreamId;
+			public Error? error;
 		}
 	}
 }

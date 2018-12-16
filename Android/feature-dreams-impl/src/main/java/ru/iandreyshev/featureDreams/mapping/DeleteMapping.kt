@@ -18,13 +18,13 @@ fun DeleteResponse.toResult(): DeleteResult =
         when (this) {
             DeleteResponse.SUCCESS -> DeleteResult.SUCCESS
             DeleteResponse.ERROR_NO_CONNECTION -> DeleteResult.ERROR_NO_CONNECTION
+            DeleteResponse.ERROR_USER_NOT_EXISTS,
             DeleteResponse.ERROR_SERVER_ERROR -> DeleteResult.ERROR_UNDEFINED
         }
 
 fun DeleteResponseJson.toApplicationModel(): DeleteResponse =
         when (error) {
-            DeleteResponseJson.Error.USER_NOT_EXISTS ->
-                DeleteResponse.ERROR_SERVER_ERROR
-            null ->
-                DeleteResponse.SUCCESS
+            DeleteResponseJson.Error.USER_NOT_EXISTS -> DeleteResponse.ERROR_USER_NOT_EXISTS
+            DeleteResponseJson.Error.UNDEFINED -> DeleteResponse.ERROR_SERVER_ERROR
+            null -> DeleteResponse.SUCCESS
         }

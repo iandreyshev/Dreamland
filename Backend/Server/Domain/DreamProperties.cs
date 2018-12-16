@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Dreamland.Domain
+﻿namespace Dreamland.Domain
 {
-	public class DreamProperties
+    public class DreamProperties
 	{
+		public string Description { get; set; }
+		public bool IsLucid { get; set; }
+		public long SleepingDate { get; set; }
 	}
 }

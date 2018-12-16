@@ -12,7 +12,8 @@ namespace Dreamland.UseCase.Dreams
 		public enum Result
 		{
 			SUCCESS,
-			ERROR_USER_NOT_EXISTS
+			ERROR_USER_NOT_EXISTS,
+			ERROR_UNDEFINED
 		};
 	}
 }

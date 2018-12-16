@@ -10,8 +10,10 @@ class SaveResponseJson(
 ) {
 
     enum class Error {
-        @SerializedName("0")
-        USER_NOT_EXISTS
+        @SerializedName("user_not_exists")
+        USER_NOT_EXISTS,
+        @SerializedName("undefined")
+        UNDEFINED
     }
 
 }

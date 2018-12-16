@@ -1,6 +1,4 @@
 ﻿using Dreamland.Domain;
-using System;
-
 namespace Dreamland.Storage.Account
 {
 	public interface IAccountStorage : IStorage
@@ -8,6 +6,7 @@ namespace Dreamland.Storage.Account
 		void Add(User user);
 		User Find(long userId, string password);
 		User Find(string email, string password);
+		bool UserExists(long id);
 		void Delete(long userId);
 	}
 }

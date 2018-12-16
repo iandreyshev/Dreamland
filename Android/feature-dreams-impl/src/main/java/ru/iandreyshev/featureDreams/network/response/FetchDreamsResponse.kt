@@ -15,6 +15,7 @@ private constructor(
 
     enum class Error {
         NO_CONNECTION,
+        USER_NOT_EXISTS,
         SERVER_ERROR
     }
 

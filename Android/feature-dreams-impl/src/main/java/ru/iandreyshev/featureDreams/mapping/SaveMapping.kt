@@ -38,6 +38,8 @@ fun SaveResponseJson.toApplicationModel(): SaveResponse =
         when (error) {
             SaveResponseJson.Error.USER_NOT_EXISTS ->
                 SaveResponse(SaveResponse.Error.USER_NOT_EXISTS)
+            SaveResponseJson.Error.UNDEFINED ->
+                SaveResponse(SaveResponse.Error.SERVER_ERROR)
             null -> dreamId?.run {
                 SaveResponse(SaveResponse.Result(this))
             } ?: SaveResponse(SaveResponse.Error.SERVER_ERROR)

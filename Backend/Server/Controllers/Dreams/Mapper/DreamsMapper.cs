@@ -1,7 +1,8 @@
-﻿using Dreamland.Controllers.Dreams.Response;
+﻿using Dreamland.Controllers.Dreams.Request;
+using Dreamland.Controllers.Dreams.Response;
 using Dreamland.Domain;
 using Dreamland.UseCase.Dreams;
-using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
+using System.Collections.Generic;
 
 namespace Dreamland.Controllers.Dreams.Mapper
 {
@@ -9,16 +10,19 @@ namespace Dreamland.Controllers.Dreams.Mapper
 	{
 		public static FetchResponse Map(FetchUseCase.Result result)
 		{
-			ArrayList<Dream> dreams = new ArrayList<Dream>();
+			List<Dream> dreams = null;
 			string error = null;
 
 			switch (result.error)
 			{
+				case null:
+					dreams = result.dreams;
+					break;
 				case FetchUseCase.Result.Error.USER_NOT_EXISTS:
-					error = "0";
+					error = "user_not_exists";
 					break;
 				case FetchUseCase.Result.Error.UNDEFINED:
-					dreams = result.Dreams;
+					error = "undefined";
 					break;
 			}
 
@@ -34,13 +38,13 @@ namespace Dreamland.Controllers.Dreams.Mapper
 			long? dreamId = null;
 			string error = null;
 
-			switch (result.Error)
+			switch (result.error)
 			{
-				case SaveUseCase.Result.ErrorCore.SUCCESS:
-					dreamId = result.DreamId;
+				case null:
+					dreamId = result.dreamId;
 					break;
-				case SaveUseCase.Result.ErrorCore.ERROR_USER_NOT_EXISTS:
-					error = "0";
+				case SaveUseCase.Result.Error.USER_NOT_EXISTS:
+					error = "user_not_exists";
 					break;
 			}
 
@@ -60,7 +64,10 @@ namespace Dreamland.Controllers.Dreams.Mapper
 				case EditUseCase.Result.SUCCESS:
 					break;
 				case EditUseCase.Result.ERROR_USER_NOT_EXISTS:
-					error = "0";
+					error = "user_not_exists";
+					break;
+				case EditUseCase.Result.ERROR_UNDEFINED:
+					error = "undefined";
 					break;
 			}
 
@@ -78,14 +85,27 @@ namespace Dreamland.Controllers.Dreams.Mapper
 			{
 				case DeleteDreamUseCase.Result.SUCCESS:
 					break;
-				case DeleteDreamUseCase.Result.ERROR_USER_NOT_FOUND:
-					error = "0";
+				case DeleteDreamUseCase.Result.ERROR_USER_NOT_EXISTS:
+					error = "user_not_exists";
+					break;
+				case DeleteDreamUseCase.Result.ERROR_UNDEFINED:
+					error = "undefined";
 					break;
 			}
 
 			return new DeleteResponse
 			{
 				Error = error
+			};
+		}
+
+		public static DreamProperties Map(RequestDream properties)
+		{
+			return new DreamProperties
+			{
+				Description = properties.Description,
+				IsLucid = properties.IsLucid,
+				SleepingDate = properties.SleepingDate
 			};
 		}
 	}
