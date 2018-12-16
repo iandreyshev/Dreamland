@@ -14,7 +14,7 @@ namespace Dreamland.Controllers.Account.Mapper
 			switch (result.error)
 			{
 				case SignInUseCase.Result.Error.NOT_EXISTS:
-					error = "0";
+					error = "not_exists";
 					break;
 				case null:
 					account = Map(result.user);
@@ -36,10 +36,10 @@ namespace Dreamland.Controllers.Account.Mapper
 			switch (result.error)
 			{
 				case SignUpUseCase.Result.Error.ALREADY_EXISTS:
-					error = "0";
+					error = "already_exists";
 					break;
 				case SignUpUseCase.Result.Error.INCORRECT_DATA:
-					error = "1";
+					error = "incorrect_data";
 					break;
 				case SignUpUseCase.Result.Error.UNDEFINED:
 					account = Map(result.user);
@@ -62,10 +62,10 @@ namespace Dreamland.Controllers.Account.Mapper
 				case DeleteAccountUseCase.Result.SUCCESS:
 					break;
 				case DeleteAccountUseCase.Result.ERROR_INCORRECT_DATA:
-					error = "0";
+					error = "incorrect_data";
 					break;
 				case DeleteAccountUseCase.Result.ERROR_UNDEFINED:
-					error = "1";
+					error = "undefined";
 					break;
 			}
 

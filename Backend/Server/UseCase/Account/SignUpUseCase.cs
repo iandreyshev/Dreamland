@@ -37,7 +37,14 @@ namespace Dreamland.UseCase.Account
 					return Result.AlreadyExists();
 				}
 
-				return new Result { user = user };
+				_storage.Add(new User
+				{
+					Email = email,
+					Password = password,
+					Name = name
+				});
+
+				return new Result { user = _storage.Find(email, password) };
 			});
 		}
 
