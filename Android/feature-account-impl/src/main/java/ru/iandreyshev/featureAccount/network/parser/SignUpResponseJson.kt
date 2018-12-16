@@ -10,9 +10,9 @@ class SignUpResponseJson(
 ) {
 
     enum class Error {
-        @SerializedName("0")
+        @SerializedName("already_exists")
         USER_ALREADY_EXISTS,
-        @SerializedName("1")
+        @SerializedName("incorrect_data")
         INCORRECT_DATA
     }
 

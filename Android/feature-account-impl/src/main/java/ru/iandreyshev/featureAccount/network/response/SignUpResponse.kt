@@ -11,7 +11,7 @@ data class SignUpResponse(
     data class Account(
             val id: Long,
             val fullName: String,
-            val avatarUrl: String
+            val avatarUrl: String?
     )
 
     enum class Error {

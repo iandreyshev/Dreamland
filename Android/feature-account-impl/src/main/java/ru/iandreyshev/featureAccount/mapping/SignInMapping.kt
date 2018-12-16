@@ -12,10 +12,10 @@ internal fun SignInProperties.toRequest() =
 
 internal fun SignInResponse.Account.toStorageEntity(password: String) =
         UserStorageEntity(
-                accountId = id,
+                id = id,
                 fullName = fullName,
                 password = password,
-                avatarUrl = avatarUrl
+                avatarUrl = avatarUrl ?: ""
         )
 
 internal fun SignInResponse.Error.toResult() =

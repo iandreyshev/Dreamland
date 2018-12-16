@@ -8,7 +8,7 @@ class DeleteResponseJson(
 ) {
 
     enum class Error {
-        @SerializedName("0")
+        @SerializedName("user_not_exists")
         USER_NOT_EXISTS
     }
 

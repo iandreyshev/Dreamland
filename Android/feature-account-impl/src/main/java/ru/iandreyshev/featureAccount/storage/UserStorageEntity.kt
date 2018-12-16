@@ -6,8 +6,8 @@ import io.objectbox.annotation.Unique
 
 @Entity
 data class UserStorageEntity(
-        @Id var id: Long = 0,
-        @Unique var accountId: Long = 0,
+        @Id(assignable = true)
+        var id: Long = 0,
         var password: String = "",
         var login: String = "",
         var fullName: String = "",
