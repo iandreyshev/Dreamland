@@ -3,6 +3,9 @@
 
     <string name="sign_in_error_title">Ошибка авторизации</string>
     <string name="sign_in_error_user_not_exists">Пользователь с такими данными не существует. Пожалуйста, зарегестрируйтесь</string>
+    <string name="sign_in_error_incorrect_email">Электронная почта должна быть короче 64 символов и содержать \'@\'</string>
+    <string name="sign_in_error_incorrect_password">Пароль должен быть от 6 до 64 символов</string>
+    <string name="sign_in_error_incorrect_name">Имя должно быть от 1 до 128 символов</string>
     <string name="sign_in_error_incorrect_data">Введены некорректные данные</string>
     <string name="sign_in_error_no_connection">Отсутствует соединение с сервером</string>
     <string name="sign_in_error_unknown">Неизвестная ошибка, попробуйте снова…</string>

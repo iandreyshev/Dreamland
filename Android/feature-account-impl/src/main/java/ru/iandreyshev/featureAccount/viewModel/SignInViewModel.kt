@@ -54,6 +54,8 @@ class SignInViewModel
         SignInResult.ERROR_USER_NOT_EXISTS,
         SignInResult.ERROR_NO_CONNECTION,
         SignInResult.ERROR_INCORRECT_DATA,
+        SignInResult.ERROR_INCORRECT_EMAIL,
+        SignInResult.ERROR_INCORRECT_PASSWORD,
         SignInResult.ERROR_UNKNOWN ->
             mErrorObservable.setValue(result)
     }

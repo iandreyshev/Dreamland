@@ -81,6 +81,9 @@ class SignUpFragment : BaseFragment() {
                 SignUpResult.ERROR_INCORRECT_DATA -> R.string.sign_up_error_incorrect_data
                 SignUpResult.ERROR_NO_CONNECTION -> R.string.sign_up_error_no_connection
                 SignUpResult.ERROR_UNKNOWN -> R.string.sign_up_error_unknown
+                SignUpResult.ERROR_INCORRECT_PASSWORD -> R.string.sign_in_error_incorrect_password
+                SignUpResult.ERROR_INCORRECT_EMAIL -> R.string.sign_in_error_incorrect_email
+                SignUpResult.ERROR_INCORRECT_NAME -> R.string.sign_in_error_incorrect_name
             }
             okButton { }
         }?.show()

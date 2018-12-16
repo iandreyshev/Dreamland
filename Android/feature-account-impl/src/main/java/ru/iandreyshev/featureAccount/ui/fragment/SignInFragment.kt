@@ -84,6 +84,8 @@ class SignInFragment : BaseFragment() {
                 SignInResult.ERROR_INCORRECT_DATA -> R.string.sign_in_error_incorrect_data
                 SignInResult.ERROR_NO_CONNECTION -> R.string.sign_in_error_no_connection
                 SignInResult.ERROR_UNKNOWN -> R.string.sign_in_error_unknown
+                SignInResult.ERROR_INCORRECT_EMAIL -> R.string.sign_in_error_incorrect_email
+                SignInResult.ERROR_INCORRECT_PASSWORD -> R.string.sign_in_error_incorrect_password
             }
             okButton {
                 if (error == SignInResult.ERROR_USER_NOT_EXISTS) {
