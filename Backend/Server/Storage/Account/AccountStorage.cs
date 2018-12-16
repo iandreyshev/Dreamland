@@ -1,58 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using Dreamland.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Dreamland.Storage.Account
 {
-	public class AccountStorage
+	public class AccountStorage : Storage, IAccountStorage
 	{
-		private int _lastId = 0;
-		private List<UserEntity> _users = new List<UserEntity>();
-
-		public void Add(string email, string password, string name)
+		public AccountStorage(DatabaseContext context) : base(context)
 		{
-			var userEntity = _users.Find(user =>
-			{
-				return user.Email == email && user.Password == password;
-			});
+			_users = Context.Users;
+		}
 
-			if (userEntity != null)
+		private DbSet<User> _users;
+
+		public User Find(long userId, string password)
+		{
+			var users = _users.Where(u => u.Id == userId && u.Password == password);
+
+			if (users.Count() == 0)
 			{
-				return;
+				return null;
 			}
 
-			_users.Add(new UserEntity
-			{
-				Id = ++_lastId,
-				Email = email,
-				Password = password,
-				Name = name,
-				AvatarUrl = ""
-			});
+			return users.First();
 		}
 
-		public UserEntity Find(string email)
+		public User Find(string email, string password)
 		{
-			return _users.Find(user =>
+			var users = _users.Where(u => u.Email == email && u.Password == password);
+
+			if (users.Count() == 0)
 			{
-				return user.Email == email;
-			});
+				return null;
+			}
+
+			return users.First();
 		}
 
-		public UserEntity Find(string email, string password)
+		public void Add(User user)
 		{
-			return _users.Find(user =>
-			{
-				return user.Email == email && user.Password == password;
-			});
+			_users.Add(user);
+			Context.SaveChanges();
 		}
 
-		public bool Delete(int id, string password)
+		public void Delete(long id)
 		{
-			var userEntity = _users.Find(user =>
-			{
-				return user.Id == id && user.Password == password;
-			});
-
-			return _users.Remove(userEntity);
+			var user = new User { Id = id };
+			_users.Attach(user);
+			_users.Remove(user);
+			Context.SaveChanges();
 		}
 	}
 }

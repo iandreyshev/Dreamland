@@ -1,6 +1,6 @@
-﻿namespace Dreamland.Services.Account
+﻿namespace Dreamland.Conditions
 {
-	internal class Preconditions
+	internal class Condition
 	{
 		public static bool IsValidEmail(string email) =>
 			!string.IsNullOrEmpty(email)

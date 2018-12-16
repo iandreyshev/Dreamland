@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace Dreamland.Controllers.Account
+namespace Dreamland.Controllers.Account.Response
 {
 	public class AccountResponse
 	{
 		[JsonProperty("id")]
-		public int Id { get; set; }
+		public long Id { get; set; }
 
 		[JsonProperty("name")]
 		public string Name { get; set; }

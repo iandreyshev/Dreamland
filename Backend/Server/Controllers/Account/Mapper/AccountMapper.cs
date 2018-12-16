@@ -1,25 +1,22 @@
-﻿using Dreamland.Services.Account.Model;
-using Dreamland.Storage.Account;
-using Microsoft.AspNetCore.Mvc;
+﻿using Dreamland.Controllers.Account.Response;
+using Dreamland.Domain;
+using Dreamland.UseCase.Account;
 
 namespace Dreamland.Controllers.Account.Mapper
 {
 	public class AccountMapper
 	{
-		public static SignInResponse Map(Services.Account.Model.SignInResult result)
+		public static SignInResponse Map(SignInUseCase.Result result)
 		{
 			AccountResponse account = null;
 			string error = null;
 
 			switch (result.error)
 			{
-				case Services.Account.Model.SignInResult.Error.NOT_EXISTS:
-					error = "0";
+				case SignInUseCase.Result.Error.NOT_EXISTS:
+					error = "not_exists";
 					break;
-				case Services.Account.Model.SignInResult.Error.INCORRECT_DATA:
-					error = "1";
-					break;
-				case Services.Account.Model.SignInResult.Error.UNDEFINED:
+				case null:
 					account = Map(result.user);
 					break;
 			}
@@ -31,20 +28,20 @@ namespace Dreamland.Controllers.Account.Mapper
 			};
 		}
 
-		public static SignUpResponse Map(SignUpResult result)
+		public static SignUpResponse Map(SignUpUseCase.Result result)
 		{
 			AccountResponse account = null;
 			string error = null;
 
 			switch (result.error)
 			{
-				case SignUpResult.Error.ALREADY_EXISTS:
-					error = "0";
+				case SignUpUseCase.Result.Error.ALREADY_EXISTS:
+					error = "already_exists";
 					break;
-				case SignUpResult.Error.INCORRECT_DATA:
-					error = "1";
+				case SignUpUseCase.Result.Error.INCORRECT_DATA:
+					error = "incorrect_data";
 					break;
-				case SignUpResult.Error.UNDEFINED:
+				case SignUpUseCase.Result.Error.UNDEFINED:
 					account = Map(result.user);
 					break;
 			}
@@ -56,16 +53,19 @@ namespace Dreamland.Controllers.Account.Mapper
 			};
 		}
 
-		public static DeleteResponse Map(DeleteResult result)
+		public static DeleteResponse Map(DeleteAccountUseCase.Result result)
 		{
 			string error = null;
 
-			switch (result.error)
+			switch (result)
 			{
-				case DeleteResult.Error.NOT_EXISTS:
-					error = "0";
+				case DeleteAccountUseCase.Result.SUCCESS:
 					break;
-				case DeleteResult.Error.UNDEFINED:
+				case DeleteAccountUseCase.Result.ERROR_INCORRECT_DATA:
+					error = "incorrect_data";
+					break;
+				case DeleteAccountUseCase.Result.ERROR_UNDEFINED:
+					error = "undefined";
 					break;
 			}
 
@@ -75,7 +75,7 @@ namespace Dreamland.Controllers.Account.Mapper
 			};
 		}
 
-		private static AccountResponse Map(UserEntity account)
+		private static AccountResponse Map(User account)
 		{
 			if (account == null)
 			{

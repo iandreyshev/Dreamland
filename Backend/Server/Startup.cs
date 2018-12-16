@@ -1,4 +1,8 @@
-﻿using Dreamland.Services.Account;
+﻿using Dreamland.Storage;
+using Dreamland.Storage.Account;
+using Dreamland.Storage.Dreams;
+using Dreamland.UseCase.Account;
+using Dreamland.UseCase.Dreams;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +22,21 @@ public class Startup
 	{
 		services.AddMvc();
 
-		services.AddSingleton<IAccountService, AccountService>();
+		// Account useCase`s
+		services.AddTransient<SignInUseCase>();
+		services.AddTransient<SignUpUseCase>();
+		services.AddTransient<DeleteAccountUseCase>();
+
+		// Dreams useCase`s
+		services.AddTransient<FetchUseCase>();
+		services.AddTransient<SaveUseCase>();
+		services.AddTransient<EditUseCase>();
+		services.AddTransient<DeleteDreamUseCase>();
+
+		// Storage
+		services.AddDbContext<DatabaseContext>();
+		services.AddTransient<IAccountStorage, AccountStorage>();
+		services.AddTransient<IDreamsStorage, DreamsStorage>();
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
