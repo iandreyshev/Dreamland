@@ -11,4 +11,7 @@
     <string name="dream_toolbar_delete">Delete</string>
     <string name="dream_delete_popup_title">Delete dream</string>
     <string name="dream_delete_popup_message">Do you really want to delete this dream?</string>
+
+    <string name="fetch_error_no_connection">Произошла ошибка соединения с сервером</string>
+    <string name="fetch_error_undefined">Произошла неизвестная ошибка</string>
 </resources>

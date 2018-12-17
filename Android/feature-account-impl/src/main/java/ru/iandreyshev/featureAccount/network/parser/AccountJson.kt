@@ -8,5 +8,5 @@ data class AccountJson(
         @SerializedName("name")
         val name: String,
         @SerializedName("avatar_url")
-        val avatarUrl: String
+        val avatarUrl: String?
 )

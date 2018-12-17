@@ -23,11 +23,11 @@ class DeleteUserUseCase
             return@create
         }
 
-        val request = DeleteRequest(user.accountId, user.password)
+        val request = DeleteRequest(user.id, user.password)
         val responseFromServer = serverApi.delete(request)
         val result = responseFromServer.toResult()
 
-        return@create when (result) {
+        when (result) {
             DeleteUserResult.SUCCESS -> {
                 storage.clear()
                 it.onSuccess(DeleteUserResult.SUCCESS)
@@ -36,6 +36,7 @@ class DeleteUserUseCase
             DeleteUserResult.NO_CONNECTION,
             DeleteUserResult.UNKNOWN -> {
                 it.onSuccess(result)
+                return@create
             }
         }
     }

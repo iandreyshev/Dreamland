@@ -71,12 +71,9 @@ class UserServerApi
     }
 
     override fun delete(request: DeleteRequest): DeleteResponse {
-        val apiRequest = Request(query = mapOf(
-                QUERY_ID to request.id.toString(),
-                QUERY_PASSWORD to request.password)
-        )
-        val apiOptions = ApiRequestOptions(path = PATH_DELETE)
-        val apiResponse = httpClient.delete(apiRequest, apiOptions)
+        val apiOptions = ApiRequestOptions(
+                userId = request.id, password = request.password, path = PATH_DELETE)
+        val apiResponse = httpClient.delete(Request(), apiOptions)
 
         when (apiResponse.error) {
             Response.Error.CONNECTION ->
@@ -99,7 +96,6 @@ class UserServerApi
         private const val QUERY_EMAIL = "email"
         private const val QUERY_PASSWORD = "password"
         private const val QUERY_NAME = "name"
-        private const val QUERY_ID = "id"
     }
 
 }

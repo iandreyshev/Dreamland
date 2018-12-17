@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_my_dreams.*
 import kotlinx.android.synthetic.main.view_dream_diary_item.view.*
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 import ru.iandreyshev.coreAndroid.ui.dialog.buildAlert
 import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.featureDreams.R
@@ -16,6 +17,7 @@ import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
 import ru.iandreyshev.featureDreams.ui.adapter.dreams.DreamsListAdapter
 import ru.iandreyshev.coreAndroid.ui.fragment.BaseFragment
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
+import ru.iandreyshev.featureDreams.domain.FetchDreamsResult
 import ru.iandreyshev.featureDreams.ui.activity.DreamActivity
 import ru.iandreyshev.featureDreams.viewModel.DreamListViewModel
 import ru.iandreyshev.featureDreamsApi.domain.Dream
@@ -54,6 +56,7 @@ class MyDreamsFragment : BaseFragment() {
         observeNotNull(dreams, ::handleDreams)
         observeNotNull(refreshing, ::handleRefreshing)
         observeNotNull(optionsTarget, ::handleOptionsTarget)
+        observeNotNull(fetchResult, ::handleFetchResult)
     }
 
     private fun handleDreams(dreams: List<Dream>) {
@@ -78,6 +81,14 @@ class MyDreamsFragment : BaseFragment() {
             setCancelable(false)
             setCanceledOnTouchOutside(true)
         }
+    }
+
+    private fun handleFetchResult(result: FetchDreamsResult) {
+        toast(when (result) {
+            FetchDreamsResult.SUCCESS -> return
+            FetchDreamsResult.ERROR_NO_CONNECTION -> R.string.fetch_error_no_connection
+            FetchDreamsResult.ERROR_UNDEFINED -> R.string.fetch_error_undefined
+        })
     }
 
     private inner class DreamActionListener : DreamsListAdapter.IDreamActionListener {

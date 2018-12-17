@@ -16,10 +16,10 @@ internal fun SignUpProperties.toRequest() =
 
 internal fun SignUpResponse.Account.toStorageEntity(password: String) =
         UserStorageEntity(
-                accountId = id,
+                id = id,
                 fullName = fullName,
                 password = password,
-                avatarUrl = avatarUrl
+                avatarUrl = avatarUrl ?: ""
         )
 
 internal fun SignUpResponse.Error.toResult() =

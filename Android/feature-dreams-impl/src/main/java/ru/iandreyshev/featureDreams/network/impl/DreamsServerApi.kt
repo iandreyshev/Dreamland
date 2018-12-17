@@ -92,7 +92,7 @@ class DreamsServerApi
 
     override fun delete(request: DeleteDreamRequest): DeleteResponse {
         val apiRequest = Request(query = mapOf(
-                QUERY_ID to request.id.toString()
+                QUERY_DREAM_ID to request.id.toString()
         ))
         val apiOptions = ApiRequestOptions(
                 userId = request.userId,
@@ -119,7 +119,7 @@ class DreamsServerApi
         private const val PATH_EDIT = "/dreams/edit"
         private const val PATH_DELETE = "/dreams/delete"
 
-        private const val QUERY_ID = "id"
+        private const val QUERY_DREAM_ID = "dreamId"
     }
 
 }

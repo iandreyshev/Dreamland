@@ -13,6 +13,11 @@
           "name": "id"
         },
         {
+          "id": "2:4058199959139336648",
+          "indexId": "1:5071377221371683736",
+          "name": "accountId"
+        },
+        {
           "id": "3:3830056500681159214",
           "name": "password"
         },
@@ -39,12 +44,8 @@
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
-  "retiredIndexUids": [
-    5071377221371683736
-  ],
-  "retiredPropertyUids": [
-    4058199959139336648
-  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

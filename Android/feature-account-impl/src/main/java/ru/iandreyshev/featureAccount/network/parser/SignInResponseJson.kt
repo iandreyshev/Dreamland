@@ -10,9 +10,9 @@ internal data class SignInResponseJson(
 ) {
 
     enum class Error {
-        @SerializedName("0")
+        @SerializedName("user_not_exists")
         USER_NOT_EXISTS,
-        @SerializedName("1")
+        @SerializedName("incorrect_data")
         INCORRECT_DATA
     }
 
