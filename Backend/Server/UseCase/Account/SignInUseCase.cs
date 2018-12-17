@@ -21,7 +21,7 @@ namespace Dreamland.UseCase.Account
 			{
 				return new Result
 				{
-					error = Result.Error.NOT_EXISTS
+					error = Result.Error.USER_NOT_EXISTS
 				};
 			}
 
@@ -35,7 +35,7 @@ namespace Dreamland.UseCase.Account
 		{
 			public enum Error
 			{
-				NOT_EXISTS
+				USER_NOT_EXISTS
 			}
 
 			public User user;

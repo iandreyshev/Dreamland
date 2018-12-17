@@ -10,7 +10,7 @@ namespace Dreamland.Controllers.Account.Response
 		[JsonProperty("name")]
 		public string Name { get; set; }
 
-		[JsonProperty("avatar_url")]
+		[JsonProperty("avatar_url", NullValueHandling = NullValueHandling.Ignore)]
 		public string AvatarUrl { get; set; }
 	}
 }

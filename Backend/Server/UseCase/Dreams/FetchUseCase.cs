@@ -18,6 +18,7 @@ namespace Dreamland.UseCase.Dreams
 			_accountStorage = accountStorage;
 			_dreamsStorage = storage;
 		}
+
 		public Result Execute(string userIdStr, string userPassword)
 		{
 			long userId = 0;
@@ -31,18 +32,15 @@ namespace Dreamland.UseCase.Dreams
 				return Result.UserNotExists;
 			}
 
-			return _accountStorage.Transaction(Result.Undefined, _ =>
+			if (_accountStorage.Find(userId, userPassword) == null)
 			{
-				if (!_accountStorage.UserExists(userId))
-				{
-					return Result.UserNotExists;
-				}
+				return Result.UserNotExists;
+			}
 
-				return new Result
-				{
-					dreams = _dreamsStorage.All(userId)
-				};
-			});
+			return new Result
+			{
+				dreams = _dreamsStorage.All(userId)
+			};
 		}
 
 		public class Result

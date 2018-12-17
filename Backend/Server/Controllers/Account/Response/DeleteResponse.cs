@@ -4,7 +4,7 @@ namespace Dreamland.Controllers.Account.Response
 {
 	public class DeleteResponse
 	{
-		[JsonProperty("error")]
+		[JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
 		public string Error { get; set; }
 	}
 }

@@ -17,24 +17,24 @@ namespace Dreamland.UseCase.Account
 		{
 			if (!Condition.IsValidEmail(email))
 			{
-				return Result.IncorrectData();
+				return Result.IncorrectData;
 			}
 			if (!Condition.IsValidName(name))
 			{
-				return Result.IncorrectData();
+				return Result.IncorrectData;
 			}
 			if (!Condition.IsValidPassword(password))
 			{
-				return Result.IncorrectData();
+				return Result.IncorrectData;
 			}
 
-			return _storage.Transaction(Result.Undefined(), _ =>
+			return _storage.Transaction(Result.Undefined, _ =>
 			{
-				var user = _storage.Find(email, password);
+				var user = _storage.Find(email);
 
 				if (user != null)
 				{
-					return Result.AlreadyExists();
+					return Result.AlreadyExists;
 				}
 
 				_storage.Add(new User
@@ -50,26 +50,19 @@ namespace Dreamland.UseCase.Account
 
 		public class Result
 		{
-			public static Result IncorrectData()
-			{
-				return new Result { error = Error.INCORRECT_DATA };
-			}
+			public static Result IncorrectData
+				=> new Result { error = Error.INCORRECT_DATA };
 
-			public static Result AlreadyExists()
-			{
-				return new Result { error = Error.ALREADY_EXISTS };
-			}
+			public static Result AlreadyExists
+				=> new Result { error = Error.ALREADY_EXISTS };
 
-			public static Result Undefined()
-			{
-				return new Result { error = Error.UNDEFINED };
-			}
+			public static Result Undefined
+				=> new Result { error = null };
 
 			public enum Error
 			{
 				INCORRECT_DATA,
-				ALREADY_EXISTS,
-				UNDEFINED
+				ALREADY_EXISTS
 			}
 
 			public User user;

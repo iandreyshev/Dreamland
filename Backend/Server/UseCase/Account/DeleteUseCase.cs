@@ -21,7 +21,7 @@ namespace Dreamland.UseCase.Account
 			}
 			catch
 			{
-				return Result.ERROR_INCORRECT_DATA;
+				return Result.ERROR_USER_NOT_EXISTS;
 			}
 
 			return _storage.Transaction(Result.ERROR_UNDEFINED, _ =>
@@ -30,7 +30,7 @@ namespace Dreamland.UseCase.Account
 
 				if (user == null)
 				{
-					return Result.SUCCESS;
+					return Result.ERROR_USER_NOT_EXISTS;
 				}
 
 				_storage.Delete(userId);
@@ -42,7 +42,7 @@ namespace Dreamland.UseCase.Account
 		public enum Result
 		{
 			SUCCESS,
-			ERROR_INCORRECT_DATA,
+			ERROR_USER_NOT_EXISTS,
 			ERROR_UNDEFINED
 		}
 	}

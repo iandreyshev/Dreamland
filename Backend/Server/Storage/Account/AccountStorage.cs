@@ -26,6 +26,18 @@ namespace Dreamland.Storage.Account
 			return users.First();
 		}
 
+		public User Find(string email)
+		{
+			var users = _users.Where(u => u.Email == email);
+
+			if (users.Count() == 0)
+			{
+				return null;
+			}
+
+			return users.First();
+		}
+
 		public User Find(string email, string password)
 		{
 			var users = _users.Where(u => u.Email == email && u.Password == password);
@@ -46,10 +58,13 @@ namespace Dreamland.Storage.Account
 
 		public void Delete(long id)
 		{
-			var user = new User { Id = id };
-			_users.Attach(user);
-			_users.Remove(user);
-			Context.SaveChanges();
+			var users = _users.Where(u => u.Id == id);
+
+			if (users.Count() > 0)
+			{
+				_users.Remove(users.First());
+				Context.SaveChanges();
+			}
 		}
 
 		public bool UserExists(long id)

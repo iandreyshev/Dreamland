@@ -32,7 +32,7 @@ namespace Dreamland.UseCase.Dreams
 
 			return _accountStorage.Transaction(Result.ERROR_UNDEFINED, _ =>
 			{
-				if (!_accountStorage.UserExists(userId))
+				if (_accountStorage.Find(userId, userPassword) == null)
 				{
 					return Result.ERROR_USER_NOT_EXISTS;
 				}
