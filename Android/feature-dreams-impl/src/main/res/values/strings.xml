@@ -12,6 +12,10 @@
     <string name="dream_delete_popup_title">Delete dream</string>
     <string name="dream_delete_popup_message">Do you really want to delete this dream?</string>
 
+    <string name="delete_error_title">Произошла ошибка</string>
+    <string name="delete_error_no_connection">Произошла ошибка соединения с сервером. Проверьте подключение к интернету.</string>
+    <string name="delete_error_undefined">Неизвестная ошибка, попробуйте снова…</string>
+
     <string name="fetch_error_no_connection">Произошла ошибка соединения с сервером</string>
-    <string name="fetch_error_undefined">Произошла неизвестная ошибка</string>
+    <string name="fetch_error_undefined">Неизвестная ошибка, попробуйте снова…</string>
 </resources>

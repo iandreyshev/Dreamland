@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable
 import ru.iandreyshev.coreAndroid.rx.ioToMain
 import ru.iandreyshev.coreAndroid.rx.subscribe
 import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
+import ru.iandreyshev.coreAndroid.viewModel.SingleLiveTypedEvent
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureDreams.domain.*
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
@@ -27,6 +28,8 @@ class DreamViewModel
     val dream: LiveData<Dream>
         get() = mDreamViewModel
 
+    val deletingResultEvent: LiveData<DeleteDreamResult>
+        get() = mDeletingErrorEvent
     val loadingErrorEvent: LiveData<Unit>
         get() = mLoadingErrorEvent
     val unknownErrorEvent: LiveData<Unit>
@@ -35,6 +38,7 @@ class DreamViewModel
     private val mDeleteWaitingViewModel = WaitingViewModel()
     private val mDreamViewModel = mutableLiveDataOf<Dream>()
 
+    private val mDeletingErrorEvent = SingleLiveTypedEvent<DeleteDreamResult>()
     private val mLoadingErrorEvent = SingleLiveEvent()
     private val mUnknownErrorEvent = SingleLiveEvent()
 
@@ -83,11 +87,12 @@ class DreamViewModel
         error.printStackTrace()
     }
 
-    private fun handleDeleteResult(result: DeleteResult) {
+    private fun handleDeleteResult(result: DeleteDreamResult) {
+        mDeletingErrorEvent.value = result
     }
 
     private fun handleDeleteError(error: Throwable) {
-        // TODO: Handle unknown error
+        mDeletingErrorEvent.value = DeleteDreamResult.ERROR_UNDEFINED
         error.printStackTrace()
     }
 

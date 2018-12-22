@@ -5,7 +5,7 @@ import ru.iandreyshev.featureAccountApi.api.IUserApi
 import ru.iandreyshev.featureDreams.storage.IDreamsStorage
 import ru.iandreyshev.featureDreams.network.IDreamsServerApi
 import ru.iandreyshev.featureDreams.useCase.IDeleteDreamUseCase
-import ru.iandreyshev.featureDreams.domain.DeleteResult
+import ru.iandreyshev.featureDreams.domain.DeleteDreamResult
 import ru.iandreyshev.featureDreams.mapping.toRequest
 import ru.iandreyshev.featureDreams.mapping.toResult
 import ru.iandreyshev.featureDreams.network.response.DeleteResponse
@@ -19,9 +19,9 @@ class DeleteDreamUseCase
         private val userApi: IUserApi
 ) : IDeleteDreamUseCase {
 
-    override fun invoke(key: DreamKey): Single<DeleteResult> = Single.create {
+    override fun invoke(key: DreamKey): Single<DeleteDreamResult> = Single.create {
         val user = userApi.user ?: run {
-            it.onSuccess(DeleteResult.ERROR_UNDEFINED)
+            it.onSuccess(DeleteDreamResult.ERROR_UNDEFINED)
             return@create
         }
         val request = key.toRequest(user)
@@ -33,7 +33,7 @@ class DeleteDreamUseCase
         }
 
         storage.delete(key)
-        it.onSuccess(DeleteResult.SUCCESS)
+        it.onSuccess(DeleteDreamResult.SUCCESS)
     }
 
 }

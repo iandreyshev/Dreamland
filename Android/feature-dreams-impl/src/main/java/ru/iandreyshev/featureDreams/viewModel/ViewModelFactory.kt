@@ -22,7 +22,9 @@ class ViewModelFactory
 
     override fun dreamEditorViewModel(activity: AppCompatActivity, bundle: Bundle?): DreamEditorViewModel =
             activity.viewModel {
-                DreamEditorViewModel(saveDreamUseCase, bundle)
+                DreamEditorViewModel(saveDreamUseCase)
+            }.apply {
+                setDreamToEdit(bundle)
             }
 
 }

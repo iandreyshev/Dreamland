@@ -17,7 +17,8 @@
         <!--ACTIVITY-->
         <activity
             android:name="ru.iandreyshev.featureMenu.presentation.activity.SplashActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +27,16 @@
         </activity>
         <activity
             android:name="ru.iandreyshev.featureAccount.ui.activity.AuthActivity"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity android:name="ru.iandreyshev.featureMenu.presentation.activity.MenuActivity" />
         <activity
             android:name="ru.iandreyshev.featureDreams.ui.activity.DreamEditorActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="ru.iandreyshev.featureDreams.ui.activity.DreamActivity" />
+        <activity
+            android:name="ru.iandreyshev.featureDreams.ui.activity.DreamActivity"
+            android:screenOrientation="portrait" />
         <!--ACTIVITY-->
     </application>
 

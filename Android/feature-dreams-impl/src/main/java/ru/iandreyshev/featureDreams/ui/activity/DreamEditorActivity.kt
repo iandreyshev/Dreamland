@@ -15,7 +15,9 @@ import ru.iandreyshev.featureDreams.domain.SaveDreamResult
 import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.IViewModelFactory
+import ru.iandreyshev.featureDreamsApi.domain.Dream
 import ru.iandreyshev.vext.view.visibleIfOrGone
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class DreamEditorActivity : BaseAppCompatActivity() {
@@ -33,10 +35,11 @@ class DreamEditorActivity : BaseAppCompatActivity() {
 
         initActionBar()
 
-        mViewModel = mViewModelFactory.dreamEditorViewModel(this, savedInstanceState).apply {
+        mViewModel = mViewModelFactory.dreamEditorViewModel(this, intent.extras).apply {
+            observeNotNull(dream, ::handleDream)
             observeNotNull(saveResult, ::handleSaveResult)
             observeNotNull(saveWaiting, ::handleSaveWaiting)
-            observeNotNull(closeEvent) { finish() }
+            observeNotNull(closeEvent, ::finish)
         }
     }
 
@@ -66,6 +69,10 @@ class DreamEditorActivity : BaseAppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
     }
 
+    private fun handleDream(dream: Dream) {
+        dream_text.setText(dream.properties.description)
+    }
+
     private fun handleSaveResult(result: SaveDreamResult) {
         if (result == SaveDreamResult.SUCCESS) {
             return
@@ -74,11 +81,11 @@ class DreamEditorActivity : BaseAppCompatActivity() {
         buildAlert {
             titleResource = R.string.save_error_title
             messageResource = when (result) {
+                SaveDreamResult.SUCCESS -> throw IllegalStateException()
                 SaveDreamResult.ERROR_EMPTY_DREAM,
                 SaveDreamResult.ERROR_BLANK_DREAM -> R.string.save_error_empty
                 SaveDreamResult.ERROR_LARGE_DREAM -> R.string.save_error_large
                 SaveDreamResult.ERROR_NO_CONNECTION -> R.string.save_error_no_connection
-                SaveDreamResult.SUCCESS,
                 SaveDreamResult.ERROR_UNDEFINED -> R.string.save_error_undefined
             }
             cancelButton { mViewModel.onCloseSaveResult() }

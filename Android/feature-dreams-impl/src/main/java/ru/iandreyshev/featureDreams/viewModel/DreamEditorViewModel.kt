@@ -11,14 +11,18 @@ import ru.iandreyshev.coreAndroid.viewModel.SingleLiveEvent
 import ru.iandreyshev.coreAndroid.viewModel.WaitingViewModel
 import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.domain.SaveDreamResult
+import ru.iandreyshev.featureDreams.ui.activity.DreamEditorActivity
 import ru.iandreyshev.featureDreams.useCase.ISaveDreamUseCase
+import ru.iandreyshev.featureDreamsApi.domain.Dream
 import ru.iandreyshev.featureDreamsApi.domain.DreamKey
+import ru.iandreyshev.vext.liveData.mutableLiveDataOf
 
 class DreamEditorViewModel(
-        private val saveDreamUseCase: ISaveDreamUseCase,
-        bundle: Bundle?
+        private val saveDreamUseCase: ISaveDreamUseCase
 ) : ViewModel() {
 
+    val dream: LiveData<Dream>
+        get() = mDreamViewModel
     val saveResult: LiveData<SaveDreamResult>
         get() = mErrorViewModel.observable
     val saveWaiting: LiveData<Boolean>
@@ -26,13 +30,20 @@ class DreamEditorViewModel(
     val closeEvent: LiveData<Unit>
         get() = mCloseEvent
 
-    private val mDreamKey: DreamKey? = DreamKey.create(bundle)
+    private var mDreamKey: DreamKey? = null
 
+    private val mDreamViewModel = mutableLiveDataOf<Dream>()
     private val mErrorViewModel = DialogViewModel<SaveDreamResult>()
     private val mWaitingViewModel = WaitingViewModel()
     private val mCloseEvent = SingleLiveEvent()
 
     private var mSaveDreamSubscription: Disposable? = null
+
+    fun setDreamToEdit(bundle: Bundle?) {
+        val dreamBundle = bundle?.getBundle(DreamEditorActivity.KEY_DREAM)
+        mDreamViewModel.postValue(Dream.create(dreamBundle))
+        mDreamKey = mDreamViewModel.value?.key
+    }
 
     fun saveDream(dream: DreamProperties) {
         mWaitingViewModel.start()

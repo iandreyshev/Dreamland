@@ -13,3 +13,8 @@ fun <T> LifecycleOwner.observeNotNull(liveData: LiveData<T>, observer: (T) -> Un
         liveData.observe(this@observeNotNull, Observer { value ->
             value?.apply(observer)
         })
+
+fun <T> LifecycleOwner.observeNotNull(liveData: LiveData<T>, observer: () -> Unit) =
+        liveData.observe(this@observeNotNull, Observer { value ->
+            value?.apply { observer() }
+        })

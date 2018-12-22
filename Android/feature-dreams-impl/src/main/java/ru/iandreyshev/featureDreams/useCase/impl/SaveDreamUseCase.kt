@@ -24,7 +24,7 @@ class SaveDreamUseCase
     override fun invoke(properties: DreamProperties, key: DreamKey?): Single<SaveDreamResult> = Single.create {
         val dream = properties.clear()
 
-        dream.validate()?.run {
+        dream.getPropertiesError()?.run {
             it.onSuccess(this)
             return@create
         }
@@ -67,18 +67,11 @@ class SaveDreamUseCase
         return SaveDreamResult.SUCCESS
     }
 
-    private fun DreamProperties.validate(): SaveDreamResult? {
-        if (description.isEmpty()) {
-            return SaveDreamResult.ERROR_EMPTY_DREAM
-        }
-        if (description.isBlank()) {
-            return SaveDreamResult.ERROR_BLANK_DREAM
-        }
-        if (description.length > MAX_DREAM_DESCRIPTION_LENGTH) {
-            return SaveDreamResult.ERROR_LARGE_DREAM
-        }
-
-        return null
+    private fun DreamProperties.getPropertiesError(): SaveDreamResult? = when {
+        description.isEmpty() -> SaveDreamResult.ERROR_EMPTY_DREAM
+        description.isBlank() -> SaveDreamResult.ERROR_BLANK_DREAM
+        description.length > MAX_DREAM_DESCRIPTION_LENGTH -> SaveDreamResult.ERROR_LARGE_DREAM
+        else -> null
     }
 
     private fun DreamProperties.clear(): DreamProperties =

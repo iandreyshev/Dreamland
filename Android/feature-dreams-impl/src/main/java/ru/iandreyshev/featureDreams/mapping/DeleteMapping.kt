@@ -1,7 +1,7 @@
 package ru.iandreyshev.featureDreams.mapping
 
 import ru.iandreyshev.featureAccountApi.data.User
-import ru.iandreyshev.featureDreams.domain.DeleteResult
+import ru.iandreyshev.featureDreams.domain.DeleteDreamResult
 import ru.iandreyshev.featureDreams.network.parser.DeleteResponseJson
 import ru.iandreyshev.featureDreams.network.request.DeleteDreamRequest
 import ru.iandreyshev.featureDreams.network.response.DeleteResponse
@@ -14,12 +14,12 @@ fun DreamKey.toRequest(user: User): DeleteDreamRequest =
                 id = id
         )
 
-fun DeleteResponse.toResult(): DeleteResult =
+fun DeleteResponse.toResult(): DeleteDreamResult =
         when (this) {
-            DeleteResponse.SUCCESS -> DeleteResult.SUCCESS
-            DeleteResponse.ERROR_NO_CONNECTION -> DeleteResult.ERROR_NO_CONNECTION
+            DeleteResponse.SUCCESS -> DeleteDreamResult.SUCCESS
+            DeleteResponse.ERROR_NO_CONNECTION -> DeleteDreamResult.ERROR_NO_CONNECTION
             DeleteResponse.ERROR_USER_NOT_EXISTS,
-            DeleteResponse.ERROR_SERVER_ERROR -> DeleteResult.ERROR_UNDEFINED
+            DeleteResponse.ERROR_SERVER_ERROR -> DeleteDreamResult.ERROR_UNDEFINED
         }
 
 fun DeleteResponseJson.toApplicationModel(): DeleteResponse =

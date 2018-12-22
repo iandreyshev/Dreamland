@@ -13,10 +13,13 @@ import ru.iandreyshev.coreAndroid.ui.dialog.customizeAndShow
 import ru.iandreyshev.coreAndroid.viewModel.observeNotNull
 import ru.iandreyshev.featureDreams.R
 import ru.iandreyshev.featureDreams.di.FeatureDreamsComponent
+import ru.iandreyshev.featureDreams.domain.DeleteDreamResult
 import ru.iandreyshev.featureDreams.ui.extension.dateViewString
 import ru.iandreyshev.featureDreams.viewModel.DreamViewModel
 import ru.iandreyshev.featureDreams.viewModel.IViewModelFactory
 import ru.iandreyshev.featureDreamsApi.domain.Dream
+import ru.iandreyshev.vext.view.visibleIfOrGone
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class DreamActivity : BaseAppCompatActivity() {
@@ -35,8 +38,11 @@ class DreamActivity : BaseAppCompatActivity() {
         initActionBar()
 
         val bundleWithDream = intent.extras?.getBundle(KEY_DREAM)
+
         mViewModel = mViewModelFactory.dreamViewModel(this, bundleWithDream).apply {
             observeNotNull(dream, ::handleDreamProperties)
+            observeNotNull(deleteDreamWaiting, progressBar::visibleIfOrGone)
+            observeNotNull(deletingResultEvent, ::handleDeleteDreamResult)
         }
     }
 
@@ -65,6 +71,23 @@ class DreamActivity : BaseAppCompatActivity() {
     private fun handleDreamProperties(dream: Dream) {
         tvDescription.text = dream.properties.description
         tvDate.text = dream.dateViewString
+    }
+
+    private fun handleDeleteDreamResult(result: DeleteDreamResult) {
+        if (result == DeleteDreamResult.SUCCESS) {
+            finish()
+            return
+        }
+
+        buildAlert {
+            titleResource = R.string.delete_error_title
+            messageResource = when (result) {
+                DeleteDreamResult.SUCCESS -> throw IllegalStateException()
+                DeleteDreamResult.ERROR_NO_CONNECTION -> R.string.delete_error_no_connection
+                DeleteDreamResult.ERROR_UNDEFINED -> R.string.delete_error_undefined
+            }
+            okButton { }
+        } customizeAndShow {}
     }
 
     private fun startEditActivity() {

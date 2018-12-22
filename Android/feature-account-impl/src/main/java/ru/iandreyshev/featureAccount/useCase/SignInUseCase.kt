@@ -21,7 +21,8 @@ class SignInUseCase
 
     override fun invoke(properties: SignInProperties): Single<SignInResult> = Single.create {
         val signInProperties = properties.clear()
-        signInProperties.validate()?.run {
+
+        signInProperties.getPropertiesError()?.run {
             it.onSuccess(this)
             return@create
         }
@@ -48,7 +49,7 @@ class SignInUseCase
     private fun SignInProperties.clear() =
             copy(email = email.trim())
 
-    private fun SignInProperties.validate(): SignInResult? =
+    private fun SignInProperties.getPropertiesError(): SignInResult? =
             when {
                 !email.isValidUserEmail -> SignInResult.ERROR_INCORRECT_EMAIL
                 !password.isValidUserPassword -> SignInResult.ERROR_INCORRECT_PASSWORD
