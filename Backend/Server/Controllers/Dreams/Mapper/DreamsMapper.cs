@@ -2,7 +2,6 @@
 using Dreamland.Controllers.Dreams.Response;
 using Dreamland.Domain;
 using Dreamland.UseCase.Dreams;
-using System;
 using System.Collections.Generic;
 
 namespace Dreamland.Controllers.Dreams.Mapper
@@ -22,7 +21,7 @@ namespace Dreamland.Controllers.Dreams.Mapper
 						Id = d.Id,
 						Description = d.Description,
 						IsLucid = d.IsLucid > 0,
-						SleepingDate = (Int32)(DateTime.UtcNow.Subtract(d.SleepingDate)).TotalSeconds
+						SleepingDate = d.SleepingDate
 					});
 					break;
 				case FetchUseCase.Result.Error.USER_NOT_EXISTS:
@@ -35,7 +34,7 @@ namespace Dreamland.Controllers.Dreams.Mapper
 
 			return new FetchResponse
 			{
-				Dreams = dreams.ToArray(),
+				Dreams = dreams,
 				Error = error
 			};
 		}

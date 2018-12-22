@@ -35,7 +35,7 @@ namespace Dreamland.Storage
 					t.Commit();
 					return result;
 				}
-				catch (Exception ex)
+				catch (Exception)
 				{
 					t.Rollback();
 					return errVal;

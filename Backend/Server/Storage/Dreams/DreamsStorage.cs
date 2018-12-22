@@ -14,10 +14,12 @@ namespace Dreamland.Storage.Dreams
 			_dreams = context.Dreams;
 		}
 
-		public void Add(Dream dream)
+		public long Add(Dream dream)
 		{
-			_dreams.Add(dream);
+			var entry = _dreams.Add(dream);
 			Context.SaveChanges();
+
+			return entry.Entity.Id;
 		}
 
 		public List<Dream> All(long userId)

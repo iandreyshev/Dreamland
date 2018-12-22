@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dreamland.Domain
 {
@@ -15,6 +14,6 @@ namespace Dreamland.Domain
 		[Column("lucid")]
 		public int IsLucid { get; set; }
 		[Column("sleeping_date")]
-		public DateTime SleepingDate { get; set; }
+		public long SleepingDate { get; set; }
 	}
 }

@@ -6,7 +6,7 @@ namespace Dreamland.Storage.Dreams
 	public interface IDreamsStorage : IStorage
 	{
 		List<Dream> All(long userId);
-		void Add(Dream dream);
+		long Add(Dream dream);
 		void Update(Dream dream);
 		void Delete(long dreamId);
 	}
