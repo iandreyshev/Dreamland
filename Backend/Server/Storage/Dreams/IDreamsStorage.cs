@@ -9,5 +9,6 @@ namespace Dreamland.Storage.Dreams
 		long Add(Dream dream);
 		void Update(Dream dream);
 		void Delete(long dreamId);
+		void DeleteAllForUser(long userId);
 	}
 }

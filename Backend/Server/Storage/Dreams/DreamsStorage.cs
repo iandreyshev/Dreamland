@@ -43,6 +43,18 @@ namespace Dreamland.Storage.Dreams
 			Context.SaveChanges();
 		}
 
+		public void DeleteAllForUser(long userId)
+		{
+			var userDreams = _dreams.Where(d => d.UserId == userId);
+
+			foreach (Dream dream in userDreams)
+			{
+				_dreams.Remove(dream);
+			}
+
+			Context.SaveChanges();
+		}
+
 		public void Update(Dream dream)
 		{
 			_dreams.Update(dream);

@@ -1,14 +1,19 @@
 ﻿using Dreamland.Storage.Account;
+using Dreamland.Storage.Dreams;
 
 namespace Dreamland.UseCase.Account
 {
 	public class DeleteAccountUseCase
 	{
-		private IAccountStorage _storage;
+		private IAccountStorage _accountStorage;
+		private IDreamsStorage _dreamsStorage;
 
-		public DeleteAccountUseCase(IAccountStorage accountStorage)
+		public DeleteAccountUseCase(
+			IAccountStorage accountStorage,
+			IDreamsStorage dreamsStorage)
 		{
-			_storage = accountStorage;
+			_accountStorage = accountStorage;
+			_dreamsStorage = dreamsStorage;
 		}
 
 		public Result Execute(string userIdString, string userPassword)
@@ -24,16 +29,17 @@ namespace Dreamland.UseCase.Account
 				return Result.ERROR_USER_NOT_EXISTS;
 			}
 
-			return _storage.Transaction(Result.ERROR_UNDEFINED, _ =>
+			return _accountStorage.Transaction(Result.ERROR_UNDEFINED, _ =>
 			{
-				var user = _storage.Find(userId, userPassword);
+				var user = _accountStorage.Find(userId, userPassword);
 
 				if (user == null)
 				{
 					return Result.ERROR_USER_NOT_EXISTS;
 				}
 
-				_storage.Delete(userId);
+				_accountStorage.Delete(userId);
+				_dreamsStorage.DeleteAllForUser(userId);
 
 				return Result.SUCCESS;
 			});
