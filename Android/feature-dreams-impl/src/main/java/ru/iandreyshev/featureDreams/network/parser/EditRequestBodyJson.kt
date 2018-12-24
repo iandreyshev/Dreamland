@@ -9,7 +9,7 @@ class EditRequestBodyJson(request: EditRequest) {
     @SerializedName("description")
     val description: String = request.description
     @SerializedName("is_lucid")
-    val IsLucid: Boolean = request.isLucid
+    val isLucid: Boolean = request.isLucid
     @SerializedName("sleeping_date")
     val sleepingDate: Long = request.sleepingDate
 }

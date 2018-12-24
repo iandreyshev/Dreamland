@@ -16,6 +16,7 @@ import ru.iandreyshev.featureDreamsApi.domain.DreamProperties
 import ru.iandreyshev.featureDreams.viewModel.DreamEditorViewModel
 import ru.iandreyshev.featureDreams.viewModel.IViewModelFactory
 import ru.iandreyshev.featureDreamsApi.domain.Dream
+import ru.iandreyshev.featureDreamsApi.domain.SleepingDate
 import ru.iandreyshev.vext.view.visibleIfOrGone
 import java.lang.IllegalStateException
 import javax.inject.Inject
@@ -101,7 +102,8 @@ class DreamEditorActivity : BaseAppCompatActivity() {
 
     private fun createDream(): DreamProperties {
         return DreamProperties(
-                description = dream_text.text.toString()
+                description = dream_text.text.toString(),
+                sleepingDate = SleepingDate(System.currentTimeMillis())
         )
     }
 

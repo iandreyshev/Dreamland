@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dreamland:
+    image: ${DOCKER_REGISTRY}dreamland
+    build:
+      context: .
+      dockerfile: Server\Dockerfile

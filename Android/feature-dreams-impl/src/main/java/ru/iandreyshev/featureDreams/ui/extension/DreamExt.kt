@@ -8,4 +8,4 @@ val Dream.dateViewString: String
     get() = properties.dateViewString
 
 val DreamProperties.dateViewString: String
-    get() = SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(sleepingDate.timesTemp)
+    get() = SimpleDateFormat("hh:mm:ss dd.MM.yyyy").format(sleepingDate.timesTemp)

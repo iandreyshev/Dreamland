@@ -41,7 +41,7 @@ class DreamEditorViewModel(
 
     fun setDreamToEdit(bundle: Bundle?) {
         val dreamBundle = bundle?.getBundle(DreamEditorActivity.KEY_DREAM)
-        mDreamViewModel.postValue(Dream.create(dreamBundle))
+        mDreamViewModel.value = Dream.create(dreamBundle)
         mDreamKey = mDreamViewModel.value?.key
     }
 
